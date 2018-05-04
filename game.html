@@ -47,10 +47,10 @@
             game.add.image(0, 1460, "healthBar");
             game.add.image(0, 1460, "health");
             game.add.image(0, 1550, "logo");
-            game.add.image(600, 1530, "home");
+            game.add.button(600, 1530, "home", homeClick, this);
             game.add.image(450, 10, "healthBanner");
             game.add.image(370, 10, "drop");
-            game.add.image(800, 1530, "settings");
+            game.add.image(780, 1530, "settings");
             
             game.add.text(540, 30, "24/100", {
                 font: "bold 70pt Arial",
@@ -61,6 +61,12 @@
 
         function update() {
 
+        }
+
+        function homeClick() {
+            console.log("enterClick");
+            window.location.href = "index.html";
+            console.log("leaveClick");
         }
         
     </script>
