@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Turn Off the Tap</title>
+        <script type="text/javascript" src="js/phaser.js"></script>
+        <script type="text/javascript" src="js/boot.js"></script>
+        <script type="text/javascript" src="js/load.js"></script>
+        <script type="text/javascript" src="js/tutorial.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+        <link rel="stylesheet" type="text/css" href="Styles/game.css" />
+    </head>
+    <body>
+        <script type="text/javascript">
+            var game = new Phaser.Game(1080, 1920, Phaser.AUTO);
+            game.state.add('boot', boot);
+            game.state.add('load', load);
+            game.state.add('tutorial', tutorial);
+            game.state.add('main', main);
+
+            game.state.start('boot');
+        </script>
+    </body>
+</html>

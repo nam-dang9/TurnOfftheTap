@@ -1,0 +1,301 @@
+/********************************************** 
+                GENERAL
+**********************************************/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    font-family: sans-serif;
+    display: inline;
+    padding: 15px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.websitebutton {
+    font-family: Upheav;
+    color: white;
+    margin-bottom: 30px;
+}
+
+@font-face {
+    font-family: Pixelate;
+    src: url(../fonts/SFPixelate.ttf);
+}
+
+@font-face {
+    font-family: Pixelate;
+    src: url(../fonts/SFPixelate-Bold.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Upheav;
+    src: url(../fonts/upheavtt.ttf);
+}
+
+/********************************************** 
+                INDEX
+**********************************************/
+#mainbody {
+    background-image: url(../Images/Background.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: auto;
+    text-align: center;
+    position: relative;
+}
+
+#logo-index {
+    width: 40%;
+    height: auto;
+    padding-top: 5%;
+}
+
+#presstart-index {
+    width: 25%;
+    height: auto;
+    padding-top: 30px;
+    padding-bottom: 0;
+}
+
+#about-index {
+    font-size: 35px;
+    padding: 0px;
+}
+
+@media only screen and (max-width: 736px) {
+    #logo-index {
+        width: 70%;
+        height: auto;
+        padding-top: 50%;
+    }
+    
+    #presstart-index {
+        width: 50%;
+        height: auto;
+    }
+    
+    #about-index {
+        font-size: 30px;
+        padding: 0px;
+    }
+}
+
+/********************************************** 
+                ABOUT
+**********************************************/
+#aboutbody {
+   background-image: url(../Images/Background2.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    position: relative;
+}
+
+#logo-about{
+    width: 20%;
+    height: auto;
+    padding-top: 5%;
+}
+
+.title {
+    font-family: Pixelate;
+    font-size: 30px;
+}
+
+.banner {
+    background-image: url(../Images/Banner.png);
+    background-size: 100% 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    width: 50%;
+    padding: 30px;
+    color: white;
+}
+
+.aboutbtn {
+    font-size: 40px;
+}
+
+@media only screen and (max-width: 736px) {
+   #aboutbody {
+        background-image: url(../Images/Background2.png);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100%;
+        width: auto;
+        text-align: center;
+        position: relative;
+    }
+    
+    #logo-about{
+        width: 45%;
+        height: auto;
+        padding-top: 15%;
+    }
+    
+    .aboutbtn {
+        font-size: 25px;
+    }
+    
+    .banner {
+        background-image: url(../Images/Banner.png);
+        background-size: 100% 100%;
+        margin: auto;
+        width: 90%;
+        margin-top: 25px;
+        padding: 20px;
+        color: white;
+    }
+}
+
+/********************************************** 
+            GAME START SCREEN
+**********************************************/
+.game-background {
+    width: 100%;
+    height: 100%;
+    background-image: url(../Images/VancouverBackground.png);
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+}
+
+#startscreen-logo {
+    width: 25%;
+    height: auto;
+    padding-top: 5%;
+    padding-bottom: 40px;
+}
+
+.startscreen-btn {
+    width: 10%;
+    height: auto;
+}
+
+.startscreen-btnicon {
+    width: 5%;
+    height: auto;
+}
+
+@media only screen and (max-width: 736px) {
+       #startscreen-logo {
+            width: 65%;
+            height: auto;
+            padding-top: 25%;
+            padding-bottom: 40px;
+        }
+
+        .startscreen-btn {
+            width: 40%;
+            height: auto;
+        }
+
+        .startscreen-btnicon {
+            width: 15%;
+            height: auto;
+        }
+}
+
+/********************************************** 
+            HIGH SCORE PAGE
+**********************************************/
+#counterbody {
+   background-image: url(../Images/Background2.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+    position: relative;
+    color: white;
+}
+
+#logo-counter{
+    width: 45%;
+    height: auto;
+    padding-top: 15%;
+}
+
+.button {
+    font-size: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: transparent;
+    border: solid 2px;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.highscores {
+    padding-top: 20px;
+    font-size: 40px;
+    margin: auto;
+}
+
+@media only screen and (max-width: 736px) {
+   #counterbody {
+        background-image: url(../Images/Background2.png);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: auto;
+        text-align: center;
+        position: relative;
+    }
+    
+    #logo-counter{
+        width: 56%;
+        height: auto;
+        padding-top: 15%;
+    }
+}
+
+input {
+    padding: 20px;
+    font-size: 35px;
+    border-radius: 20px;
+}
+
+#display {
+    font-size: 45px;
+}
+
+.main-list {
+    margin-left: 35%;
+}
+
+.list-score, .list-name {
+    text-align: left;
+}
+
+.counterbtn {
+    font-size: 60px;
+}
