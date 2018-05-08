@@ -20,7 +20,6 @@ function storeData(){
 
 }
 
-
 // function to increment value of count variable
 var count = 0;
 function incrementCount() {
@@ -30,14 +29,29 @@ function incrementCount() {
         display.innerHTML = count;
 };
 
+// Create a variable for list_div to show the data in html
 const list_div = document.querySelector("#list_div");
 
-db.collection("Users").get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-       list_div.innerHTML += "<div class='list-name'><p1>Name: " + doc.data().name + "</p1></div>"
-        
-       list_div.innerHTML += "<div class='list-score'><p2>Scores: " + doc.data().score + "</p2></div>"
-        
+// Set Top 3 in the list with DESC order
+db.collection("Users").orderBy("score", "desc").limit(3).onSnapshot(function(snapshot) {
+    snapshot.docChanges.forEach(function(change) {
+
+    if(change.type == "added"){
+        //Store the name var in limitUser
+        var limitUser = change.doc.data().name;
+        // Store the score var in limitUser
+        var limitScore =change.doc.data().score;
+
+       list_div.innerHTML += "<div class='list-name'><p1>Name: " + limitUser + "</p1></div>"
+       list_div.innerHTML += "<div class='list-score'><p2>Scores: " + limitScore + "</p2></div>"
+    }
     });
 
 });
+
+//firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+//  // Handle Errors here.
+//  var errorCode = error.code;
+//  var errorMessage = error.message;
+//  // ...
+//});
