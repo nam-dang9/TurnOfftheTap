@@ -1,6 +1,9 @@
 var healthDisplay;
 var health = 100;
 
+var startTime;
+var baseInterval = spawnInterval = 2000;
+
 var bubbleNames = ['sprinkler', 'shower', 'bathtub', 'carwash', 'faucet'];
 var bubbles;
 
@@ -32,32 +35,36 @@ var main = {
         
         // Setting up bubbles
         bubbles = game.add.group();
-        for (var i = 0; i < 6; i++) {
-            // Randomly pick an event from the bubbles array
-            var currentBubble = Math.floor(Math.random() * 5);
-            var currentEvent = bubbleNames[currentBubble];
+        // for (var i = 0; i < 6; i++) {
+        //     // Randomly pick an event from the bubbles array
+        //     var currentBubble = Math.floor(Math.random() * 5);
+        //     var currentEvent = bubbleNames[currentBubble];
             
-            // Boundary
-            // x: 120 < --- < 880
-            // y: 270 < --- < 1200
+        //     // Boundary
+        //     // x: 120 < --- < 880
+        //     // y: 270 < --- < 1200
             
-            // While the x coordinate exceeds the boundaries, assign it a new value
-            var currentX = Math.random() * 880 + 15;
-            while (currentX > 880 || currentX < 120) {
-                currentX = Math.random() * 880 + 15;
-            }
+        //     // While the x coordinate exceeds the boundaries, assign it a new value
+        //     var currentX = Math.random() * 880 + 15;
+        //     while (currentX > 880 || currentX < 120) {
+        //         currentX = Math.random() * 880 + 15;
+        //     }
                 
-            // While the y coordinate exceeds the boundaries, assign it a new value
-            var currentY = Math.random() * 1200 + 20
-            while (currentY > 1200 || currentY < 270) {
-                currentY = Math.random() * 1200 + 20;
-            }
+        //     // While the y coordinate exceeds the boundaries, assign it a new value
+        //     var currentY = Math.random() * 1200 + 20
+        //     while (currentY > 1200 || currentY < 270) {
+        //         currentY = Math.random() * 1200 + 20;
+        //     }
             
-            var bubble =  bubbles.create(currentX, currentY, currentEvent); 
-            bubble.anchor.setTo(0.5, 0.5);
-            bubble.inputEnabled = true;
-            bubble.events.onInputDown.add(tapOnBubble, this);
-        }
+        //     var bubble =  bubbles.create(currentX, currentY, currentEvent); 
+        //     bubble.anchor.setTo(0.5, 0.5);
+        //     bubble.inputEnabled = true;
+        //     bubble.events.onInputDown.add(tapOnBubble, this);
+        // }
+
+        // Initiate bubble spawning
+        startTime = Date.now();
+        createBubble();
         
     },
     
@@ -65,7 +72,6 @@ var main = {
         if (typeof bubble !== undefined) {
             healthDisplay.text = Math.round(health) + ' / 100';
             health -= 0.005;
-            console.log(health);
         }
         
     },
@@ -74,7 +80,7 @@ var main = {
 function tapOnBubble(bubble) {
     bubble.kill();
     console.log("tapped on a bubble");
-    createBubble();
+    //createBubble();
 }
 
 function createBubble() {
@@ -101,4 +107,10 @@ function createBubble() {
     bubble.anchor.setTo(0.5, 0.5);
     bubble.inputEnabled = true;
     bubble.events.onInputDown.add(tapOnBubble, this);
+
+    // Set interval until next Bubble spawns
+    console.log("time is: " + game.time.elapsedSecondsSince(startTime));
+    spawnInterval = baseInterval * Math.pow(0.8, Math.round(game.time.elapsedSince(startTime) / 5000));
+    console.log("spawn interval is: " + spawnInterval);
+    game.time.events.add(spawnInterval, createBubble, this);
 }
