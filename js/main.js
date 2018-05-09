@@ -1,8 +1,17 @@
+
 var healthDisplay;
 var health = 100;
+// The rate at which the players health regenerates.
+var regenRate = 0.05;
+
+// The starting value of the difficulty, determines spawning interval and number of bubles spawned.
+var difficulty = 1;
+// The rate at which the difficult is increased, in milliseconds.
+var difficultyRate = 5000;
 
 var startTime;
-var baseInterval = spawnInterval = 2000;
+// The base rate at which bubbles will spawn, in milliseconds.
+var baseInterval = spawnInterval = 1000;
 
 var bubbleNames = ['sprinkler', 'shower', 'bathtub', 'carwash', 'faucet'];
 var bubbles;
@@ -64,16 +73,22 @@ var main = {
 
         // Initiate bubble spawning
         startTime = Date.now();
-        createBubble();
+        spawnBubbles();
         
     },
     
     update: function() {
-        if (typeof bubble !== undefined) {
-            healthDisplay.text = Math.round(health) + ' / 100';
-            health -= 0.005;
+
+        // Recover health
+        if(health < 100) {
+            health += regenRate;
         }
-        
+
+        // Reduce health based on currently living bubbles
+        bubbles.forEachAlive(damageHealth, this);
+
+        // Update difficulty based on elapsed time
+        difficulty = Math.round(game.time.elapsedSince(startTime) / 5000);
     },
 };
 
@@ -108,9 +123,29 @@ function createBubble() {
     bubble.inputEnabled = true;
     bubble.events.onInputDown.add(tapOnBubble, this);
 
+}
+
+function spawnBubbles() {
+
+    var spawnCount = Math.ceil(difficulty / 4);
+    if (spawnCount > 4) {
+        spawnCount = 4;
+    }
+
+    for (var i = 0; i < spawnCount; i++) {
+        createBubble();
+    }
+
     // Set interval until next Bubble spawns
     console.log("time is: " + game.time.elapsedSecondsSince(startTime));
-    spawnInterval = baseInterval * Math.pow(0.8, Math.round(game.time.elapsedSince(startTime) / 5000));
+    spawnInterval = baseInterval * Math.pow(0.98, difficulty);
+
+    // Initiate timer delay for next bubble spawn
     console.log("spawn interval is: " + spawnInterval);
-    game.time.events.add(spawnInterval, createBubble, this);
+    game.time.events.add(spawnInterval, spawnBubbles, this);
+}
+
+function damageHealth(bubble) {
+    health -= 0.02;
+    healthDisplay.text = Math.round(health) + ' / 100';
 }
