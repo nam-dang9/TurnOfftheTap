@@ -4,10 +4,19 @@ html, body {
 }
             
 body {
-    background-image: url(../Images/VancouverBackground.png);
-    background-position: center;
-    background-repeat: no-repeat;
+    background-image: url(../Images/mountains.png), url("../Images/clouds.png"), url("../Images/gradient.png");
     background-size: cover;
     width: 100%;
     height: auto;
+    -webkit-animation: animatebackground 60s linear infinite;
+    animation: animatebackground 60s linear infinite;
+}
+
+@keyframes animatebackground {
+    from {background-position: 0 0, 0 0, 0 0;}
+    to {background-position: 0 0, -1000px 0, 0 0;}
+}
+@-webkit-keyframes animatebackground {
+     from {background-position: 0 0, 0 0, 0 0;}
+     to {background-position: 0 0, -1000px 0, 0 0;}
 }
