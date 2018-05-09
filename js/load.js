@@ -25,6 +25,7 @@ var load = {
         game.load.image('logo', 'Images/TurnOfftheTap Logo1.png');
         game.load.image('water', 'Images/Water.png');
         game.load.image('waterDrop', 'Images/Waterdrop.png');
+        game.load.image('tutorialBanner', 'Images/tutorialbanner.png');
         
         // Event bubbles
         game.load.image('shower', 'Images/shower.png');
@@ -35,6 +36,6 @@ var load = {
     },
     
     create: function() {
-        game.state.start('tutorial');
+        game.state.start('main');
     }
 };
