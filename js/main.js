@@ -1,5 +1,12 @@
 var healthDisplay;
 var health = 100;
+var healthRegen = 0.05;
+
+var startTime;
+var baseInterval = 1000;
+
+var difficulty = 1;
+var difficultyRate = 5000;
 
 var bubbleNames = ['sprinkler', 'shower', 'bathtub', 'carwash', 'faucet'];
 var bubbles;
@@ -8,8 +15,13 @@ var character;
 var charX = -5;
 var charY = +5;
 
+
+
 var main = {
     create: function() {
+
+        startTime = Date.now();
+
         // Setting up background
         var background = game.add.image(0, 0, 'water');
         background.height = game.height;
@@ -48,42 +60,20 @@ var main = {
 
         character.smoothed = false;
         
-        // Setting up bubbles
         bubbles = game.add.group();
-        for (var i = 0; i < 6; i++) {
-            // Randomly pick an event from the bubbles array
-            var currentBubble = Math.floor(Math.random() * 5);
-            var currentEvent = bubbleNames[currentBubble];
-            
-            // Boundary
-            // x: 120 < --- < 880
-            // y: 270 < --- < 1200
-            
-            // While the x coordinate exceeds the boundaries, assign it a new value
-            var currentX = Math.random() * 880 + 15;
-            while (currentX > 880 || currentX < 120) {
-                currentX = Math.random() * 880 + 15;
-            }
-                
-            // While the y coordinate exceeds the boundaries, assign it a new value
-            var currentY = Math.random() * 1200 + 20
-            while (currentY > 1200 || currentY < 270) {
-                currentY = Math.random() * 1200 + 20;
-            }
-            
-            var bubble =  bubbles.create(currentX, currentY, currentEvent); 
-            bubble.anchor.setTo(0.5, 0.5);
-            bubble.inputEnabled = true;
-            bubble.events.onInputDown.add(tapOnBubble, this);
-        }
+
+        spawnBubbles();
         
     },
     
     update: function() {
+        if(health < 100) {
+            health += healthRegen;
+        }
+        
         if (typeof bubble !== undefined) {
             healthDisplay.text = Math.round(health) + ' / 100';
             health -= 0.005;
-            console.log(health);
         }
 
         // Reduce health based on currently living bubbles
@@ -97,7 +87,6 @@ var main = {
 function tapOnBubble(bubble) {
     bubble.kill();
     console.log("tapped on a bubble");
-    createBubble();
 }
 
 function createBubble() {
@@ -124,7 +113,6 @@ function createBubble() {
     bubble.anchor.setTo(0.5, 0.5);
     bubble.inputEnabled = true;
     bubble.events.onInputDown.add(tapOnBubble, this);
-
 }
 
 function spawnBubbles() {
