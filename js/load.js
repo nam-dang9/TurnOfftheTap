@@ -1,8 +1,12 @@
 var load = {
     preload: function() {
-
-        game.load.image('loadingLogo', 'Images/TurnOfftheTap Logo2.png');
-        game.load.image('background', 'Images/VancouverBackground.png');
+        // Loading screen
+        var background = game.add.image(540, 960, "background");
+        background.anchor.setTo(0.5, 0.5);
+        background.scale.setTo(10, 10);
+        var logo = game.add.image(540, 960, "loadingLogo");
+        logo.anchor.setTo(0.5, 0.5);
+        logo.scale.setTo(2, 2);
         
         game.load.image('arrowLeft', 'Images/Arrow-left.png');
         game.load.image('arrowRight', 'Images/Arrow-Right.png');

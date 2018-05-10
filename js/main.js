@@ -32,7 +32,7 @@ var main = {
         map.anchor.setTo(0.5, 0.5);
         map.scale.setTo(1.1, 1.1);
          
-        game.add.image(-15, -15, "bannerLong"); 
+        game.add.image(-15, -25, "bannerLong"); 
         game.add.image(-15, 1735, "bannerLong"); 
         game.add.image(30, 1775, "logo");
         game.add.image(880, 1740, "settingsBtn");
