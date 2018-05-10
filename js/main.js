@@ -122,6 +122,7 @@ function createBubble() {
     bubble.anchor.setTo(0.5, 0.5);
     bubble.inputEnabled = true;
     bubble.events.onInputDown.add(tapOnBubble, this);
+    //fix git please
 
 }
 
