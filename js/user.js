@@ -22,41 +22,58 @@
     const login = document.getElementById('login');
     const signUp = document.getElementById('signUp');
     const logOut = document.getElementById('logOut');
+    const txtName = document.getElementById('txtName');
+    
+    // create the div object
+    const err_msg = document.querySelector("#err_msg");
+    
+
 
 // Add login event
-
+    
     login.addEventListener('click', e=> {
+
+        // Testing: Getting email and password (delete after testing)
+        const email = txtEmail.value;
+        console.log(email);
+        const password = txtPassword.value;
+        const auth = firebase.auth();
+
+        // Sign in   
+        const promise = auth.signInWithEmailAndPassword(email, password);
         
-    // Getting email and password
-    const email = txtEmail.value;
-    console.log(email);
-    const password = txtPassword.value;
-    console.log(password);
-    const auth = firebase.auth();
+        // Show error msg in the div html page 
+        promise.catch(function(error) {
+            console.log(error.code);
+            err_msg.innerHTML = error.code;
+
+        });  
+    });                   
     
-    // Sign in 
-    const promise = auth.signInWithEmailAndPassword(email, password);
-    promise.catch(e => console.log(e.message));
-        
-    });
-    
+
     
     signUp.addEventListener('click', e=> {
     
-    // signUp email and password
-    const email = txtEmail.value;
-    const password = txtPassword.value;
-    const auth = firebase.auth();   
+        // signUp email and password
+        const email = txtEmail.value;
+        const password = txtPassword.value;
+        const auth = firebase.auth();   
     
-    const promise = auth.createUserWithEmailAndPassword(email,password);
-    promise.catch(e => console.log(e.message));
+        const promise = auth.createUserWithEmailAndPassword(email,password);
         
+        //Show error msg in the div html page 
+        promise.catch(function(error) {
+            console.log(error.code);
+            err_msg.innerHTML = error.code;
+            });      
     });
     
     // logout button function
     logOut.addEventListener('click', e=> {
         firebase.auth().signOut();
     });
+    
+
 // Create a  variable to hide the div
 var hide = document.getElementById("hidebtn");
     
@@ -65,13 +82,30 @@ var hide = document.getElementById("hidebtn");
         if(firebaseUser){
             console.log(firebaseUser);
             hide.style.display = "block";
-            logOut.classList.remove('hidden');
+            
+                    //code should not go here but testing is it work
+                    var user = firebase.auth().currentUser;
+                    const dpName = txtName.value;
+                    console.log(dpName);
+
+                        user.updateProfile({
+                          displayName: dpName
+                    //      photoURL: "https://example.com/jane-q-user/profile.jpg"
+                        }).then(function() {
+                          console.log("Update successful.");
+                        }).catch(function(error) {
+                          console.log("Can not Save the display name.");
+                        });
+    
             
         } else{
             console.log ('Not logged in');
             logOut.style.display = "none";
         }
     });
+    
+var userName = document.getElementById("user_Name");
+    userName.innerHTML
     
     
 }());

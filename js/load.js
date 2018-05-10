@@ -8,7 +8,6 @@ var load = {
         logo.anchor.setTo(0.5, 0.5);
         logo.scale.setTo(2, 2);
         
-        
         game.load.image('arrowLeft', 'Images/Arrow-left.png');
         game.load.image('arrowRight', 'Images/Arrow-Right.png');
         game.load.image('banner', 'Images/Banner.png');
@@ -39,6 +38,12 @@ var load = {
         game.load.image('carwash', 'Images/carwash.png');
         game.load.image('sprinkler', 'Images/sprinkler.png');
         game.load.image('bathtub', 'Images/bathtub.png');
+
+        // Character
+        game.load.image('body', 'Images/character/body.png');
+        game.load.image('face', 'Images/character/face.png');
+        game.load.image('hair', 'Images/character/hair02.png');
+        game.load.image('shirt', 'Images/character/shirt02.png');
     },
     
     create: function() {
