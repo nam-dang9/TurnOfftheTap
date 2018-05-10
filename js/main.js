@@ -2,10 +2,12 @@ var healthDisplay;
 var health = 100;
 var healthRegen = 0.05;
 
+var score = 0;
+var scoreDisplay;
 var startTime;
 var baseInterval = 1000;
 
-var difficulty = 1;
+var difficulty = 100000000000000000000;
 var difficultyRate = 5000;
 
 var bubbleNames = ['sprinkler', 'shower', 'bathtub', 'carwash', 'faucet'];
@@ -46,7 +48,12 @@ var main = {
                     align: "center"
         });
         healthDisplay.anchor.setTo(0.5, 0.5);
-
+        scoreDisplay = game.add.text(500, 147, score, {
+                    font: "75px Arial",
+                    fill: "#ffffff",
+                    align: "center"
+        });
+        scoreDisplay.anchor.setTo(0.5, 0.5);
         character = game.add.group();
 
         var body = character.create(charX, charY, 'body');
@@ -75,17 +82,23 @@ var main = {
             healthDisplay.text = Math.round(health) + ' / 100';
             health -= 0.005;
         }
-
+        if (health <= 0) {
+            game.state.start('gameover');
+        }
         // Reduce health based on currently living bubbles
         bubbles.forEachAlive(damageHealth, this);
 
         // Update difficulty based on elapsed time
         difficulty = Math.round(game.time.elapsedSince(startTime) / difficultyRate);
     },
+    
+    
 };
 
 function tapOnBubble(bubble) {
     bubble.kill();
+    score += 10;
+    scoreDisplay.text = score;
     console.log("tapped on a bubble");
 }
 
