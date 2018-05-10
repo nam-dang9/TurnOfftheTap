@@ -1,5 +1,6 @@
 var load = {
     preload: function() {
+
         game.load.image('loadingLogo', 'Images/TurnOfftheTap Logo2.png');
         game.load.image('background', 'Images/VancouverBackground.png');
         
@@ -33,6 +34,12 @@ var load = {
         game.load.image('carwash', 'Images/carwash.png');
         game.load.image('sprinkler', 'Images/sprinkler.png');
         game.load.image('bathtub', 'Images/bathtub.png');
+
+        // Character
+        game.load.image('body', 'Images/character/body.png');
+        game.load.image('face', 'Images/character/face.png');
+        game.load.image('hair', 'Images/character/hair02.png');
+        game.load.image('shirt', 'Images/character/shirt02.png');
     },
     
     create: function() {

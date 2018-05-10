@@ -4,6 +4,10 @@ var health = 100;
 var bubbleNames = ['sprinkler', 'shower', 'bathtub', 'carwash', 'faucet'];
 var bubbles;
 
+var character;
+var charX = -5;
+var charY = +5;
+
 var main = {
     create: function() {
         // Setting up background
@@ -23,13 +27,26 @@ var main = {
         game.add.image(680, 1740, "customizeBtn");
         game.add.image(550, 60, "healthDisplayBanner");
         game.add.image(500, 20, "waterDrop");
-        game.add.image(0, -190, "charDisplayBanner");
+        game.add.image(0, -40, "charDisplayBanner");
         healthDisplay = game.add.text(800, 147, health + ' / 100', {
                     font: "75px Arial",
                     fill: "#ffffff",
                     align: "center"
         });
         healthDisplay.anchor.setTo(0.5, 0.5);
+
+        character = game.add.group();
+
+        var body = character.create(charX, charY, 'body');
+        body.smoothed = false;
+        //body.tint = 0xf6f7be;
+        character.create(charX, charY, 'shirt').smoothed = false;
+        character.create(charX, charY, 'hair').smoothed = false;
+        character.create(charX, charY, 'face').smoothed = false;
+
+        character.scale.setTo(8);
+
+        character.smoothed = false;
         
         // Setting up bubbles
         bubbles = game.add.group();
@@ -68,7 +85,12 @@ var main = {
             health -= 0.005;
             console.log(health);
         }
-        
+
+        // Reduce health based on currently living bubbles
+        bubbles.forEachAlive(damageHealth, this);
+
+        // Update difficulty based on elapsed time
+        difficulty = Math.round(game.time.elapsedSince(startTime) / difficultyRate);
     },
 };
 
@@ -102,4 +124,29 @@ function createBubble() {
     bubble.anchor.setTo(0.5, 0.5);
     bubble.inputEnabled = true;
     bubble.events.onInputDown.add(tapOnBubble, this);
+}
+
+function spawnBubbles() {
+
+    var spawnCount = Math.random() * Math.ceil(difficulty / 4);
+    if (spawnCount > 4) {
+        spawnCount = 4;
+    }
+
+    for (var i = 0; i < spawnCount; i++) {
+        createBubble();
+    }
+
+    // Set interval until next Bubble spawns
+    console.log("time is: " + game.time.elapsedSecondsSince(startTime));
+    spawnInterval = baseInterval * Math.pow(0.98, difficulty);
+
+    // Initiate timer delay for next bubble spawn
+    console.log("spawn interval is: " + spawnInterval);
+    game.time.events.add(spawnInterval, spawnBubbles, this);
+}
+
+function damageHealth(bubble) {
+    health -= 0.02;
+    healthDisplay.text = Math.round(health) + ' / 100';
 }
