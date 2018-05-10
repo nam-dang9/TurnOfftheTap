@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Login</title>
+    <link rel="stylesheet" href="Styles/style.css">
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>  
+</head>
+<body id="counterbody">
+    <div class="counter-nav">
+            <a href="index.html"><img src="Images/TurnOfftheTap%20Logo2.png" alt="TurnOfftheTap Logo" id="logo-counter" /></a><br />
+            <a href="index.html"><p class="websitebutton aboutbtn counterbtn">HOME</p></a>
+            <a href="about.html"><p class="websitebutton aboutbtn counterbtn">ABOUT</p></a>
+            <a href="game-startscreen.html"><p class="websitebutton aboutbtn counterbtn">THE GAME</p></a>
+    </div>
+    
+    <div class="main" id="mainType">
+        <input type ="email" placeholder="Enter Your email" id="txtEmail"/><br />
+        <input type ="password" placeholder="Enter Your password" id="txtPassword"/><br />
+        <input type ="text" placeholder="Enter the NickName" id="txtName"/><br />
+        <button class="button" id="signUp" onclick="sign_Up();after_signUp()"><h6>Sign Up</h6></button>
+        
+
+		<div class="userName" id ="user_Name"></div>
+        <div class="ErrorMsg" id="err_msg"></div>
+
+    </div>
+	
+	<div id="hidebtn">
+		<button class="button" id="logOut" onclick="log_out()"><h6>Log Out</h6></button><br>
+    </div>
+        
+    
+    <!--Display the data    -->
+    
+    <div class="main-list ">
+     
+    </div>
+
+
+<!-- Add my js file   -->
+<script src="js/dbLink.js"></script>
+<script src="js/signUp.js"></script>
+    
+    
+
+
+</body>
+
+</html>
