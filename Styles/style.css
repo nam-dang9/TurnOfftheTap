@@ -86,7 +86,7 @@ ul {
     #logo-index {
         width: 70%;
         height: auto;
-        padding-top: 50%;
+        padding-top: 60%;
     }
     
     #presstart-index {
@@ -182,6 +182,8 @@ ul {
     width: 100%;
     height: 100%;
     text-align: center;
+    background-position: center;
+    background-repeat: no-repeat, repeat-x, no-repeat;
     -webkit-animation: animatebackground 60s linear infinite;
     animation: animatebackground 60s linear infinite;
 }
@@ -199,7 +201,7 @@ ul {
     width: 25%;
     height: auto;
     padding-top: 5%;
-    padding-bottom: 40px;
+    padding-bottom: 25px;
 }
 
 .startscreen-btn {
@@ -313,3 +315,38 @@ input {
 /*************************************
             TUTORIAL
 *************************************/
+#tutorialBanner {
+    height: 85%;
+    width: auto;
+    padding-top: 2%;
+}
+
+#tutorialBtn {
+    height: 10%;
+    width: auto;
+}
+
+@media only screen and (max-width: 736px) {
+    #tutorialBanner {
+        height: 87%;
+        width: auto;
+        padding-top: 25%;
+    }
+}
+
+/*************************************
+        CHARACTER CREATION
+*************************************/
+#charCreationBanner {
+    height: 85%;
+    width: auto;
+    padding-top: 5%;
+}
+
+@media only screen and (max-width: 736px) {
+    #charCreationBanner {
+        height: 87%;
+        width: auto;
+        padding-top: 25%;
+    }
+}
