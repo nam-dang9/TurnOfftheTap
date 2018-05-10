@@ -6,8 +6,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div class="game-background">
-            <img src="Images/banner-Light.png" alt="Character Creation Banner" id="charCreationBanner"/>
+        <div id="charCreation">
+            <div id="charBanner">
+                <div id="leftCol">
+                    <div>
+                        <p class="charTitle">Name</p><br />
+                        <input type="textbox" class="spriteInput" id="charName" /><br />
+                        <p class="charTitle">Company Name</p><br />
+                    </div>
+                    <input type="textbox" class="spriteInput" id="companyName" /><br />
+                    <div class="option"><img src="Images/Arrow-Left.png" class="arrow btn" />Skin<img src="Images/Arrow-Right.png" class="arrow btn" /></div>
+                    <div class="option"><img src="Images/Arrow-Left.png" class="arrow btn" />Face<img src="Images/Arrow-Right.png" class="arrow btn" /></div>
+                    <div class="option"><img src="Images/Arrow-Left.png" class="arrow btn" />Hair<img src="Images/Arrow-Right.png" class="arrow btn" /></div>
+                    <div class="option"><img src="Images/Arrow-Left.png" class="arrow btn" />Shirt<img src="Images/Arrow-Right.png" class="arrow btn" /></div>
+                </div>
+                <div id="rightCol">
+                    <div id="charDisplayBox">
+                    </div>
+                    <a href="game.html"><img src="Images/Btn-LooksGood.png" class="btn charCustomizeBtn" /></a><br />
+                    <a href="game-startscreen.html"><img src="Images/Btn-Back.png" class="btn charCustomizeBtn" /></a>
+                </div>
+            </div>
         </div>
     </body>
 </html>

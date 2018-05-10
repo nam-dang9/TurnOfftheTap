@@ -5,6 +5,11 @@ var boot = {
         game.scale.pageAlignHorizontally = true; 
     },
     
+    preload: function() {
+        game.load.image('loadingLogo', 'Images/TurnOfftheTap Logo2.png');
+        game.load.image('background', 'Images/VancouverBackground.png');
+    },
+    
     create: function() {
         game.state.start('load');
     }

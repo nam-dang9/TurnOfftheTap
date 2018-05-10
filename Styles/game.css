@@ -6,7 +6,7 @@ html, body {
 body {
     background-image: url(../Images/mountains.png), url("../Images/clouds.png"), url("../Images/gradient.png");
     background-size: cover;
-    background-repeat: no-repeat, repeat-x, no-repeat;
+    background-repeat: repeat;
     width: 100%;
     height: auto;
     -webkit-animation: animatebackground 60s linear infinite;
