@@ -2,30 +2,27 @@
 <html>
     <head>
         <title>Turn Off the Tap | the Tutorial</title>
-        <link rel="stylesheet" type="text/css" href="Styles/style.css" >
+        <link rel="stylesheet" type="text/css" href="Styles/game.css" >
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div id="charCreation">
-            <div id="charBanner">
-                <div id="leftCol">
-                    <div>
-                        <p class="charTitle">Name</p><br />
-                        <input type="textbox" class="spriteInput" id="charName" /><br />
-                        <p class="charTitle">Company Name</p><br />
-                    </div>
-                    <input type="textbox" class="spriteInput" id="companyName" /><br />
-                    <div class="option"><img src="Images/Arrow-Left.png" class="arrow btn" />Skin<img src="Images/Arrow-Right.png" class="arrow btn" /></div>
-                    <div class="option"><img src="Images/Arrow-Left.png" class="arrow btn" />Face<img src="Images/Arrow-Right.png" class="arrow btn" /></div>
-                    <div class="option"><img src="Images/Arrow-Left.png" class="arrow btn" />Hair<img src="Images/Arrow-Right.png" class="arrow btn" /></div>
-                    <div class="option"><img src="Images/Arrow-Left.png" class="arrow btn" />Shirt<img src="Images/Arrow-Right.png" class="arrow btn" /></div>
+        <div id="characterCreation">
+            <div id="leftCol">
+                <h5 class="inputTitle">Name</h5>
+                <input type="text" id="name" />
+                <h5 class="inputTitle">Company Name</h5>
+                <input type="text" id="companyName" />
+                <div class="option"><img src="Images/Arrow-Left.png" class="arrow btn" /><p class="optionTitle">Skin</p><img src="Images/Arrow-Right.png" class="arrow btn" /></div>
+                <div class="option"><img src="Images/Arrow-Left.png" class="arrow btn" /><p class="optionTitle">Face</p><img src="Images/Arrow-Right.png" class="arrow btn" /></div>
+                <div class="option"><img src="Images/Arrow-Left.png" class="arrow btn" /><p class="optionTitle">Hair</p><img src="Images/Arrow-Right.png" class="arrow btn" /></div>
+                <div class="option"><img src="Images/Arrow-Left.png" class="arrow btn" /><p class="optionTitle">Shirt</p><img src="Images/Arrow-Right.png" class="arrow btn" /></div>
+            </div>
+            <div id="rightCol">
+                <div id="charDisplay">
+                    <img src="Images/charDisplayBanner.png" id="charDisplayBanner" />
                 </div>
-                <div id="rightCol">
-                    <div id="charDisplayBox">
-                    </div>
-                    <a href="game.html"><img src="Images/Btn-LooksGood.png" class="btn charCustomizeBtn" /></a><br />
-                    <a href="game-startscreen.html"><img src="Images/Btn-Back.png" class="btn charCustomizeBtn" /></a>
-                </div>
+                <img src="Images/Btn-LooksGood.png" class="btn charCreationbtn" /><br />
+                <a href="game-startscreen.html"><img src="Images/Btn-Back.png" class="btn charCreationbtn" /></a>
             </div>
         </div>
     </body>
