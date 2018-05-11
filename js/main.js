@@ -17,6 +17,8 @@ var character;
 var charX = -5;
 var charY = +5;
 
+var logo;
+
 
 
 var main = {
@@ -36,7 +38,12 @@ var main = {
          
         game.add.image(-15, -25, "bannerLong"); 
         game.add.image(-15, 1735, "bannerLong"); 
-        game.add.image(30, 1775, "logo");
+        
+        logo = game.add.image(30, 1775, "logo");
+        logo.inputEnabled = true;
+        logo.events.onInputDown.add(tapOnLogo, this);
+        logo.taps = 9;
+        
         game.add.image(880, 1740, "settingsBtn");
         game.add.image(680, 1740, "customizeBtn");
         game.add.image(550, 60, "healthDisplayBanner");
@@ -90,6 +97,7 @@ var main = {
 
         // Update difficulty based on elapsed time
         difficulty = Math.round(game.time.elapsedSince(startTime) / difficultyRate);
+        
     },
     
     
@@ -151,4 +159,16 @@ function spawnBubbles() {
 function damageHealth(bubble) {
     health -= 0.02;
     healthDisplay.text = Math.round(health) + ' / 100';
+}
+
+function tapOnLogo(logo) {
+    console.log("tapping on logo");
+    logo.taps -= 1;
+    console.log(logo.taps);
+    
+    if(logo.taps < 0) {
+        console.log("logo tapped more than 10 times");
+        logo.kill();
+        logo = game.add.image(5, 1675, "easteregg");
+    }
 }
