@@ -7,7 +7,7 @@ var scoreDisplay;
 var startTime;
 var baseInterval = 1000;
 
-var difficulty = 100000000000000000000;
+var difficulty = 1;
 var difficultyRate = 5000;
 
 var bubbleNames = ['sprinkler', 'shower', 'bathtub', 'carwash', 'faucet'];
