@@ -44,8 +44,15 @@ var main = {
         logo.events.onInputDown.add(tapOnLogo, this);
         logo.taps = 9;
         
-        game.add.image(880, 1740, "settingsBtn");
-        game.add.image(680, 1740, "customizeBtn");
+        var mainReplay = game.add.image(880, 1740, "replay");
+        mainReplay.scale.setTo(0.6, 0.6);
+        mainReplay.inputEnabled = true;
+        mainReplay.events.onInputDown.add(replayBtn, this);
+       
+        var mainHome = game.add.image(680, 1740, "homeBtn");
+        mainHome.inputEnabled = true;
+        mainHome.events.onInputDown.add(homeBtn, this);
+        
         game.add.image(550, 60, "healthDisplayBanner");
         game.add.image(500, 20, "waterDrop");
         game.add.image(0, -40, "charDisplayBanner");
@@ -90,6 +97,7 @@ var main = {
             health -= 0.005;
         }
         if (health <= 0) {
+            console.log("gameover");
             game.state.start('gameover');
         }
         // Reduce health based on currently living bubbles
@@ -171,4 +179,14 @@ function tapOnLogo(logo) {
         logo.kill();
         logo = game.add.image(5, 1675, "easteregg");
     }
+}
+
+function replayBtn() {
+    console.log('clicked on replay');
+    window.location.href = "game.html";
+}
+
+function homeBtn() {
+    console.log('clicked on home');
+    window.location.href = "index.html";
 }

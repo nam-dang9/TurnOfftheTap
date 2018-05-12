@@ -8,7 +8,7 @@ body {
     background-image: url(../Images/mountains.png), url("../Images/clouds.png"), url("../Images/gradient.png");
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat, repeat-x, no-repeat;
+    background-repeat: no-repeat, repeat, no-repeat;
     -webkit-animation: animatebackground 60s linear infinite;
     animation: animatebackground 60s linear infinite;
 }
