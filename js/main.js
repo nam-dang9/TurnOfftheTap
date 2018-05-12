@@ -36,7 +36,7 @@ var main = {
         map.anchor.setTo(0.5, 0.5);
         map.scale.setTo(1.1, 1.1);
          
-        game.add.image(-15, -25, "bannerLong"); 
+        //game.add.image(-15, -25, "bannerLong"); 
         game.add.image(-15, 1735, "bannerLong"); 
         
         logo = game.add.image(30, 1775, "logo");
@@ -44,6 +44,7 @@ var main = {
         logo.events.onInputDown.add(tapOnLogo, this);
         logo.taps = 9;
         
+        // UI buttons
         var mainReplay = game.add.image(880, 1740, "replay");
         mainReplay.scale.setTo(0.6, 0.6);
         mainReplay.inputEnabled = true;
@@ -53,21 +54,34 @@ var main = {
         mainHome.inputEnabled = true;
         mainHome.events.onInputDown.add(homeBtn, this);
         
-        game.add.image(550, 60, "healthDisplayBanner");
-        game.add.image(500, 20, "waterDrop");
+        // Health display
+        var healthDisplayBanner = game.add.image(960, 110, "healthDisplayBanner");
+        healthDisplayBanner.anchor.setTo(0.5, 0.5);
+        healthDisplayBanner.scale.setTo(1, 1);
+        var waterdrop = game.add.image(840, 110, "waterDrop");
+        waterdrop.anchor.setTo(0.5, 0.5);
+        waterdrop.scale.setTo(0.7, 0.7);
         game.add.image(0, -40, "charDisplayBanner");
-        healthDisplay = game.add.text(800, 147, health + ' / 100', {
-                    font: "75px Arial",
+        healthDisplay = game.add.text(970, 110, health + ' / 100', {
+                    font: "40px Arial",
                     fill: "#ffffff",
                     align: "center"
         });
         healthDisplay.anchor.setTo(0.5, 0.5);
-        scoreDisplay = game.add.text(500, 147, score, {
-                    font: "75px Arial",
+        
+        // Score display
+        var scoreDisplayBanner = game.add.image(600, 110, "scoreDisplayBanner");
+        scoreDisplayBanner.anchor.setTo(0.5, 0.5);
+        scoreDisplay = game.add.text(650, 110, score, {
+                    font: "45px Arial",
                     fill: "#ffffff",
-                    align: "center"
+                    align: "right"
         });
         scoreDisplay.anchor.setTo(0.5, 0.5);
+        var trophy = game.add.image(500, 110, "trophy");
+        trophy.anchor.setTo(0.5, 0.5);
+        
+        // Character
         character = game.add.group();
 
         var body = character.create(charX, charY, 'body');

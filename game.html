@@ -13,7 +13,13 @@
     </head>
     <body>
         <script type="text/javascript">
-            var game = new Phaser.Game(1080, 1920, Phaser.AUTO);
+            var config = {
+                width: 1080,
+                height: 1920,
+                renderer: Phaser.AUTO,
+                antialias: false
+            }
+            var game = new Phaser.Game(config);
             game.state.add('boot', boot);
             game.state.add('load', load);
             game.state.add('tutorial', tutorial);
