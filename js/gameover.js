@@ -10,7 +10,7 @@ var gameover = {
         var scoreDisplay = game.add.image(540,860, "score");
         scoreDisplay.anchor.setTo(0.5, 0.5);
         
-        var replay = game.add.image(540,1190, "replay");
+        replay = game.add.image(540,1190, "replay");
         replay.anchor.setTo(0.5, 0.5);
         replay.inputEnabled = true;
         // the replayBtn function is in main.js
