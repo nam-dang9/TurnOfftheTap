@@ -37,6 +37,8 @@ var load = {
         game.load.image('score', 'Images/score.png');
         game.load.image('trophy', 'Images/trophy.png');
         game.load.image('scoreDisplayBanner', 'Images/scoredisplaybanner.png');
+        game.load.image('overlay', 'Images/overlay.png');
+        game.load.image('pause', 'Images/btn-pause.png');
         
         // Event bubbles
         game.load.image('shower', 'Images/shower.png');

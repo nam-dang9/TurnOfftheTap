@@ -18,7 +18,9 @@ var charX = -5;
 var charY = +5;
 
 var logo;
+var pause;
 
+var minigame = ['sprinkler', 'faucet', 'shower'];
 
 
 var main = {
@@ -45,10 +47,9 @@ var main = {
         logo.taps = 9;
         
         // UI buttons
-        var mainReplay = game.add.image(880, 1740, "replay");
-        mainReplay.scale.setTo(0.6, 0.6);
-        mainReplay.inputEnabled = true;
-        mainReplay.events.onInputDown.add(replayBtn, this);
+        var mainPause = game.add.image(880, 1740, "pause");
+        mainPause.inputEnabled = true;
+        mainPause.events.onInputDown.add(pauseBtn, this);
        
         var mainHome = game.add.image(680, 1740, "homeBtn");
         mainHome.inputEnabled = true;
@@ -102,27 +103,22 @@ var main = {
     },
     
     update: function() {
-        if(health < 100) {
-            health += healthRegen;
-        }
-        
-        if (typeof bubble !== undefined) {
-            healthDisplay.text = Math.round(health) + ' / 100';
-            health -= 0.005;
-        }
-        if (health <= 0) {
-            console.log("gameover");
-            game.state.start('gameover');
-        }
-        // Reduce health based on currently living bubbles
-        bubbles.forEachAlive(damageHealth, this);
+        if(!pause) {
+            if (typeof bubble !== undefined) {
+                healthDisplay.text = Math.round(health) + ' / 100';
+                health -= 0.005;
+            }
+            if (health <= 0) {
+                console.log("gameover");
+                game.state.start('gameover');
+            }
+            // Reduce health based on currently living bubbles
+            bubbles.forEachAlive(damageHealth, this);
 
-        // Update difficulty based on elapsed time
-        difficulty = Math.round(game.time.elapsedSince(startTime) / difficultyRate);
-        
-    },
-    
-    
+            // Update difficulty based on elapsed time
+            difficulty = Math.round(game.time.elapsedSince(startTime) / difficultyRate);
+        }
+    } 
 };
 
 function tapOnBubble(bubble) {
@@ -193,6 +189,13 @@ function tapOnLogo(logo) {
         logo.kill();
         logo = game.add.image(5, 1675, "easteregg");
     }
+}
+
+function pauseBtn() {
+    var overlay = game.add.image(0, 0, 'overlay');
+    pause = true;
+    overlay.height = game.height;
+    overlay.width = game.width;
 }
 
 function replayBtn() {
