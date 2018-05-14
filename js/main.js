@@ -20,6 +20,7 @@ var charX = -5;
 var charY = +5;
 
 var logo;
+var pause;
 
 var minigame = false;
 
@@ -48,10 +49,9 @@ var main = {
         logo.taps = 9;
         
         // UI buttons
-        var mainReplay = game.add.image(880, 1740, "replay");
-        mainReplay.scale.setTo(0.6, 0.6);
-        mainReplay.inputEnabled = true;
-        mainReplay.events.onInputDown.add(replayBtn, this);
+        var mainPause = game.add.image(880, 1740, "pause");
+        mainPause.inputEnabled = true;
+        mainPause.events.onInputDown.add(pauseBtn, this);
        
         var mainHome = game.add.image(680, 1740, "homeBtn");
         mainHome.inputEnabled = true;
