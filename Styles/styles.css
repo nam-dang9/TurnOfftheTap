@@ -63,6 +63,48 @@ canvas {
     width: auto;
 }
 
+/******* SIGN UP *******/
+.signUp {
+    width: 450px;
+    height: 450px;
+    background-color: white;
+    font-family: Pixelate;
+    margin-left: auto;
+    margin-right: auto;
+    color: #133052;
+    padding: 20px;
+    margin-top: 5%;
+}
+
+.bannerInput, .bannerInput:focus {
+    border: 0;
+    border-bottom: 1px solid #dddcdc;
+    padding: 15px;
+    width: 300px;
+    margin: 10px;
+    font-family: Pixelate;
+    color: #767676;
+}
+
+.title {
+    margin-top: 5px;
+    font-size: 40px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.inputLabel {
+    font-size: 15px;
+    padding: 7px;
+}
+
+.authentBtn {
+    margin-top: 4px;
+    width: 10%;
+}
+
+/******* LOGIN *******/
+
 /******* MEDIA QUERIES *******/
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 500px) {
@@ -81,6 +123,12 @@ canvas {
         width: auto;
         padding-top: 20%;
         padding-bottom: .5%;
+    }
+    
+    .signUp {
+        width: 200px;
+        height: 200px;
+        padding-top: 25%;
     }
 }
 
@@ -102,6 +150,11 @@ canvas {
         width: auto;
         padding-top: 15%;
         padding-bottom: .5%;
+    }
+    
+    .signUp {
+        width: 5000px;
+        height: 5000px;
     }
 }
 
@@ -142,6 +195,13 @@ canvas {
         padding-top: 7%;
         padding-bottom: .5%;
     }
+    
+    .signUp {
+        width: 500px;
+        height: 500px;
+        padding: 20px;
+        margin-top: 15%;
+    }
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -157,6 +217,13 @@ canvas {
         width: auto;
         padding-top: 7%;
         padding-bottom: .5%;
+    }
+    
+    .signUp {
+        width: 450px;
+        height: 450px;
+        padding: 20px;
+        margin-top: 10%;
     }
 } 
 
@@ -177,6 +244,13 @@ canvas {
         width: auto;
         padding-top: 4%;
         padding-bottom: .5%;
+    }
+    
+    .signUp {
+        width: 450px;
+        height: 450px;
+        padding: 20px;
+        margin-top: 5%;
     }
     
 }

@@ -6,17 +6,27 @@
         <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>  
     </head>
     <body>
-        <div>
-            <input type ="email" placeholder="Email" id="txtEmail"/><br />
-            <input type ="password" placeholder="Password" id="txtPassword"/><br />
-            <input type ="text" placeholder="NickName" id="txtName"/><br />
-            <button class="button" id="signUp" onclick="sign_Up();after_signUp()"><h6>Sign Up</h6></button>
+        <div class="signUp">
+            <h3 class="title">SIGN UP</h3>
+            <h5 class="inputLabel">Email</h5>
+            <input type ="email" id="txtEmail" class="bannerInput" /><br />
+            <h5 class="inputLabel">Password</h5>
+            <input type ="password" id="txtPassword" class="bannerInput" /><br />
+            <h5 class="inputLabel">Nickname</h5>
+            <input type ="text" id="txtNickname" class="bannerInput" /><br />
+<!--            <input type ="text" placeholder="NickName" id="txtName"/><br />-->
+            
+<!--            <button class="button" id="signUp" ><h6>Sign Up</h6></button>-->
             <div class="userName" id ="user_Name"></div>
-            <div class="ErrorMsg" id="err_msg"></div>
+            <div class="ErrorMsg" id="err_msg" style="color: #df0d64;"></div>
         </div>
+        <img src="Images/Btn-SignUp.png" onclick="sign_Up();after_signUp()" class="btn authentBtn" />
+        <a href="index.html"><img src="Images/btn-backlong.png" class="btn authentBtn" /></a>
+<!--
         <div id="hidebtn">
             <button class="button" id="logOut" onclick="log_out()"><h6>Log Out</h6></button><br>
         </div>
+-->
         <!--Display the data    -->
         <div class="main-list ">
         </div>
