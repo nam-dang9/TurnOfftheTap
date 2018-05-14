@@ -64,7 +64,7 @@ canvas {
 }
 
 /******* SIGN UP *******/
-.signUp {
+.authentBanner {
     width: 450px;
     height: 450px;
     background-color: white;
@@ -80,6 +80,7 @@ canvas {
     border: 0;
     border-bottom: 1px solid #dddcdc;
     padding: 15px;
+    background-color: transparent;
     width: 300px;
     margin: 10px;
     font-family: Pixelate;
