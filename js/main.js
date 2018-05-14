@@ -10,8 +10,10 @@ var baseInterval = 1000;
 var difficulty = 1;
 var difficultyRate = 5000;
 
-var bubbleNames = ['sprinkler', 'shower', 'bathtub', 'carwash', 'faucet'];
+var bubbleNames = ['sprinkler', 'shower', 'bathtub', 'carwash', 'faucet', 'minigameSprinkler', 
+                   'minigameShower', 'minigameFaucet'];
 var bubbles;
+var bubble;
 
 var character;
 var charX = -5;
@@ -19,6 +21,7 @@ var charY = +5;
 
 var logo;
 
+var minigame = false;
 
 
 var main = {
@@ -102,38 +105,51 @@ var main = {
     },
     
     update: function() {
-        if(health < 100) {
-            health += healthRegen;
-        }
-        
-        if (typeof bubble !== undefined) {
-            healthDisplay.text = Math.round(health) + ' / 100';
-            health -= 0.005;
-        }
-        if (health <= 0) {
-            console.log("gameover");
-            game.state.start('gameover');
-        }
-        // Reduce health based on currently living bubbles
-        bubbles.forEachAlive(damageHealth, this);
+        if (!minigame) {
+            if(health < 100) {
+                health += healthRegen;
+            }
 
-        // Update difficulty based on elapsed time
-        difficulty = Math.round(game.time.elapsedSince(startTime) / difficultyRate);
-        
-    },
-    
-    
+            if (typeof bubble !== undefined) {
+                healthDisplay.text = Math.round(health) + ' / 100';
+                health -= 0.005;
+            }
+            if (health <= 0) {
+                console.log("gameover");
+                game.state.start('gameover');
+            }
+            // Reduce health based on currently living bubbles
+            bubbles.forEachAlive(damageHealth, this);
+
+            // Update difficulty based on elapsed time
+            difficulty = Math.round(game.time.elapsedSince(startTime) / difficultyRate);
+        }
+    }
+   
 };
 
 function tapOnBubble(bubble) {
+    if (bubble.type == 'minigameSprinkler') {
+        minigame = true;
+        minigameSprinkler();
+    }
+    if (bubble.type == 'minigameFaucet') {
+        minigame = true;
+        minigameSprinkler();
+    }
+    if (bubble.type == 'minigameShower') {
+        minigame = true;
+        minigameSprinkler();
+    }
+    console.log(bubble.type);
+    console.log(minigame);
     bubble.kill();
     score += 10;
     scoreDisplay.text = score;
-    console.log("tapped on a bubble");
 }
 
 function createBubble() {
-    var currentBubble = Math.floor(Math.random() * 5);
+    var currentBubble = Math.floor(Math.random() * 8);
     var currentEvent = bubbleNames[currentBubble];
             
     // Boundary
@@ -152,7 +168,8 @@ function createBubble() {
     currentY = Math.random() * 1200 + 20;
     }
             
-    var bubble =  bubbles.create(currentX, currentY, currentEvent); 
+    bubble =  bubbles.create(currentX, currentY, currentEvent); 
+    bubble.type = currentEvent;
     bubble.anchor.setTo(0.5, 0.5);
     bubble.inputEnabled = true;
     bubble.events.onInputDown.add(tapOnBubble, this);
@@ -170,11 +187,9 @@ function spawnBubbles() {
     }
 
     // Set interval until next Bubble spawns
-    console.log("time is: " + game.time.elapsedSecondsSince(startTime));
     spawnInterval = baseInterval * Math.pow(0.98, difficulty);
 
     // Initiate timer delay for next bubble spawn
-    console.log("spawn interval is: " + spawnInterval);
     game.time.events.add(spawnInterval, spawnBubbles, this);
 }
 
@@ -184,23 +199,30 @@ function damageHealth(bubble) {
 }
 
 function tapOnLogo(logo) {
-    console.log("tapping on logo");
     logo.taps -= 1;
-    console.log(logo.taps);
     
     if(logo.taps < 0) {
-        console.log("logo tapped more than 10 times");
         logo.kill();
         logo = game.add.image(5, 1675, "easteregg");
     }
 }
+function minigameSprinkler() {
+    console.log("MINIGAME FUCK YEA");
+    minigame = false;
+}
 
+function minigameFaucet() {
+    console.log("MINIGAME FUCK YEA");
+    minigame = false;
+}
+function minigameShower() {
+    console.log("MINIGAME FUCK YEA");
+    minigame = false;
+}
 function replayBtn() {
-    console.log('clicked on replay');
     window.location.href = "game.html";
 }
 
 function homeBtn() {
-    console.log('clicked on home');
     window.location.href = "index.html";
 }
