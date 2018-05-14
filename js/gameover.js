@@ -13,12 +13,14 @@ var gameover = {
         var replay = game.add.image(540,1190, "replay");
         replay.anchor.setTo(0.5, 0.5);
         replay.inputEnabled = true;
+        // the replayBtn function is in main.js
         replay.events.onInputDown.add(replayBtn, this);
         
         var home = game.add.image(540,1500, "homeBtn");
         home.anchor.setTo(0.5, 0.5);
         home.scale.setTo(1.599, 1.599);
         home.inputEnabled = true;
+        // the homeBtn function is in main.js
         home.events.onInputDown.add(homeBtn, this);
         
         
@@ -31,3 +33,4 @@ var gameover = {
         
     }
 };
+

@@ -99,10 +99,6 @@ canvas {
     padding: 7px;
 }
 
-.authentBtn {
-    margin-top: 4px;
-    width: 10%;
-}
 
 /******* LOGIN *******/
 
@@ -126,10 +122,34 @@ canvas {
         padding-bottom: .5%;
     }
     
-    .signUp {
+    .authentBanner {
+        width: 305px;
+        height: 375px;
+        padding: 20px;
+        margin-top: 30%;
+    }
+    
+    .authentBtn {
+        margin-top: 4px;
+        width: 110px;
+    }
+    
+    .title {
+        margin-top: 5px;
+        font-size: 20px;
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+
+    .inputLabel {
+        font-size: 17px;
+        padding: 3px;
+    }
+    
+    .bannerInput, .bannerInput:focus {
+        padding: 15px;
         width: 200px;
-        height: 200px;
-        padding-top: 25%;
+        margin: 5px;
     }
 }
 
@@ -153,9 +173,16 @@ canvas {
         padding-bottom: .5%;
     }
     
-    .signUp {
-        width: 5000px;
-        height: 5000px;
+    .authentBanner {
+        width: 450px;
+        height: 450px;
+        padding: 20px;
+        margin-top: 17%;
+    }
+    
+    .authentBtn {
+        margin-top: 4px;
+        width: 25%;
     }
 }
 
@@ -175,6 +202,18 @@ canvas {
         width: auto;
         padding-top: 7%;
         padding-bottom: .5%;
+    }
+    
+    .authentBanner {
+        width: 450px;
+        height: 450px;
+        padding: 20px;
+        margin-top: 17%;
+    }
+    
+    .authentBtn {
+        margin-top: 4px;
+        width: 20%;
     }
 } 
 
@@ -197,11 +236,16 @@ canvas {
         padding-bottom: .5%;
     }
     
-    .signUp {
+    .authentBanner {
         width: 500px;
         height: 500px;
         padding: 20px;
-        margin-top: 15%;
+        margin-top: 10%;
+    }
+    
+    .authentBtn {
+        margin-top: 4px;
+        width: 19%;
     }
 } 
 
@@ -220,11 +264,16 @@ canvas {
         padding-bottom: .5%;
     }
     
-    .signUp {
+    .authentBanner {
         width: 450px;
         height: 450px;
         padding: 20px;
         margin-top: 10%;
+    }
+    
+    .authentBtn {
+        margin-top: 4px;
+        width: 15%;
     }
 } 
 
@@ -247,11 +296,16 @@ canvas {
         padding-bottom: .5%;
     }
     
-    .signUp {
+    .authentBanner {
         width: 450px;
         height: 450px;
         padding: 20px;
         margin-top: 5%;
+    }
+    
+    .authentBtn {
+        margin-top: 4px;
+        width: 10%;
     }
     
 }

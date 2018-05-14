@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Character Creation | Turn Off the Tap</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="Styles/styles.css" type="text/css">
+        <script type="text/javascript" src="js/phaser.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            var config = {
+                width: 1080,
+                height: 1920,
+                renderer: Phaser.AUTO,
+                antialias: false,
+                state: {
+                    init: init,
+                    preload: preload,
+                    create: create,
+                    update: update
+                }
+            }
+
+            var game = new Phaser.Game(config);
+            function init() {
+                game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+                game.scale.pageAlignVertically = true;
+                game.scale.pageAlignHorizontally = true;
+                
+            }
+            
+            function preload() {
+                game.load.image('loadingLogo', 'Images/TurnOfftheTap Logo2.png');
+                game.load.image('background', 'Images/VancouverBackground.png');
+                game.load.image('arrowLeft', 'Images/Arrow-Left.png');
+                game.load.image('arrowRight', 'Images/Arrow-Right.png');
+                game.load.image('banner', 'Images/banner-Light.png');
+                game.load.image('displayBanner', 'Images/banner-charDisplay.png');
+                game.load.image('looksgood', 'Images/btn-LooksGood.png');
+                game.load.image('back', 'Images/btn-Back.png');
+            }
+
+            function create() {
+                var background = game.add.image(540, 960, "background");
+                background.anchor.setTo(0.5, 0.5);
+                background.scale.setTo(10, 10);
+                
+                var banner = game.add.image(540, 960, "banner");
+                banner.anchor.setTo(0.5, 0.5);
+                
+                var displayBanner = game.add.image(540, 670, "displayBanner");
+                displayBanner.anchor.setTo(0.5, 0.5);
+                
+                var looksgood = game.add.image(650, 1070, "looksgood");
+                looksgood.inputEnabled = true;
+                looksgood.events.onInputDown.add(looksgoodBtn, this);
+                
+                var back = game.add.image(650, 1270, "back");
+                back.inputEnabled = true;
+                back.events.onInputDown.add(backBtn, this);
+                
+                var arrowL_Skin = game.add.image(150, 1030, "arrowLeft");
+                var arrowR_Skin = game.add.image(450, 1030, "arrowRight");
+                
+                var arrowL_Face = game.add.image(150, 1180, "arrowLeft");
+                var arrowR_Face = game.add.image(450, 1180, "arrowRight");
+                
+                var arrowL_Hair = game.add.image(150, 1330, "arrowLeft");
+                var arrowR_Hair = game.add.image(450, 1330, "arrowRight");
+                
+                var arrowL_Shirt = game.add.image(150, 1480, "arrowLeft");
+                var arrowR_Shirt = game.add.image(450, 1480, "arrowRight");
+
+                
+            }
+            
+            function update() {
+                
+            }
+            
+            function looksgoodBtn() {
+                window.location.href = "game.html";
+            }
+            
+            function backBtn() {
+                window.location.href = "index.html";
+            }
+        </script>
+    </body>
+</html>
