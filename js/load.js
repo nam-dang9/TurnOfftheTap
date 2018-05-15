@@ -37,6 +37,8 @@ var load = {
         game.load.image('overlay', 'Images/overlay.png');
         game.load.image('pause', 'Images/btn-pause.png');
         game.load.image('unpause', 'Images/btn-unpause.png');
+        game.load.image('timesup', 'Images/timesup.png');
+        game.load.image('success', 'Images/success.png');
         
         // Event bubbles
         game.load.image('shower', 'Images/shower.png');
@@ -60,7 +62,7 @@ var load = {
         game.load.audio('gameoverSound', 'sounds/gameover.wav');
         
         // Minigame sprites
-        game.load.spritesheet('minigameFaucetAnimation', 'Images/faucetspritesheet.png', 21, 28, 10);
+        game.load.spritesheet('faucetBoss', 'Images/sprites/faucetBoss-spritesheet.png', 105, 140, 16);
     },
     
     create: function() {
