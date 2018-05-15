@@ -220,19 +220,30 @@ function tapOnLogo(logo) {
     }
 }
 function minigameSprinkler() {
+    if (health > 80) {
+        health = 100;
+    } else {
     health += 20;
+    }
+    minigame = false;
     //overlay = game.add.image(0, 0, 'overlay');
 }
 
 function minigameFaucet() {
     console.log("MINIGAME FUCK YEA");
+if (health > 80) {
+        health = 100;
+    } else {
     health += 20;
-    minigame = false;
+    }    minigame = false;
 }
 function minigameShower() {
     console.log("MINIGAME FUCK YEA");
+if (health > 80) {
+        health = 100;
+    } else {
     health += 20;
-    minigame = false;
+    }    minigame = false;
 }
 
 function pauseBtn() {

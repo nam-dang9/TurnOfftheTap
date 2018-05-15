@@ -3,7 +3,7 @@ var gameover = {
         var background = game.add.image(540, 960, "background");
         background.anchor.setTo(0.5, 0.5);
         background.scale.setTo(10, 10);
-        
+        var highScore = score;
         var gameover = game.add.image(540,560, "gameover");
         gameover.anchor.setTo(0.5, 0.5);
         
@@ -24,7 +24,7 @@ var gameover = {
         home.events.onInputDown.add(homeBtn, this);
         
         
-        var scoreNumber = game.add.text(540, 970, score, {
+        var scoreNumber = game.add.text(540, 970, highScore, {
                     font: "75px Arial",
                     fill: "#ffffff",
                     align: "center"
