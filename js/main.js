@@ -20,7 +20,6 @@ var charX = -5;
 var charY = +5;
 
 var logo;
-var pause;
 
 var minigame = false;
 var pause = false;
@@ -30,8 +29,9 @@ var mainHome;
 var overlay;
 var unpause;
 var replay;
-var pausedTime;
+var pausedTime = 0;
 
+var timer;
 var main = {
     create: function() {
 
@@ -121,14 +121,14 @@ var main = {
                 health -= 0.005;
             }
             if (health <= 0) {
-                console.log("gameover");
                 game.state.start('gameover');
             }
             // Reduce health based on currently living bubbles
             bubbles.forEachAlive(damageHealth, this);
 
             // Update difficulty based on elapsed time
-            difficulty = Math.round(game.time.elapsedSince(startTime) / difficultyRate);
+            timer = game.time.elapsedSince(startTime) - pausedTime;
+            difficulty = Math.round(timer / difficultyRate);
         }
     }
    
@@ -142,15 +142,12 @@ function tapOnBubble(bubble) {
         }
         if (bubble.type == 'minigameFaucet') {
             minigame = true;
-            minigameSprinkler();
+            minigameFaucet();
         }
         if (bubble.type == 'minigameShower') {
             minigame = true;
-            minigameSprinkler();
+            minigameShower();
         }
-
-        console.log(bubble.type);
-        console.log(minigame);
         bubble.kill();
         score += 10;
         scoreDisplay.text = score;
@@ -232,9 +229,8 @@ function minigameShower() {
 function pauseBtn() {
     if (!minigame) {
         pausedTime = Date.now();
-        console.log(difficulty);
         pause = true;
-        console.log('paused');
+        console.log(difficulty);
         overlay = game.add.image(0, 0, 'overlay');
         mainHome.inputEnabled = false;
         mainPause.inputEnabled = false;
@@ -251,7 +247,7 @@ function pauseBtn() {
 }
 
 function unpauseBtn() {
-    startTime = pausedTime;
+    pausedTime = game.time.elapsedSince(pausedTime);
     console.log(difficulty);
     overlay.kill();
     unpause.kill();
