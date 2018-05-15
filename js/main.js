@@ -137,6 +137,7 @@ var main = {
 
 function tapOnBubble(bubble) {
     if (!pause && !minigame) {
+        game.sound.play('pop');
         if (bubble.type == 'minigameSprinkler') {
             minigame = true;
             minigameSprinkler();
@@ -229,25 +230,139 @@ function minigameSprinkler() {
     //overlay = game.add.image(0, 0, 'overlay');
 }
 
+// FAUCET MINIGAME
 function minigameFaucet() {
-    console.log("MINIGAME FUCK YEA");
-if (health > 80) {
-        health = 100;
-    } else {
-    health += 20;
-    }    minigame = false;
+    overlay = game.add.image(0, 0, 'overlay');
+    
+    // Health bar
+    var barConfig = {
+        width: 800,
+        height: 70,
+        x: 540, 
+        y: 360,
+        bg: {
+            color: '#1c4167'
+        },
+        bar: {
+            color: '#0d91df'
+        }
+        
+    };
+	var faucetHealthBar = new HealthBar(this.game, barConfig);
+    
+    // Faucet sprite
+    var faucetBoss = game.add.sprite(540, 960, 'faucetBoss');
+    faucetBoss.anchor.setTo(0.5, 0.5);
+    faucetBoss.scale.setTo(6, 6);
+    faucetBoss.inputEnabled = true;
+    faucetBoss.health = 10;
+    console.log(faucetBoss.health);
+    
+    // Faucet sprite animation
+    var running = faucetBoss.animations.add('running', [0, 1, 2, 3, 4, 5, 6, 7]);
+    faucetBoss.animations.play('running', 30, true);
+    
+    // Timer
+    var faucetTimer = game.time.events.add(Phaser.Timer.SECOND * 3, function() {
+        if (faucetBoss.health > 0) {
+            faucetBoss.kill();
+            faucetHealthBar.kill();
+            
+            var timesup = game.add.image(540, 850, 'timesup');
+            timesup.anchor.setTo(0.5, 0.5);
+            var updatedscore = game.add.text(540, 1210, '-10', {
+                        font: "150px Arial",
+                        fill: "#ffffff",
+                        align: "center"
+            });
+            updatedscore.anchor.setTo(0.5, 0.5);
+            
+            game.time.events.add(Phaser.Timer.SECOND * 1.5, function() {
+                timesup.kill();
+                updatedscore.kill();
+                overlay.kill();
+                health -= 10;
+                minigame = false;
+                spawnBubbles();
+            }, this);
+        } else {
+            faucetBoss.kill();
+            faucetHealthBar.kill();
+            
+            var success = game.add.image(540, 850, 'success');
+            timesup.anchor.setTo(0.5, 0.5);
+            var updatedscore = game.add.text(540, 1210, '+20', {
+                        font: "150px Arial",
+                        fill: "#ffffff",
+                        align: "center"
+            });
+            updatedscore.anchor.setTo(0.5, 0.5);
+            
+            game.time.events.add(Phaser.Timer.SECOND * 1.5, function() {
+                success.kill();
+                updatedscore.kill();
+                overlay.kill();
+                if (health > 80) {
+                    health = 100;
+                } else {
+                    health += 20;
+                }
+                console.log(minigame);
+                minigame = false;
+                spawnBubbles();
+            }, this);
+        }
+    } , this);
+    
+    // Handle if faucet gets tapped on
+    faucetBoss.events.onInputDown.add(function() {
+        if (faucetBoss.health !== 0) {
+            faucetBoss.health -= 1;
+            console.log(faucetBoss.health);
+            faucetHealthBar.setPercent((faucetBoss.health / 10) * 100);
+        } else {
+            faucetBoss.kill();
+            faucetHealthBar.kill();
+            
+            var success = game.add.image(540, 850, 'success');
+            success.anchor.setTo(0.5, 0.5);
+            var updatedscore = game.add.text(540, 1010, '+20', {
+                        font: "150px Arial",
+                        fill: "#ffffff",
+                        align: "center"
+            });
+            updatedscore.anchor.setTo(0.5, 0.5);
+            
+            game.time.events.add(Phaser.Timer.SECOND * 1.5, function() {
+                success.kill();
+                updatedscore.kill();
+                overlay.kill();
+                if (health > 80) {
+                    health = 100;
+                } else {
+                    health += 20;
+                }
+                faucetTimer = game.time.events.stop();
+                console.log(minigame);
+                minigame = false;
+                spawnBubbles();
+            }, this);
+        }
+    }, this);
 }
 function minigameShower() {
     console.log("MINIGAME FUCK YEA");
-if (health > 80) {
+    if (health > 80) {
         health = 100;
     } else {
-    health += 20;
-    }    minigame = false;
+        health += 20;
+    }    
+    minigame = false;
 }
 
 function pauseBtn() {
-    if (!minigame) {
+    if (!minigame && !pause) {
+        game.sound.play('btn');
         pauseStart = Date.now();
         pause = true;
         overlay = game.add.image(0, 0, 'overlay');
@@ -266,6 +381,7 @@ function pauseBtn() {
 }
 
 function unpauseBtn() {
+    game.sound.play('btn');
     pausedTime += game.time.elapsedSince(pauseStart);
     overlay.kill();
     unpause.kill();
@@ -277,11 +393,13 @@ function unpauseBtn() {
 }
 
 function replayBtn() {
+    game.sound.play('btn');
     window.location.href = "game.html";
 }
 
 function homeBtn() {
-    if (!minigame) {
+    if (!minigame && !pause) {
+        game.sound.play('btn');
         window.location.href = "index.html";
     }
 }
