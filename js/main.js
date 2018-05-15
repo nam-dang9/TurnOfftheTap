@@ -289,7 +289,7 @@ function minigameFaucet() {
             faucetHealthBar.kill();
             
             var success = game.add.image(540, 850, 'success');
-            timesup.anchor.setTo(0.5, 0.5);
+            success.anchor.setTo(0.5, 0.5);
             var updatedscore = game.add.text(540, 1210, '+20', {
                         font: "150px Arial",
                         fill: "#ffffff",
@@ -321,30 +321,6 @@ function minigameFaucet() {
         } else {
             faucetBoss.kill();
             faucetHealthBar.kill();
-            
-            var success = game.add.image(540, 850, 'success');
-            success.anchor.setTo(0.5, 0.5);
-            var updatedscore = game.add.text(540, 1010, '+20', {
-                        font: "150px Arial",
-                        fill: "#ffffff",
-                        align: "center"
-            });
-            updatedscore.anchor.setTo(0.5, 0.5);
-            
-            game.time.events.add(Phaser.Timer.SECOND * 1.5, function() {
-                success.kill();
-                updatedscore.kill();
-                overlay.kill();
-                if (health > 80) {
-                    health = 100;
-                } else {
-                    health += 20;
-                }
-                faucetTimer = game.time.events.stop();
-                console.log(minigame);
-                minigame = false;
-                spawnBubbles();
-            }, this);
         }
     }, this);
 }
