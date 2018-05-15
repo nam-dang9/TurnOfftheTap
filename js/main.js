@@ -11,7 +11,7 @@ var difficulty = 1;
 var difficultyRate = 5000;
 var minigameNames = ['minigameSprinkler', 'minigameFaucet', 'minigameShower'];
 
-var bubbleNames = ['sprinkler', 'shower', 'bathtub', 'carwash', 'faucet', minigameNames];
+var bubbleNames = [minigameNames, 'sprinkler', 'shower', 'bathtub', 'carwash', 'faucet'];
 var bubbles;
 var bubble;
 
@@ -158,7 +158,7 @@ function tapOnBubble(bubble) {
 
 function createBubble() {
     var currentBubble = Math.floor(Math.random() * bubbleNames.length);
-    if (currentBubble == 5) {
+    if (currentBubble == 0) {
         currentBubble = Math.floor(Math.random() * minigameNames.length);
         var currentEvent = minigameNames[currentBubble];
     } else {
@@ -190,9 +190,9 @@ function createBubble() {
 
 function spawnBubbles() {
     if (!pause && !minigame) {
-    var spawnCount = Math.random() * Math.ceil(difficulty / 4);
-    if (spawnCount > 4) {
-        spawnCount = 4;
+    var spawnCount = Math.random() * Math.ceil(difficulty / 3);
+    if (spawnCount > 3) {
+        spawnCount = 3;
     }
 
     for (var i = 0; i < spawnCount; i++) {
@@ -256,7 +256,6 @@ function minigameFaucet() {
     faucetBoss.scale.setTo(6, 6);
     faucetBoss.inputEnabled = true;
     faucetBoss.health = 10;
-    console.log(faucetBoss.health);
     
     // Faucet sprite animation
     var running = faucetBoss.animations.add('running', [0, 1, 2, 3, 4, 5, 6, 7]);
@@ -307,7 +306,6 @@ function minigameFaucet() {
                 } else {
                     health += 20;
                 }
-                console.log(minigame);
                 minigame = false;
                 spawnBubbles();
             }, this);
