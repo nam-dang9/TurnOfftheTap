@@ -20,15 +20,22 @@ var charX = -5;
 var charY = +5;
 
 var logo;
+var pause;
 
 var minigame = false;
+var pause = false;
 
+var mainPause;
+var mainHome;
+var overlay;
+var unpause;
+var replay;
+var pausedTime;
 
 var main = {
     create: function() {
 
         startTime = Date.now();
-
         // Setting up background
         var background = game.add.image(0, 0, 'water');
         background.height = game.height;
@@ -48,12 +55,11 @@ var main = {
         logo.taps = 9;
         
         // UI buttons
-        var mainReplay = game.add.image(880, 1740, "replay");
-        mainReplay.scale.setTo(0.6, 0.6);
-        mainReplay.inputEnabled = true;
-        mainReplay.events.onInputDown.add(replayBtn, this);
+        mainPause = game.add.image(880, 1740, "pause");
+        mainPause.inputEnabled = true;
+        mainPause.events.onInputDown.add(pauseBtn, this);
        
-        var mainHome = game.add.image(680, 1740, "homeBtn");
+        mainHome = game.add.image(680, 1740, "homeBtn");
         mainHome.inputEnabled = true;
         mainHome.events.onInputDown.add(homeBtn, this);
         
@@ -99,13 +105,13 @@ var main = {
         character.smoothed = false;
         
         bubbles = game.add.group();
-
+    
         spawnBubbles();
         
     },
     
     update: function() {
-        if (!minigame) {
+        if (!pause && !minigame) {
             if(health < 100) {
                 health += healthRegen;
             }
@@ -129,23 +135,26 @@ var main = {
 };
 
 function tapOnBubble(bubble) {
-    if (bubble.type == 'minigameSprinkler') {
-        minigame = true;
-        minigameSprinkler();
+    if (!pause && !minigame) {
+        if (bubble.type == 'minigameSprinkler') {
+            minigame = true;
+            minigameSprinkler();
+        }
+        if (bubble.type == 'minigameFaucet') {
+            minigame = true;
+            minigameSprinkler();
+        }
+        if (bubble.type == 'minigameShower') {
+            minigame = true;
+            minigameSprinkler();
+        }
+
+        console.log(bubble.type);
+        console.log(minigame);
+        bubble.kill();
+        score += 10;
+        scoreDisplay.text = score;
     }
-    if (bubble.type == 'minigameFaucet') {
-        minigame = true;
-        minigameSprinkler();
-    }
-    if (bubble.type == 'minigameShower') {
-        minigame = true;
-        minigameSprinkler();
-    }
-    console.log(bubble.type);
-    console.log(minigame);
-    bubble.kill();
-    score += 10;
-    scoreDisplay.text = score;
 }
 
 function createBubble() {
@@ -176,7 +185,7 @@ function createBubble() {
 }
 
 function spawnBubbles() {
-
+    if (!pause && !minigame) {
     var spawnCount = Math.random() * Math.ceil(difficulty / 4);
     if (spawnCount > 4) {
         spawnCount = 4;
@@ -191,6 +200,7 @@ function spawnBubbles() {
 
     // Initiate timer delay for next bubble spawn
     game.time.events.add(spawnInterval, spawnBubbles, this);
+    }
 }
 
 function damageHealth(bubble) {
@@ -207,8 +217,7 @@ function tapOnLogo(logo) {
     }
 }
 function minigameSprinkler() {
-    console.log("MINIGAME FUCK YEA");
-    minigame = false;
+    overlay = game.add.image(0, 0, 'overlay');
 }
 
 function minigameFaucet() {
@@ -219,10 +228,46 @@ function minigameShower() {
     console.log("MINIGAME FUCK YEA");
     minigame = false;
 }
+
+function pauseBtn() {
+    if (!minigame) {
+        pausedTime = Date.now();
+        console.log(difficulty);
+        pause = true;
+        console.log('paused');
+        overlay = game.add.image(0, 0, 'overlay');
+        mainHome.inputEnabled = false;
+        mainPause.inputEnabled = false;
+        unpause = game.add.image(540, 800, 'unpause');
+        unpause.anchor.setTo(0.5, 0.5);
+        unpause.scale.setTo(1.7, 1.7);
+        unpause.inputEnabled = true;
+        unpause.events.onInputDown.add(unpauseBtn, this);
+        replay = game.add.image(540, 1100, 'replay');
+        replay.anchor.setTo(0.5, 0.5);
+        replay.inputEnabled = true;
+        replay.events.onInputDown.add(replayBtn, this);
+    }
+}
+
+function unpauseBtn() {
+    startTime = pausedTime;
+    console.log(difficulty);
+    overlay.kill();
+    unpause.kill();
+    replay.kill();
+    pause = false;
+    mainHome.inputEnabled = true;
+    mainPause.inputEnabled = true;
+    spawnBubbles();
+}
+
 function replayBtn() {
     window.location.href = "game.html";
 }
 
 function homeBtn() {
-    window.location.href = "index.html";
+    if (!minigame) {
+        window.location.href = "index.html";
+    }
 }
