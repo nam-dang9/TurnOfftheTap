@@ -31,6 +31,7 @@ var gameover = {
         });
         scoreNumber.anchor.setTo(0.5, 0.5);
         
-    }
+        game.sound.play('gameoverSound');
+    },
 };
 

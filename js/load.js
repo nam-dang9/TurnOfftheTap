@@ -40,7 +40,6 @@ var load = {
         game.load.image('overlay', 'Images/overlay.png');
         game.load.image('pause', 'Images/btn-pause.png');
         game.load.image('unpause', 'Images/btn-unpause.png');
-        game.load.image('minigame', 'Images/minigame.gif');
         
         // Event bubbles
         game.load.image('shower', 'Images/shower.png');
@@ -56,6 +55,12 @@ var load = {
         game.load.image('face', 'Images/character/face.png');
         game.load.image('hair', 'Images/character/hair02.png');
         game.load.image('shirt', 'Images/character/shirt02.png');
+        
+        // Sounds
+        game.load.audio('pop', 'sounds/pop.wav');
+        game.load.audio('btn', 'sounds/btn.wav')
+        game.load.audio('minigameSound', 'sounds/minigame.wav');
+        game.load.audio('gameoverSound', 'sounds/gameover.wav');
     },
     
     create: function() {
