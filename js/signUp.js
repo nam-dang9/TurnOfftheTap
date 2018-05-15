@@ -1,6 +1,6 @@
-// Front-End Reminder: Show the logout Button "realtime" when you login
-// Front-End Reminder: Error Message only shows on console now, set the msg on the html (wait for frontEnd)
-// DB: Keep login in every pages. 
+const db = firebase.firestore();
+ const settings = {/* your settings... */ timestampsInSnapshots: true};
+ db.settings(settings);
 
 //Get elements 
     const txtEmail = document.getElementById('txtEmail');
@@ -8,7 +8,7 @@
     const login = document.getElementById('login');
     const signUp = document.getElementById('signUp');
     const logOut = document.getElementById('logOut');
-    const txtName = document.getElementById('txtName');
+    const txtName = document.getElementById('txtNickname');
     const loginUser = document.getElementById('mainDisplay');
     
     // create the div object
@@ -21,40 +21,84 @@
 	var btnSignUp = document.getElementById("btnSignUp");
     
 function sign_Up(){
-	    const email = txtEmail.value;
-        const password = txtPassword.value;
-        const auth = firebase.auth();  
 	
-	    const promise = auth.createUserWithEmailAndPassword(email,password);
-	       promise.catch(function(error) {
-           console.log(error.code);
-           err_msg.innerHTML = error.code;
-           });  
-};
+		if(txtEmail.value ==""){
+			console.log("Please enter Email");
+			return false;
+		}
+		console.log("txtNickname.value"+ txtNickname.value);
+		if (txtNickname.value == ""){
+			console.log("Please enter a display name");
+			return false;
+		}
+		
+		if((txtPassword.value =="")||(txtPassword.value.length<6)){
+			console.log("Enter password or password must contain 6 characters");
+			return false;
+			
+		}else{
+				const email = txtEmail.value;
+//				console.log("display email: " + txtEmail.value);
+				
+				const password = txtPassword.value;
+//				console.log("display Password: " + txtPassword.value);
+				
+				const name = txtName.value;
+//				console.log("display name: " + txtName.value);
+				
+				
+           firebase.auth().createUserWithEmailAndPassword(email,password)
+			.then(function(user) {
+			   console.log("signup sucessfully");  
+		   }).catch(function(error){
+			   console.log(error.code);
+		   });
+		}
+}
+				
+
 
 //update the display name
 function after_signUp(){
+			
+	const dpName = txtName.value;
 	
 	firebase.auth().onAuthStateChanged(function(user) {
-		if (user) {
-		  const dpName = txtName.value;
-		  user.updateProfile({
+
+		if (user){
+			user.updateProfile({
 			  displayName: dpName
-			  //      photoURL: "https://example.com/jane-q-user/profile.jpg"
-		  }).then(function() {
-			  console.log("Update successful.");
-		  }).catch(function(error) {
-			  console.log("Can not Save the display name.");
-		  });
-          
-		} else {
-//			 console.log ('Not logged in');
-//			 hide.style.display ="none";
+			}).then(function() {
+//				console.log("Update display Name successful.");
+			}).catch(function(error) {
+				console.log("Update display Name not successful.");
+			});
+		}
+	});	
+	
+	firebase.auth().onAuthStateChanged(function(user) {
+		
+		if (user){
+			var uid = firebase.auth().currentUser.uid;
+//			console.log("User ID" + uid);			
+				db.collection("Users").doc(uid).set({
+				email: email,
+				displayName: dpName,
+				hair: "demo",
+				body: "demo",
+//				userId: uid,
+				scores: 0
+			}).then(function() {
+//				console.log("Document successfully written on db !");
+			}).catch(function(error){
+				console.log("Document is not successfully written on db !",error); 
+			});		
 		}
 	});	
 }
 
-	firebase.auth().onAuthStateChanged(function(user) {
+
+firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			btnSignUp.style.display = "none";
 			notLogin.style.display ="none";
@@ -70,7 +114,7 @@ function after_signUp(){
 			console.log("Not log in yet.")
 
 		}
-	});	
+});	
 
 
 // logout button function
@@ -79,30 +123,4 @@ function log_out(){
 	// chnage the URL page.
     window.location.href = 'signUp.html';
 }
-
-//    // Add realtime listener
-//    firebase.auth().onAuthStateChanged(firebaseUser => {
-//        if(firebaseUser){
-//            console.log(firebaseUser);
-//            hide.style.display = "block";
-//            
-//                    //code should not go here but testing is it work
-//                    var user = firebase.auth().currentUser;
-//                    const dpName = txtName.value;
-//                    console.log(dpName);
-//
-//                        user.updateProfile({
-//                          displayName: dpName
-//                    //      photoURL: "https://example.com/jane-q-user/profile.jpg"
-//                        }).then(function() {
-//                          console.log("Update successful.");
-//                        }).catch(function(error) {
-//                          console.log("Can not Save the display name.");
-//                        });
-//    
-//            
-//        } else{
-//            console.log ('Not logged in');
-//            logOut.style.display = "none";
-//        }
-//    });
+	   
