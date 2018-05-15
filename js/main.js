@@ -30,6 +30,7 @@ var overlay;
 var unpause;
 var replay;
 var pausedTime = 0;
+var pauseStart;
 
 var timer;
 var main = {
@@ -228,9 +229,8 @@ function minigameShower() {
 
 function pauseBtn() {
     if (!minigame) {
-        pausedTime = Date.now();
+        pauseStart = Date.now();
         pause = true;
-        console.log(difficulty);
         overlay = game.add.image(0, 0, 'overlay');
         mainHome.inputEnabled = false;
         mainPause.inputEnabled = false;
@@ -247,8 +247,7 @@ function pauseBtn() {
 }
 
 function unpauseBtn() {
-    pausedTime = game.time.elapsedSince(pausedTime);
-    console.log(difficulty);
+    pausedTime += game.time.elapsedSince(pauseStart);
     overlay.kill();
     unpause.kill();
     replay.kill();
