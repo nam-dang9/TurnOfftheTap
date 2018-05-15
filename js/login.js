@@ -2,7 +2,7 @@ var logIn = document.getElementById("login");
 var name, email;
 
 
-var notlogIn = document.getElementById("notLogIn");
+//var notlogIn = document.getElementById("notLogIn");
 var txtEmail = document.getElementById('txtEmail');
 var txtPassword = document.getElementById('txtPassword');
 
@@ -17,11 +17,9 @@ firebase.auth().onAuthStateChanged(function(user) {
     var checkName = (name != "null")?  name: "Welcome!";
     logIn.innerHTML += checkName + "</br>";
     login.innerHTML += "Email: " + email;
-    hide.style.display = "block";
-    notLogIn.style.display ="none";
-    
-  } else {
     hide.style.display = "none";
+  } else {
+    logIn.style.display = "none";
   }
 });
 
@@ -33,18 +31,22 @@ function logOut(){
 
 
 function logInF(){
-         
     var email = txtEmail.value;
     var password = txtPassword.value;
     var auth = firebase.auth();  
-    var promise = auth.signInWithEmailAndPassword(email, password);
-        
-        // Show error msg in the div html page 
-        promise.catch(function(error) {
+    var promise = auth.signInWithEmailAndPassword(email, password);     
+
+	    promise.then(function(){
+		//refresh the page
+		window.location.href = 'logIn.html';
+		})
+        .catch(function(error) {
+			// Show error msg in the div html page 
             console.log(error.code);
             err_msg.innerHTML = error.code;
 
         }); 
-      
 
 };
+
+

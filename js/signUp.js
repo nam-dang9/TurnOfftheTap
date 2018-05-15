@@ -2,8 +2,6 @@
 // Front-End Reminder: Error Message only shows on console now, set the msg on the html (wait for frontEnd)
 // DB: Keep login in every pages. 
 
-
-
 //Get elements 
     const txtEmail = document.getElementById('txtEmail');
     const txtPassword = document.getElementById('txtPassword');
@@ -11,14 +9,16 @@
     const signUp = document.getElementById('signUp');
     const logOut = document.getElementById('logOut');
     const txtName = document.getElementById('txtName');
+    const loginUser = document.getElementById('mainDisplay');
     
     // create the div object
     const err_msg = document.querySelector("#err_msg");
 
 
 	// Create a  variable to hide the div
-	var hide = document.getElementById("mainType");
+	var notLogin = document.getElementById("notLoginIn");
 	var logOutBtn = document.getElementById("hidebtn");
+	var btnSignUp = document.getElementById("btnSignUp");
     
 function sign_Up(){
 	    const email = txtEmail.value;
@@ -46,7 +46,7 @@ function after_signUp(){
 		  }).catch(function(error) {
 			  console.log("Can not Save the display name.");
 		  });
-    
+          
 		} else {
 //			 console.log ('Not logged in');
 //			 hide.style.display ="none";
@@ -56,17 +56,17 @@ function after_signUp(){
 
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
+			btnSignUp.style.display = "none";
+			notLogin.style.display ="none";
     		console.log("logged In");
 			console.log(user);
-			hide.style.display = "none";
-			logOutBtn.style.display ="block";
-			
 			name = user.displayName;
     		email = user.email;
     		var checkName = (name != "null")?  name: "Welcome!";
-    		hidebtn.innerHTML += checkName + "</br>";
-    		hidebtn.innerHTML += "Email: " + email + "</br>";
+    		loginUser.innerHTML += checkName + "</br>";
+    		loginUser.innerHTML += "Email: " + email + "</br>";
 		} else {
+			logOutBtn.style.display = "none";
 			console.log("Not log in yet.")
 
 		}
@@ -80,11 +80,6 @@ function log_out(){
     window.location.href = 'signUp.html';
 }
 
-
-
-
-
-    
 //    // Add realtime listener
 //    firebase.auth().onAuthStateChanged(firebaseUser => {
 //        if(firebaseUser){
