@@ -8,8 +8,6 @@ var load = {
         logo.anchor.setTo(0.5, 0.5);
         logo.scale.setTo(2, 2);
         
-        game.load.image('arrowLeft', 'Images/Arrow-left.png');
-        game.load.image('arrowRight', 'Images/Arrow-Right.png');
         game.load.image('banner', 'Images/Banner.png');
         game.load.image('bannerDark', 'Images/Banner-Dark.png');
         game.load.image('bannerLong', 'Images/Banner-Long.png');
@@ -17,7 +15,6 @@ var load = {
         game.load.image('backBtn', 'Images/Btn-Back.png');
         game.load.image('customizeBtn', 'Images/Btn-CustomizeIcon.png');
         game.load.image('homeBtn', 'Images/Btn-HomeIcon.png');
-        game.load.image('looksGoodBtn', 'Images/Btn-LooksGood.png');
         game.load.image('settingsBtn', 'Images/Btn-SettingsIcon.png');
         game.load.image('healthBar', 'Images/HealthBar.png');
         game.load.image('healthBarData', 'Images/HealthBar-Health.png');
@@ -63,7 +60,7 @@ var load = {
         game.load.audio('gameoverSound', 'sounds/gameover.wav');
         
         // Minigame sprites
-        game.load.spritesheet('minigameFaucetAnimation', 'Images/faucetspritesheet.png', 21, 28, )
+        game.load.spritesheet('minigameFaucetAnimation', 'Images/faucetspritesheet.png', 21, 28, 10);
     },
     
     create: function() {
