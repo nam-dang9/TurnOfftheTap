@@ -60,6 +60,9 @@ var load = {
         game.load.audio('btn', 'sounds/btn.wav')
         game.load.audio('minigameSound', 'sounds/minigame.wav');
         game.load.audio('gameoverSound', 'sounds/gameover.wav');
+        game.load.audio('successSound', 'sounds/success.wav');
+        game.load.audio('timesupSound', 'sounds/timesup.wav');
+        game.load.audio('albertlaugh', 'sounds/albertlaugh.wav');
         
         // Minigame sprites
         game.load.spritesheet('faucetBoss', 'Images/sprites/faucetBoss-spritesheet.png', 105, 140, 16);
