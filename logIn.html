@@ -8,20 +8,23 @@
     </head>
     <body>
         <div class="authentBanner">
-            <h3 class="title">LOG IN</h3>
-            <h5 class="inputLabel">Email</h5>
-            <input type ="email" class="bannerInput" /><br />
-            <h5 class="inputLabel">Password</h5>
-            <input type ="password" class="bannerInput" /><br />
-            <div id="errMsg" ></div>
+				<div id="loginHid">
+				<h3 class="title">LOG IN</h3>
+				<h5 class="inputLabel">Email</h5>
+				<input type ="email" id="txtEmail" class="bannerInput" /><br />
+				<h5 class="inputLabel">Password</h5>
+				<input type ="password" id="txtPassword"class="bannerInput" /><br />
+				<div id="errMsg" ></div>
+			</div>
             <div id="login">
-            </div>
-            <div id="loginHid">
-                <button class="button" id="logOut" onclick="logOut()">Log Out</button><br>
                 <a href = "game.html"><p class="websitebutton aboutbtn counterbtn">PLAY NOW</p></a>
+			    <button class="button" id="logOut" onclick="logOut()">Log Out</button><br>
             </div>
+ 
+ 
+
         </div>
-        <img src="Images/Btn-Login.png" onclick="logInF()" class="btn authentBtn" />
+        <img src="Images/Btn-Login.png" onclick="logInF()" class="btn authentBtn" id="imgClick"/>
         <a href="index.html"><img src="Images/btn-backlong.png" class="btn authentBtn" /></a>
     </body>
 <script src="js/dbLink.js"></script>
