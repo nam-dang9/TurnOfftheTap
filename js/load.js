@@ -61,6 +61,9 @@ var load = {
         game.load.audio('btn', 'sounds/btn.wav')
         game.load.audio('minigameSound', 'sounds/minigame.wav');
         game.load.audio('gameoverSound', 'sounds/gameover.wav');
+        
+        // Minigame sprites
+        game.load.spritesheet('minigameFaucetAnimation', 'Images/faucetspritesheet.png', 21, 28, )
     },
     
     create: function() {
