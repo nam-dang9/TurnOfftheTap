@@ -9,9 +9,9 @@ var baseInterval = 1000;
 
 var difficulty = 1;
 var difficultyRate = 5000;
+var minigameNames = ['minigameSprinkler', 'minigameFaucet', 'minigameShower'];
 
-var bubbleNames = ['sprinkler', 'shower', 'bathtub', 'carwash', 'faucet', 'minigameSprinkler', 
-                   'minigameShower', 'minigameFaucet'];
+var bubbleNames = ['sprinkler', 'shower', 'bathtub', 'carwash', 'faucet', minigameNames];
 var bubbles;
 var bubble;
 
@@ -156,8 +156,13 @@ function tapOnBubble(bubble) {
 }
 
 function createBubble() {
-    var currentBubble = Math.floor(Math.random() * 8);
-    var currentEvent = bubbleNames[currentBubble];
+    var currentBubble = Math.floor(Math.random() * bubbleNames.length);
+    if (currentBubble == 5) {
+        currentBubble = Math.floor(Math.random() * minigameNames.length);
+        var currentEvent = minigameNames[currentBubble];
+    } else {
+        var currentEvent = bubbleNames[currentBubble];
+    }
             
     // Boundary
     // x: 120 < --- < 880
@@ -215,15 +220,18 @@ function tapOnLogo(logo) {
     }
 }
 function minigameSprinkler() {
-    overlay = game.add.image(0, 0, 'overlay');
+    health += 20;
+    //overlay = game.add.image(0, 0, 'overlay');
 }
 
 function minigameFaucet() {
     console.log("MINIGAME FUCK YEA");
+    health += 20;
     minigame = false;
 }
 function minigameShower() {
     console.log("MINIGAME FUCK YEA");
+    health += 20;
     minigame = false;
 }
 
