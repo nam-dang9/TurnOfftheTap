@@ -33,6 +33,7 @@ var pausedTime = 0;
 var pauseStart;
 
 var timer;
+
 var main = {
     create: function() {
 
@@ -130,29 +131,34 @@ var main = {
             // Update difficulty based on elapsed time
             timer = game.time.elapsedSince(startTime) - pausedTime;
             difficulty = Math.round(timer / difficultyRate);
-        }
+        } 
     }
    
 };
 
 function tapOnBubble(bubble) {
     if (!pause && !minigame) {
-        game.sound.play('pop');
         if (bubble.type == 'minigameSprinkler') {
+            game.sound.play('minigameSound');
+            bubble.kill();
             minigame = true;
             minigameSprinkler();
-        }
-        if (bubble.type == 'minigameFaucet') {
+        } else if (bubble.type == 'minigameFaucet') {
+            game.sound.play('minigameSound');
+            bubble.kill();
             minigame = true;
             minigameFaucet();
-        }
-        if (bubble.type == 'minigameShower') {
+        } else if (bubble.type == 'minigameShower') {
+            game.sound.play('minigameSound');
+            bubble.kill();
             minigame = true;
             minigameShower();
+        } else {
+            game.sound.play('pop');
+            bubble.kill();
+            score += 10;
+            scoreDisplay.text = score;   
         }
-        bubble.kill();
-        score += 10;
-        scoreDisplay.text = score;
     }
 }
 
@@ -212,11 +218,13 @@ function damageHealth(bubble) {
     healthDisplay.text = Math.round(health) + ' / 100';
 }
 
+// EASTER EGG 
 function tapOnLogo(logo) {
     logo.taps -= 1;
     
     if(logo.taps < 0) {
         logo.kill();
+        game.sound.play('albertlaugh');
         logo = game.add.image(5, 1675, "easteregg");
     }
 }
@@ -262,44 +270,65 @@ function minigameFaucet() {
     faucetBoss.animations.play('running', 30, true);
     
     // Timer
-    var faucetTimer = game.time.events.add(Phaser.Timer.SECOND * 3, function() {
+    var faucetTimer = game.time.events.add(Phaser.Timer.SECOND * 5, function() {
         if (faucetBoss.health > 0) {
             faucetBoss.kill();
             faucetHealthBar.kill();
             
+            game.sound.play('timesupSound');
+            
             var timesup = game.add.image(540, 850, 'timesup');
             timesup.anchor.setTo(0.5, 0.5);
-            var updatedscore = game.add.text(540, 1210, '-10', {
+            var updatedscore = game.add.text(470, 1270, '-30', {
                         font: "150px Arial",
                         fill: "#ffffff",
                         align: "center"
             });
             updatedscore.anchor.setTo(0.5, 0.5);
+            var scoreWaterDrop = game.add.image(710, 1270, 'waterDrop');
+            scoreWaterDrop.anchor.setTo(0.5, 0.5);
+            scoreWaterDrop.scale.setTo(0.8, 0.8);
             
-            game.time.events.add(Phaser.Timer.SECOND * 1.5, function() {
+            game.time.events.add(Phaser.Timer.SECOND * 1, function() {
                 timesup.kill();
                 updatedscore.kill();
+                scoreWaterDrop.kill();
                 overlay.kill();
-                health -= 10;
+                health -= 30;
                 minigame = false;
                 spawnBubbles();
             }, this);
+        }
+    } , this);
+    
+    // Handle if faucet gets tapped on
+    faucetBoss.events.onInputDown.add(function() {
+        game.sound.play('btn');
+        if (faucetBoss.health > 0) {
+            faucetBoss.health -= 1;
+            console.log(faucetBoss.health);
+            faucetHealthBar.setPercent((faucetBoss.health / 10) * 100);
         } else {
             faucetBoss.kill();
             faucetHealthBar.kill();
+            game.sound.play('successSound');
             
             var success = game.add.image(540, 850, 'success');
             success.anchor.setTo(0.5, 0.5);
-            var updatedscore = game.add.text(540, 1210, '+20', {
+            var updatedscore = game.add.text(470, 1070, '+20', {
                         font: "150px Arial",
                         fill: "#ffffff",
                         align: "center"
             });
             updatedscore.anchor.setTo(0.5, 0.5);
+            var scoreWaterDrop = game.add.image(710, 1070, 'waterDrop');
+            scoreWaterDrop.anchor.setTo(0.5, 0.5);
+            scoreWaterDrop.scale.setTo(0.6, 0.6);
             
-            game.time.events.add(Phaser.Timer.SECOND * 1.5, function() {
+            game.time.events.add(Phaser.Timer.SECOND * 1, function() {
                 success.kill();
                 updatedscore.kill();
+                scoreWaterDrop.kill();
                 overlay.kill();
                 if (health > 80) {
                     health = 100;
@@ -310,19 +339,20 @@ function minigameFaucet() {
                 spawnBubbles();
             }, this);
         }
-    } , this);
+    }, this);
     
-    // Handle if faucet gets tapped on
-    faucetBoss.events.onInputDown.add(function() {
-        if (faucetBoss.health !== 0) {
-            faucetBoss.health -= 1;
-            console.log(faucetBoss.health);
-            faucetHealthBar.setPercent((faucetBoss.health / 10) * 100);
+    // While the faucet health is over 0, keep regenerating it
+    game.time.events.loop(10, function() {
+        if (faucetBoss.health > 0) {
+            if (faucetBoss.health < 10) {
+                faucetBoss.health += 0.1;
+                faucetHealthBar.setPercent((faucetBoss.health / 10) * 100);
+            }
         } else {
-            faucetBoss.kill();
-            faucetHealthBar.kill();
+            this.stop();
         }
     }, this);
+
 }
 function minigameShower() {
     console.log("MINIGAME FUCK YEA");
@@ -346,24 +376,22 @@ function pauseBtn() {
         unpause.anchor.setTo(0.5, 0.5);
         unpause.scale.setTo(1.7, 1.7);
         unpause.inputEnabled = true;
-        unpause.events.onInputDown.add(unpauseBtn, this);
+        unpause.events.onInputDown.add(function() {
+            game.sound.play('btn');
+            pausedTime += game.time.elapsedSince(pauseStart);
+            overlay.kill();
+            unpause.kill();
+            replay.kill();
+            pause = false;
+            mainHome.inputEnabled = true;
+            mainPause.inputEnabled = true;
+            spawnBubbles();
+        }, this);
         replay = game.add.image(540, 1100, 'replay');
         replay.anchor.setTo(0.5, 0.5);
         replay.inputEnabled = true;
         replay.events.onInputDown.add(replayBtn, this);
     }
-}
-
-function unpauseBtn() {
-    game.sound.play('btn');
-    pausedTime += game.time.elapsedSince(pauseStart);
-    overlay.kill();
-    unpause.kill();
-    replay.kill();
-    pause = false;
-    mainHome.inputEnabled = true;
-    mainPause.inputEnabled = true;
-    spawnBubbles();
 }
 
 function replayBtn() {
