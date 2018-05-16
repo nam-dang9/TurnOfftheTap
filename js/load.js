@@ -40,6 +40,7 @@ var load = {
         game.load.image('timesup', 'Images/timesup.png');
         game.load.image('success', 'Images/success.png');
         
+        
         // Event bubbles
         game.load.image('shower', 'Images/shower.png');
         game.load.image('faucet', 'Images/faucet.png');
@@ -64,8 +65,18 @@ var load = {
         game.load.audio('timesupSound', 'sounds/timesup.wav');
         game.load.audio('albertlaugh', 'sounds/albertlaugh.wav');
         
-        // Minigame sprites
+        // Faucet Minigame Assets
         game.load.spritesheet('faucetBoss', 'Images/sprites/faucetBoss-spritesheet.png', 105, 140, 16);
+        
+        // Sprinkler Minigame Assets
+        game.load.image('sprinklerBackground', 'Images/sprinklerminigameBackground.png');
+        game.load.image('needswater', 'Images/needswater.png');
+        game.load.image('reallyneedswater', 'Images/reallyneedswater.png');
+        game.load.image('haswater', 'Images/haswater.png');
+        game.load.image('toomuchwater', 'Images/toomuchwater.png');
+        game.load.image('overwatered', 'Images/overwatered.png');
+        game.load.spritesheet('sprinklerBoss', 'Images/sprites/sprinklerBoss-spritesheet.png', 288, 265, 7);
+        game.load.image('nothing', 'Images/nothing.png');
     },
     
     create: function() {
