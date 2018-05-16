@@ -460,7 +460,7 @@ function minigameSprinkler() {
         house2.waterStatus();
         
         house3.status.anchor.setTo(0.5, 0.5);
-        house3.health -= 3;
+        house3.health -= 8;
         house3.sprinklerOn();
         house3.waterStatus();
         
@@ -495,8 +495,16 @@ function minigameSprinkler() {
 
                 game.time.events.add(Phaser.Timer.SECOND * 1, function() {
                     overwatered.kill();
-                    health -= 20;
-                    score -= 40;
+                    if (health <= 20) {
+                        health = 0;
+                    } else {
+                        health -= 20;
+                    }
+                    if (score <= 20) {
+                        score = 0;
+                    } else {
+                        score -= 40;
+                    }
                     minigame = false;
                     spawnBubbles();
                 }, this);
@@ -507,7 +515,7 @@ function minigameSprinkler() {
     
     
     // The overall timer of the minigame 
-    game.time.events.add(Phaser.Timer.SECOND * 7, function() {
+    game.time.events.add(Phaser.Timer.SECOND * 15, function() {
         if (sprinklerHealthBar.health <= 0 & !alreadyDone) {
             alreadyDone = true;
             sprinklerBackground.kill();
@@ -531,8 +539,16 @@ function minigameSprinkler() {
             
             game.time.events.add(Phaser.Timer.SECOND * 1, function() {
                 overwatered.kill();
-                health -= 20;
-                score -= 40;
+                if (health <= 20) {
+                    health = 0;
+                } else {
+                    health -= 20;
+                }
+                if (score <= 20) {
+                    score = 0;
+                } else {
+                    score -= 40;
+                }
                 minigame = false;
                 spawnBubbles();
             }, this);
@@ -606,7 +622,7 @@ function minigameFaucet() {
     faucetBoss.animations.play('running', 30, true);
     
     // Timer
-    game.time.events.add(Phaser.Timer.SECOND * 5, function() {
+    game.time.events.add(Phaser.Timer.SECOND * 7, function() {
         if (faucetBoss.health > 0) {
             faucetBoss.kill();
             faucetHealthBar.kill();
@@ -619,8 +635,16 @@ function minigameFaucet() {
             game.time.events.add(Phaser.Timer.SECOND * 1, function() {
                 timesup.kill();
                 overlay.kill();
-                health -= 20;
-                score -= 40;
+                if (health <= 20) {
+                    health = 0;
+                } else {
+                    health -= 20;
+                }
+                if (score <= 20) {
+                    score = 0;
+                } else {
+                    score -= 40;
+                }
                 minigame = false;
                 spawnBubbles();
             }, this);

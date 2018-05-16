@@ -64,6 +64,7 @@ var load = {
         game.load.audio('successSound', 'sounds/success.wav');
         game.load.audio('timesupSound', 'sounds/timesup.wav');
         game.load.audio('albertlaugh', 'sounds/albertlaugh.wav');
+        game.load.audio('sprinklerSound', 'sounds/sprinkler.wav');
         
         // Faucet Minigame Assets
         game.load.spritesheet('faucetBoss', 'Images/sprites/faucetBoss-spritesheet.png', 105, 140, 16);
