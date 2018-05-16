@@ -48,8 +48,8 @@ var load = {
         // Character
         game.load.image('body', 'Images/character/body.png');
         game.load.image('face', 'Images/character/face.png');
-        game.load.image('hair', 'Images/character/hair02.png');
-        game.load.image('shirt', 'Images/character/shirt02.png');
+        game.load.image('hair', 'Images/character/hair2.png');
+        game.load.image('shirt', 'Images/character/shirt2.png');
     },
     
     create: function() {
