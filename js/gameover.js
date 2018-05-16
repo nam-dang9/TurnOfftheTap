@@ -60,7 +60,8 @@ var gameover = {
 			console.log("User have not login");
 		}
 
-	}
+	   });
+    }
 }
 
 
