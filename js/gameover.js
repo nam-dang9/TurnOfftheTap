@@ -39,13 +39,13 @@ var gameover = {
         
         game.sound.play('gameoverSound');
 		
-		
 		console.log("highScore: " + highScore);
 	
 		var uid = firebase.auth().currentUser.uid;
 		//testing please delete it after the game done (console)
 		console.log("Uid: " +uid);
 		console.log(firebase.auth().currentUser.displayName);
+		
 		
 		var updateScore = db.collection("Users").doc(uid);
 		
