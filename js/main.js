@@ -19,7 +19,11 @@ var character;
 var charX = -5;
 var charY = +5;
 
+var bodyTint = "0xdc9556";
+var hairTint = "0x006aff";
+
 var logo;
+ 
 
 var minigame = false;
 var pause = false;
@@ -97,14 +101,16 @@ var main = {
 
         var body = character.create(charX, charY, 'body');
         body.smoothed = false;
-        //body.tint = 0xf6f7be;
+        body.tint = bodyTint;
+
+        var hair = character.create(charX, charY, 'hair');
+        hair.smoothed = false;
+        hair.tint = hairTint;
+
         character.create(charX, charY, 'shirt').smoothed = false;
-        character.create(charX, charY, 'hair').smoothed = false;
         character.create(charX, charY, 'face').smoothed = false;
 
         character.scale.setTo(8);
-
-        character.smoothed = false;
         
         bubbles = game.add.group();
     
