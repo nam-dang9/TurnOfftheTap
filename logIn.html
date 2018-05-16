@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Login | Turn Off the Tap</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="Styles/styles.css">
+        <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase.js"></script>
+    </head>
+    <body>
+        <div class="authentBanner">
+				<div id="loginHid">
+				<h3 class="title">LOG IN</h3>
+				<h5 class="inputLabel">Email</h5>
+				<input type ="email" id="txtEmail" class="bannerInput" /><br />
+				<h5 class="inputLabel">Password</h5>
+				<input type ="password" id="txtPassword"class="bannerInput" /><br />
+				<div id="errMsg" ></div>
+			</div>
+            <div id="login">
+                <a href = "game.html"><p class="websitebutton aboutbtn counterbtn">PLAY NOW</p></a>
+			    <button class="button" id="logOut" onclick="logOut()">Log Out</button><br>
+            </div>
+ 
+ 
+
+        </div>
+        <img src="Images/Btn-Login.png" onclick="logInF()" class="btn authentBtn" id="imgClick"/>
+        <a href="index.html"><img src="Images/btn-backlong.png" class="btn authentBtn" /></a>
+    </body>
+<script src="js/dbLink.js"></script>
+<script src="js/login.js"></script>
+</html>    
+ 

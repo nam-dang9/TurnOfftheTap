@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
         <title>Turn Off the Tap</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <script type="text/javascript" src="js/phaser.js"></script>
         <script type="text/javascript" src="js/boot.js"></script>
         <script type="text/javascript" src="js/load.js"></script>
         <script type="text/javascript" src="js/tutorial.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-        <link rel="stylesheet" type="text/css" href="Styles/game.css" />
+
+		<script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+		<script src="js/dbLink.js"></script>
+		<script type="text/javascript" src="js/gameover.js"></script>
+        <script type="text/javascript" src="js/healthbar.js"></script>
+        <link rel="stylesheet" type="text/css" href="Styles/styles.css" />
     </head>
     <body>
         <script type="text/javascript">
-            var game = new Phaser.Game(1080, 1920, Phaser.AUTO);
+            var config1 = {
+                width: 1080,
+                height: 1920,
+                renderer: Phaser.AUTO,
+                antialias: false
+            }
+            var game = new Phaser.Game(config1);
             game.state.add('boot', boot);
             game.state.add('load', load);
             game.state.add('tutorial', tutorial);
             game.state.add('main', main);
-
+            game.state.add('gameover', gameover);
             game.state.start('boot');
         </script>
     </body>

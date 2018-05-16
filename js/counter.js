@@ -1,3 +1,8 @@
+
+  const firestore = firebase.firestore();
+  const settings = {/* your settings... */ timestampsInSnapshots: true};
+  firestore.settings(settings);
+
 var db = firebase.firestore();
 
 //Function store data by clicking the button
@@ -33,7 +38,7 @@ function incrementCount() {
 const list_div = document.querySelector("#list_div");
 
 // Set Top 3 in the list with DESC order
-db.collection("Users").orderBy("score", "desc").limit(3).onSnapshot(function(snapshot) {
+db.collection("Users").orderBy("scores", "desc").limit(3).onSnapshot(function(snapshot) {
     snapshot.docChanges.forEach(function(change) {
 
     if(change.type == "added"){
@@ -47,6 +52,26 @@ db.collection("Users").orderBy("score", "desc").limit(3).onSnapshot(function(sna
     }
     });
 
+});
+
+//  Getting currently signed-in user
+
+const login_Detail = document.querySelector("#login_Detail");
+
+var user = firebase.auth().currentUser;
+var email;
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+   //Console for testing. 
+   console.log("user", user);
+      email = user.email;
+      login_Detail.innerHTML += "User Email: " + email; 
+  } else {
+    //Console for testing. 
+    console.log("No user is signed in.");
+    login_Detail.innerHTML += "No user is signed in.";
+  }
 });
 
 //firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
