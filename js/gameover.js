@@ -39,7 +39,9 @@ var gameover = {
         
         game.sound.play('gameoverSound');
 		console.log("highScore: " + highScore);
-	
+		
+		firebase.auth().onAuthStateChanged(function(user) {
+  		if (user) {
 		var uid = firebase.auth().currentUser.uid;
 		//testing please delete it after the game done (console)
 		console.log("Uid: " +uid);
@@ -54,6 +56,9 @@ var gameover = {
 		.then(function() {
 			console.log("Document successfully updated!");
 		});
+		}else{
+			console.log("User have not login");
+		}
 
 	}
 }
