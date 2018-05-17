@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+	
+
     <head>
         <title>Character Creation | Turn Off the Tap</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="Styles/styles.css" type="text/css">
+		<script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
         <script type="text/javascript" src="js/phaser.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+		<script>
+		  // Initialize Firebase
+		  var config = {
+			apiKey: "AIzaSyB9iAfpDb7RZgzYmpz7Gi6lkrV6lLWbr2Q",
+			authDomain: "demo2-b13f2.firebaseapp.com",
+			databaseURL: "https://demo2-b13f2.firebaseio.com",
+			projectId: "demo2-b13f2",
+			storageBucket: "demo2-b13f2.appspot.com",
+			messagingSenderId: "641975222602"
+		  };
+		  firebase.initializeApp(config);
+			var db = firebase.firestore();
+  			const settings = {/* your settings... */ timestampsInSnapshots: true};
+			db.settings(settings);
+		</script>
     </head>
     <body>
         <script type="text/javascript">
+			
             var config = {
                 width: 1080,
                 height: 1920,
@@ -199,10 +219,35 @@
             }
             
             function looksgoodBtn() {
-                var custom = {
-                    hair: hairArr[hairIndex],
-                    shirt: shirtArr[shirtIndex]
-                };
+				
+				var uid = firebase.auth().currentUser.uid;
+				var uName = firebase.auth().currentUser.displayName;
+				var uemail = firebase.auth().currentUser.email;
+//			testing db /delete after the game done 
+				
+//				alert("user name: " + uName);
+//				alert("User email: " + uemail);
+//				alert("hairArr[hairIndex]: " + hairArr[hairIndex]);
+//				alert("shirtArr[shirtIndex]: " + shirtArr[shirtIndex]);
+//				alert("hairTint: " + hairTint);
+//				alert("skinTint: " +skinTint);
+				
+				
+				firebase.auth().onAuthStateChanged(function(user) {
+
+						if (user){
+							db.collection("Users").doc(uid).update({
+								hair: hairArr[hairIndex],
+								hairColor: hairTint,
+								body: shirtArr[shirtIndex],
+								skin: skinTint
+							}).then(function() {
+								alert("Update data successful.");
+							}).catch(function(error) {
+								alert("Update data failed.");
+							});
+						}
+				});	
 
                 window.location.href = "game.html";
             }
@@ -326,5 +371,6 @@
 
 
         </script>
+		
     </body>
 </html>
