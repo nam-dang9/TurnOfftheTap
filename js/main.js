@@ -151,15 +151,15 @@ var main = {
 
     render: function() {
 
-        game.debug.font = "35px Arial";   
+      game.debug.font = "35px Arial";   
 
-        var minutes = Math.round(timer/60000);
+      //var minutes = Math.round(timer/60000);
 
-        game.debug.text("Time: " + minutes + ":" + (Math.round(timer/1000) - (minutes*60)), 530, 200);
-        game.debug.text("Spawn Interval: " + Math.round(spawnInterval)/1000, 530, 250);
-        game.debug.text("Difficulty: " + difficulty, 530, 300);
-        game.debug.text("Spawn Ratios: " + Math.round(debugSpawn1 * 100) + " : " + Math.round(debugSpawn2 * 100) + " : " + Math.round(debugSpawn3 * 100), 530, 350);
-        game.debug.text("Roll: " + Math.round(debugRand * 100), 530, 400);
+      //game.debug.text("Time: " + minutes + ":" + (Math.round(timer/1000) - (minutes*60)), 530, 200);
+      //game.debug.text("Spawn Interval: " + Math.round(spawnInterval)/1000, 530, 250);
+      //game.debug.text("Difficulty: " + difficulty, 530, 300);
+      //game.debug.text("Spawn Ratios: " + Math.round(debugSpawn1 * 100) + " : " + Math.round(debugSpawn2 * 100) + " : " + Math.round(debugSpawn3 * 100), 530, 350);
+      //game.debug.text("Roll: " + Math.round(debugRand * 100), 530, 400);
         
 
     }
@@ -318,6 +318,7 @@ function tapOnLogo(logo) {
     logo.taps -= 1;
     
     if(logo.taps < 0) {
+        baseInterval =  750;
         logo.kill();
         game.sound.play('albertlaugh');
         logo = game.add.image(5, 1675, "easteregg");
