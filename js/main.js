@@ -253,14 +253,14 @@ function minigameSprinkler() {
         animationDuration: 200
     };
 	var sprinklerHealthBar = new HealthBar(this.game, barConfig);
-    sprinklerHealthBar.health = 25;
+    sprinklerHealthBar.health = 50;
     
-    
+    var startingHealth = Math.floor(Math.random() * 26);
     
     
     // HOUSE 1
     var house1 = {
-        health: 19,
+        health: startingHealth,
         sprinklerStatus: false,
         sprinkler: game.add.sprite(377, 796, 'sprinklerBoss'),
         sprinklerOn: function() {
@@ -279,7 +279,7 @@ function minigameSprinkler() {
             if (this.health > 20) {
                 this.status.loadTexture('toomuchwater');
                 sprinklerHealthBar.health -= 2.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 25) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
             } else if (this.health >= 15 && this.health <= 20) {
                 this.status.loadTexture('haswater');
             } else if (this.health <= 5 && this.health >= 0) {
@@ -287,7 +287,7 @@ function minigameSprinkler() {
             } else if (this.health < 0) {
                 this.status.loadTexture('reallyneedswater');
                 sprinklerHealthBar.health -= 2.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 25) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
             }
         } 
     }
@@ -305,11 +305,11 @@ function minigameSprinkler() {
     }, this);
     
     
-    
+    startingHealth = Math.floor(Math.random() * 26);
     
     // HOUSE 2
     var house2 = {
-        health: 19,
+        health: startingHealth,
         sprinklerStatus: false,
         sprinkler: game.add.sprite(725, 598, 'sprinklerBoss'),
         sprinklerOn: function() {
@@ -328,7 +328,7 @@ function minigameSprinkler() {
             if (this.health > 20) {
                 this.status.loadTexture('toomuchwater');
                 sprinklerHealthBar.health -= 4.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 25) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
             } else if (this.health >= 15 && this.health <= 20) {
                 this.status.loadTexture('haswater');
             } else if (this.health <= 5 && this.health >= 0) {
@@ -336,7 +336,7 @@ function minigameSprinkler() {
             } else if (this.health < 0) {
                 this.status.loadTexture('reallyneedswater');
                 sprinklerHealthBar.health -= 4.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 25) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
             }
         } 
     }
@@ -352,10 +352,11 @@ function minigameSprinkler() {
         }
     }, this);
     
+    startingHealth = Math.floor(Math.random() * 26);
     
     // HOUSE 3
     var house3 = {
-        health: 5,
+        health: startingHealth,
         sprinklerStatus: false,
         sprinkler: game.add.sprite(370, 1110, 'sprinklerBoss'),
         sprinklerOn: function() {
@@ -374,7 +375,7 @@ function minigameSprinkler() {
             if (this.health > 20) {
                 this.status.loadTexture('toomuchwater');
                 sprinklerHealthBar.health -= 0.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 25) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
             } else if (this.health >= 15 && this.health <= 20) {
                 this.status.loadTexture('haswater');
             } else if (this.health <= 5 && this.health >= 0) {
@@ -382,7 +383,7 @@ function minigameSprinkler() {
             } else if (this.health < 0) {
                 this.status.loadTexture('reallyneedswater');
                 sprinklerHealthBar.health -= 0.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 25) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
             }
         } 
     }
@@ -398,11 +399,11 @@ function minigameSprinkler() {
         }
     }, this);
     
-    
+    startingHealth = Math.floor(Math.random() * 26);
     
     // HOUSE 4
     var house4 = {
-        health: 7,
+        health: startingHealth,
         sprinklerStatus: false,
         sprinkler: game.add.sprite(720, 1310, 'sprinklerBoss'),
         sprinklerOn: function() {
@@ -421,7 +422,7 @@ function minigameSprinkler() {
             if (this.health > 20) {
                 this.status.loadTexture('toomuchwater');
                 sprinklerHealthBar.health -= 4.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 25) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
             } else if (this.health >= 15 && this.health <= 20) {
                 this.status.loadTexture('haswater');
             } else if (this.health <= 5 && this.health >= 0) {
@@ -429,7 +430,7 @@ function minigameSprinkler() {
             } else if (this.health < 0) {
                 this.status.loadTexture('reallyneedswater');
                 sprinklerHealthBar.health -= 0.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 25) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
             }
         } 
     }
@@ -505,6 +506,8 @@ function minigameSprinkler() {
                     } else {
                         score -= 40;
                     }
+                    scoreDisplay.text = score;
+                    healthDisplay.text = Math.round(health) + ' / 100';
                     minigame = false;
                     spawnBubbles();
                 }, this);
@@ -515,7 +518,7 @@ function minigameSprinkler() {
     
     
     // The overall timer of the minigame 
-    game.time.events.add(Phaser.Timer.SECOND * 15, function() {
+    game.time.events.add(Phaser.Timer.SECOND * 12.5, function() {
         if (sprinklerHealthBar.health <= 0 & !alreadyDone) {
             alreadyDone = true;
             sprinklerBackground.kill();
@@ -549,6 +552,8 @@ function minigameSprinkler() {
                 } else {
                     score -= 40;
                 }
+                scoreDisplay.text = score;
+                healthDisplay.text = Math.round(health) + ' / 100';
                 minigame = false;
                 spawnBubbles();
             }, this);
@@ -581,6 +586,8 @@ function minigameSprinkler() {
                         health += 20;
                     }
                     score += 50;
+                    scoreDisplay.text = score;
+                    healthDisplay.text = Math.round(health) + ' / 100';
                     minigame = false;
                     spawnBubbles();
                 }, this);
@@ -645,6 +652,7 @@ function minigameFaucet() {
                 } else {
                     score -= 40;
                 }
+                scoreDisplay.text = score;
                 minigame = false;
                 spawnBubbles();
             }, this);
@@ -675,6 +683,7 @@ function minigameFaucet() {
                     health += 20;
                 }
                 score += 50;
+                scoreDisplay.text = score;
                 minigame = false;
                 spawnBubbles();
             }, this);
