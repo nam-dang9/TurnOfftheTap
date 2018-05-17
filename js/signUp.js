@@ -86,7 +86,8 @@ function after_signUp(){
 				displayName: dpName,
 				hair: "demo",
 				body: "demo",
-//				userId: uid,
+				hairColor: "demo",
+				skin: "demo",
 				scores: 0
 			}).then(function() {
 //				console.log("Document successfully written on db !");
