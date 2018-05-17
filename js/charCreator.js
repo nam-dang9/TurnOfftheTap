@@ -218,10 +218,35 @@ function update() {
 }
 
 function looksgoodBtn() {
-    var custom = {
-        hair: hairArr[hairIndex],
-        shirt: shirtArr[shirtIndex]
-    };
+				
+    var uid = firebase.auth().currentUser.uid;
+    var uName = firebase.auth().currentUser.displayName;
+    var uemail = firebase.auth().currentUser.email;
+//			testing db /delete after the game done 
+    
+//				alert("user name: " + uName);
+//				alert("User email: " + uemail);
+//				alert("hairArr[hairIndex]: " + hairArr[hairIndex]);
+//				alert("shirtArr[shirtIndex]: " + shirtArr[shirtIndex]);
+//				alert("hairTint: " + hairTint);
+//				alert("skinTint: " +skinTint);
+    
+    
+    firebase.auth().onAuthStateChanged(function(user) {
+
+            if (user){
+                db.collection("Users").doc(uid).update({
+                    hair: hairArr[hairIndex],
+                    hairColor: hairTint,
+                    body: shirtArr[shirtIndex],
+                    skin: skinTint
+                }).then(function() {
+                    alert("Update data successful.");
+                }).catch(function(error) {
+                    alert("Update data failed.");
+                });
+            }
+    });	
 
     window.location.href = "game.html";
 }
