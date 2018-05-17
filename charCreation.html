@@ -28,7 +28,6 @@
     </head>
     <body>
         <script type="text/javascript">
-			
             var config = {
                 width: 1080,
                 height: 1920,
@@ -220,35 +219,10 @@
             }
             
             function looksgoodBtn() {
-				
-				var uid = firebase.auth().currentUser.uid;
-				var uName = firebase.auth().currentUser.displayName;
-				var uemail = firebase.auth().currentUser.email;
-//			testing db /delete after the game done 
-				
-//				alert("user name: " + uName);
-//				alert("User email: " + uemail);
-//				alert("hairArr[hairIndex]: " + hairArr[hairIndex]);
-//				alert("shirtArr[shirtIndex]: " + shirtArr[shirtIndex]);
-//				alert("hairTint: " + hairTint);
-//				alert("skinTint: " +skinTint);
-				
-				
-				firebase.auth().onAuthStateChanged(function(user) {
-
-						if (user){
-							db.collection("Users").doc(uid).update({
-								hair: hairArr[hairIndex],
-								hairColor: hairTint,
-								body: shirtArr[shirtIndex],
-								skin: skinTint
-							}).then(function() {
-								alert("Update data successful.");
-							}).catch(function(error) {
-								alert("Update data failed.");
-							});
-						}
-				});	
+                var custom = {
+                    hair: hairArr[hairIndex],
+                    shirt: shirtArr[shirtIndex]
+                };
 
                 window.location.href = "game.html";
             }
@@ -372,6 +346,5 @@
 
 
         </script>
-		
     </body>
 </html>
