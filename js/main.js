@@ -8,10 +8,22 @@ var startTime;
 var baseInterval = 1000;
 
 var difficulty = 1;
+var maxDifficulty = 50;
 var difficultyRate = 5000;
+var debugSpawn1, debugSpawn2, debugSpawn3;
+var debugRand;
+var debugCount;
 
 var minigameNames = ['minigameSprinkler', 'minigameFaucet', 'minigameShower'];
-var bubbleNames = [minigameNames, 'sprinkler', 'shower', 'bathtub', 'carwash', 'faucet'];
+
+var bubbleHealth = {
+    'sprinkler': 2,
+    'shower': 2,
+    'bathtub': 2,
+    'carwash': 3,
+    'faucet': 1
+};
+var bubbleNames = ['sprinkler', 'shower', 'bathtub', 'carwash', 'faucet'];
 var bubbles;
 var bubble;
 
@@ -41,6 +53,7 @@ var main = {
     create: function() {
 
         startTime = Date.now();
+
         // Setting up background
         var background = game.add.image(0, 0, 'water');
         background.height = game.height;
@@ -123,20 +136,32 @@ var main = {
                 health += healthRegen;
             }
 
-            if (typeof bubble !== undefined) {
-                healthDisplay.text = Math.round(health) + ' / 100';
-                health -= 0.005;
-            }
             if (health <= 0) {
                 game.state.start('gameover');
             }
             // Reduce health based on currently living bubbles
             bubbles.forEachAlive(damageHealth, this);
+            healthDisplay.text = Math.round(health) + ' / 100';
 
             // Update difficulty based on elapsed time
             timer = game.time.elapsedSince(startTime) - pausedTime;
             difficulty = Math.round(timer / difficultyRate);
-        } 
+        }
+    },
+
+    render: function() {
+
+        game.debug.font = "35px Arial";   
+
+        var minutes = Math.round(timer/60000);
+
+        game.debug.text("Time: " + minutes + ":" + (Math.round(timer/1000) - (minutes*60)), 530, 200);
+        game.debug.text("Spawn Interval: " + Math.round(spawnInterval)/1000, 530, 250);
+        game.debug.text("Difficulty: " + difficulty, 530, 300);
+        game.debug.text("Spawn Ratios: " + Math.round(debugSpawn1 * 100) + " : " + Math.round(debugSpawn2 * 100) + " : " + Math.round(debugSpawn3 * 100), 530, 350);
+        game.debug.text("Roll: " + Math.round(debugRand * 100), 530, 400);
+        
+
     }
    
 };
@@ -148,32 +173,38 @@ function tapOnBubble(bubble) {
             bubble.kill();
             minigame = true;
             minigameSprinkler();
-        } else if (bubble.type == 'minigameFaucet') {
             game.sound.play('minigameSound');
-            bubble.kill();
+        } else if (bubble.type == 'minigameFaucet') {
             minigame = true;
             minigameFaucet();
         } else if (bubble.type == 'minigameShower') {
             game.sound.play('minigameSound');
-            bubble.kill();
             minigame = true;
             minigameShower();
         } else {
             game.sound.play('pop');
-            bubble.kill();
+        }
+
+        bubble.damage(1);
+        bubble.healthBar.setPercent((bubble.health / bubble.maxHealth) * 100);
+        if(!bubble.alive) {
+            bubble.healthBar.kill();
+            bubble.destroy();
             score += 10;
             scoreDisplay.text = score;   
+            console.log("Bubble destroyed");
         }
     }
 }
 
 function createBubble() {
-    var currentBubble = Math.floor(Math.random() * bubbleNames.length);
+    var currentEvent, currentBubble = Math.floor(Math.random() * 20);
     if (currentBubble == 0) {
         currentBubble = Math.floor(Math.random() * minigameNames.length);
-        var currentEvent = minigameNames[currentBubble];
+        currentEvent = minigameNames[currentBubble];
     } else {
-        var currentEvent = bubbleNames[currentBubble];
+        currentBubble = Math.floor(Math.random() * bubbleNames.length);
+        currentEvent = bubbleNames[currentBubble];
     }
             
     // Boundary
@@ -188,8 +219,8 @@ function createBubble() {
                 
     // While the y coordinate exceeds the boundaries, assign it a new value
     var currentY = Math.random() * 1200 + 20
-    while (currentY > 1200 || currentY < 270) {
-    currentY = Math.random() * 1200 + 20;
+    while (currentY > 1200 || currentY < 500) {
+        currentY = Math.random() * 1200 + 20;
     }
             
     bubble =  bubbles.create(currentX, currentY, currentEvent); 
@@ -197,30 +228,89 @@ function createBubble() {
     bubble.anchor.setTo(0.5, 0.5);
     bubble.inputEnabled = true;
     bubble.events.onInputDown.add(tapOnBubble, this);
+    if (minigameNames.includes(bubble.type)){
+        bubble.health = 1;
+    } else {
+        bubble.health = bubble.maxHealth = bubbleHealth[bubble.type];
+    }
+
+    // bubble.healthBar = game.add.text(bubble.x - 10, bubble.y - bubble.width/2, bubble.health, {
+    //     font: "50px Arial",
+    //     fill: "#ffffff"
+    // });
+    var barConfig = {
+        width: 100,
+        height: 30,
+        x: bubble.x, 
+        y: bubble.y - 120,
+        bg: {
+            color: '#1c4167'
+        },
+        bar: {
+            color: '#0d91df'
+        },
+        animationDuration: 75
+    };
+
+    bubble.healthBar = new HealthBar(game, barConfig);
+    bubble.healthBar.health = bubble.health;
+    
 }
 
 function spawnBubbles() {
     if (!pause && !minigame) {
-    var spawnCount = Math.random() * Math.ceil(difficulty / 3);
-    if (spawnCount > 3) {
-        spawnCount = 3;
-    }
 
-    for (var i = 0; i < spawnCount; i++) {
-        createBubble();
-    }
+        var spawn1 = Math.pow(1.023, 1 - difficulty);
+        var spawn3 = Math.pow(1.03, difficulty - maxDifficulty) - 0.33;
+        if (spawn3 < 0) {
+            spawn3 = 0;
+        }
+        var spawn2 = 1 - spawn1 - spawn3;
 
-    // Set interval until next Bubble spawns
-    spawnInterval = baseInterval * Math.pow(0.98, difficulty);
+        debugSpawn1 = spawn1, debugSpawn2 = spawn2, debugSpawn3 = spawn3;
 
-    // Initiate timer delay for next bubble spawn
-    game.time.events.add(spawnInterval, spawnBubbles, this);
+        var weights = [spawn1, spawn2, spawn3];
+
+        function bubbleCount(){
+            var rand = Math.random();
+            debugRand = rand;
+            var prev = 0;
+            var cur;
+            for (i=0; i < weights.length; i++) {
+                cur = prev + weights[i];
+                if((prev < rand ) && (cur > rand)) {
+                    return i + 1;
+                }
+                prev = cur;
+            }
+            return 1;
+        }
+
+        var toSpawn = bubbleCount();
+        
+
+        console.log("Ratios; " + spawn1 + " : " + spawn2 + " : " + spawn3);
+        console.log("Spawning: " + toSpawn);
+
+        for (i = 0; i < toSpawn; i++){
+            createBubble();
+        }
+        
+
+        // Set interval until next Bubble spawns
+        var adjustment = maxDifficulty * 4 * Math.log2(difficulty/10 + 1);
+        spawnInterval = baseInterval - adjustment;
+        console.log("Difficulty: " + difficulty);
+        console.log("Adjustment: " + adjustment);
+        console.log("Spawn Interval: " + spawnInterval);
+
+        // Initiate timer delay for next bubble spawn
+        game.time.events.add(spawnInterval, spawnBubbles, this);
     }
 }
 
 function damageHealth(bubble) {
-    health -= 0.02;
-    healthDisplay.text = Math.round(health) + ' / 100';
+    health -= 0.01 * bubble.health;
 }
 
 // EASTER EGG 
