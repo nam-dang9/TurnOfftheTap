@@ -192,7 +192,6 @@ function tapOnBubble(bubble) {
             bubble.destroy();
             score += 10;
             scoreDisplay.text = score;   
-            console.log("Bubble destroyed");
         }
     }
 }
@@ -289,8 +288,6 @@ function spawnBubbles() {
         var toSpawn = bubbleCount();
         
 
-        console.log("Ratios; " + spawn1 + " : " + spawn2 + " : " + spawn3);
-        console.log("Spawning: " + toSpawn);
 
         for (i = 0; i < toSpawn; i++){
             createBubble();
@@ -300,9 +297,7 @@ function spawnBubbles() {
         // Set interval until next Bubble spawns
         var adjustment = maxDifficulty * 4 * Math.log2(difficulty/10 + 1);
         spawnInterval = baseInterval - adjustment;
-        console.log("Difficulty: " + difficulty);
-        console.log("Adjustment: " + adjustment);
-        console.log("Spawn Interval: " + spawnInterval);
+
 
         // Initiate timer delay for next bubble spawn
         game.time.events.add(spawnInterval, spawnBubbles, this);
@@ -760,7 +755,6 @@ function minigameFaucet() {
         game.sound.play('btn');
         if (faucetBoss.health > 0) {
             faucetBoss.health -= 1;
-            console.log(faucetBoss.health);
             faucetHealthBar.setPercent((faucetBoss.health / 10) * 100);
         } else {
             faucetBoss.kill();
@@ -801,7 +795,6 @@ function minigameFaucet() {
 
 // FAUCET MINIGAME
 function minigameShower() {
-    console.log("MINIGAME FUCK YEA");
     if (health > 80) {
         health = 100;
     } else {
