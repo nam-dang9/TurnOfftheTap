@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Counter</title>
-    <link rel="stylesheet" href="Styles/style.css">
+    <link rel="stylesheet" href="Styles/styles.css">
 </head>
 <body id="counterbody">
     <div id="counter-nav">
@@ -10,25 +10,13 @@
             <a href="index.html"><p class="websitebutton aboutbtn counterbtn">HOME</p></a>
             <a href="about.html"><p class="websitebutton aboutbtn counterbtn">ABOUT</p></a>
             <a href="game-startscreen.html"><p class="websitebutton aboutbtn counterbtn">THE GAME</p></a>
-    </div>
-    
-    <div class="main">
-        
-        <!--  button to do count ++-->
-        <button class="button" id ="increment" onclick="incrementCount()">Tap</button>
-        <button class="button" id="saveButton" onclick="storeData()">Save</button><br/>
-        <input type ="text" placeholder="Enter Your Name" id="text"/><br />
-        
-        <!-- display the number when you click the Increment button-->
-        <p id = "display"> - </p>
-
+		
     </div>
     
     <div class ="LogInUserDetail" id="login_Detail">
     </div>
     
     <!--Display the data    -->
-    
     <div class="main-list highscores" id="list_div">
         <div class="list-name" id="listName"></div>
         <div class="list-score" id="listScore"></div>        
@@ -39,7 +27,7 @@
 <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-firestore.js"></script>
 <!-- Add my js file   -->
 <script src="js/dbLink.js"></script>
-<script src="js/counter.js"></script>
+<script src="js/highScores.js"></script>
 
 
 </body>

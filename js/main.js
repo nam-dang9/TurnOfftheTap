@@ -9,8 +9,8 @@ var baseInterval = 1000;
 
 var difficulty = 1;
 var difficultyRate = 5000;
-var minigameNames = ['minigameSprinkler', 'minigameFaucet', 'minigameShower'];
 
+var minigameNames = ['minigameSprinkler', 'minigameFaucet', 'minigameShower'];
 var bubbleNames = [minigameNames, 'sprinkler', 'shower', 'bathtub', 'carwash', 'faucet'];
 var bubbles;
 var bubble;
@@ -23,7 +23,6 @@ var logo;
 
 var minigame = false;
 var pause = false;
-
 var mainPause;
 var mainHome;
 var overlay;
@@ -84,7 +83,7 @@ var main = {
         var scoreDisplayBanner = game.add.image(600, 110, "scoreDisplayBanner");
         scoreDisplayBanner.anchor.setTo(0.5, 0.5);
         scoreDisplay = game.add.text(650, 110, score, {
-                    font: "45px Arial",
+                    font: "45px Pixelate",
                     fill: "#ffffff",
                     align: "right"
         });
@@ -701,8 +700,9 @@ function minigameFaucet() {
             this.stop();
         }
     }, this);
-
 }
+
+// FAUCET MINIGAME
 function minigameShower() {
     console.log("MINIGAME FUCK YEA");
     if (health > 80) {
