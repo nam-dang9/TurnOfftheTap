@@ -6,7 +6,6 @@ var gameover = {
 		const settings = {/* your settings... */ timestampsInSnapshots: true};
 		db.settings(settings);
 		var highScore;
-		
         var background = game.add.image(540, 960, "background");
         background.anchor.setTo(0.5, 0.5);
         background.scale.setTo(10, 10);
@@ -28,9 +27,24 @@ var gameover = {
         home.inputEnabled = true;
         // the homeBtn function is in main.js
         home.events.onInputDown.add(homeBtn, this);
+        window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+            t._e = [];
+            t.ready = function(f) {
+                t._e.push(f);
+            };
+            return t;
+            }(document, "script", "twitter-wjs"));
         
+        document.getElementById('hideTwitter').innerHTML = '<a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Check%20out%20my%20new%20score: ' + highScore + ' %20on%20Turn%20Off%20the%20Tap\"data-size="large" id="twitter-wjs">Tweet</a>';
         
-        var scoreNumber = game.add.text(540, 970, highScore, {
+           var scoreNumber = game.add.text(540, 970, highScore, {
                     font: "75px Arial",
                     fill: "#ffffff",
                     align: "center"
@@ -39,7 +53,7 @@ var gameover = {
         
         game.sound.play('gameoverSound');
 		console.log("highScore: " + highScore);
-		
+        
 		firebase.auth().onAuthStateChanged(function(user) {
   		if (user) {
 		var uid = firebase.auth().currentUser.uid;
