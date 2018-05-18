@@ -251,8 +251,10 @@ function createBubble() {
         animationDuration: 75
     };
 
-    bubble.healthBar = new HealthBar(game, barConfig);
-    bubble.healthBar.health = bubble.health;
+    if (bubble.health > 1) {
+        bubble.healthBar = new HealthBar(game, barConfig);
+        bubble.healthBar.health = bubble.health;
+    }
     
 }
 
