@@ -104,6 +104,6 @@ function twitterBtn() {
             return t;
             }(document, "script", "twitter-wjs"));
         
-        window.open("https://twitter.com/intent/tweet?text=Check%20out%20my%20new%20score: " + score + " on http://turnoffthetap.today/", "_blank");
+        window.open("https://twitter.com/intent/tweet?text=Check%20out%20my%20new%20score: " + score + " on http://turnoffthetap.today", "_blank");
 }
 
