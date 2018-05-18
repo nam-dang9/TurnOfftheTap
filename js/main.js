@@ -72,12 +72,12 @@ var main = {
         var healthDisplayBanner = game.add.image(960, 110, "healthDisplayBanner");
         healthDisplayBanner.anchor.setTo(0.5, 0.5);
         healthDisplayBanner.scale.setTo(1, 1);
-        var waterdrop = game.add.image(840, 110, "waterDrop");
+        var waterdrop = game.add.image(837, 110, "waterDrop");
         waterdrop.anchor.setTo(0.5, 0.5);
         waterdrop.scale.setTo(0.7, 0.7);
         game.add.image(0, -40, "charDisplayBanner");
-        healthDisplay = game.add.text(970, 110, health + ' / 100', {
-                    font: "40px Arial",
+        healthDisplay = game.add.text(970, 110, health + '/100', {
+                    font: "35px Pixelate",
                     fill: "#ffffff",
                     align: "center"
         });
@@ -258,7 +258,7 @@ function minigameSprinkler() {
         animationDuration: 200
     };
 	var sprinklerHealthBar = new HealthBar(this.game, barConfig);
-    sprinklerHealthBar.health = 50;
+    sprinklerHealthBar.health = 40;
     
     var startingHealth = Math.floor(Math.random() * 26);
     
@@ -284,7 +284,7 @@ function minigameSprinkler() {
             if (this.health > 20) {
                 this.status.loadTexture('toomuchwater');
                 sprinklerHealthBar.health -= 2.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             } else if (this.health >= 15 && this.health <= 20) {
                 this.status.loadTexture('haswater');
             } else if (this.health <= 5 && this.health >= 0) {
@@ -292,7 +292,7 @@ function minigameSprinkler() {
             } else if (this.health < 0) {
                 this.status.loadTexture('reallyneedswater');
                 sprinklerHealthBar.health -= 2.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             }
         } 
     }
@@ -300,12 +300,17 @@ function minigameSprinkler() {
     
     house1.sprinkler.anchor.setTo(0.5, 0.5);
     house1.sprinkler.inputEnabled = true;
+    var sprinklerSound1 = game.add.audio('sprinklerSound');
     house1.sprinkler.events.onInputDown.add(function(){
         game.sound.play('btn');
         if (house1.sprinklerStatus) {
             house1.sprinklerStatus = false;
+            if (sprinklerSound1.play()) {
+                sprinklerSound1.pause();
+            }
         } else {
             house1.sprinklerStatus = true;
+            sprinklerSound1.play();
         }
     }, this);
     
@@ -333,7 +338,7 @@ function minigameSprinkler() {
             if (this.health > 20) {
                 this.status.loadTexture('toomuchwater');
                 sprinklerHealthBar.health -= 4.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             } else if (this.health >= 15 && this.health <= 20) {
                 this.status.loadTexture('haswater');
             } else if (this.health <= 5 && this.health >= 0) {
@@ -341,19 +346,24 @@ function minigameSprinkler() {
             } else if (this.health < 0) {
                 this.status.loadTexture('reallyneedswater');
                 sprinklerHealthBar.health -= 4.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             }
         } 
     }
     
     house2.sprinkler.anchor.setTo(0.5, 0.5);
     house2.sprinkler.inputEnabled = true;
+    var sprinklerSound2 = game.add.audio('sprinklerSound');
     house2.sprinkler.events.onInputDown.add(function(){
         game.sound.play('btn');
         if (house2.sprinklerStatus) {
             house2.sprinklerStatus = false;
+            if (sprinklerSound2.play()) {
+                sprinklerSound2.pause();
+            }
         } else {
             house2.sprinklerStatus = true;
+            sprinklerSound2.play();
         }
     }, this);
     
@@ -380,7 +390,7 @@ function minigameSprinkler() {
             if (this.health > 20) {
                 this.status.loadTexture('toomuchwater');
                 sprinklerHealthBar.health -= 0.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             } else if (this.health >= 15 && this.health <= 20) {
                 this.status.loadTexture('haswater');
             } else if (this.health <= 5 && this.health >= 0) {
@@ -388,19 +398,24 @@ function minigameSprinkler() {
             } else if (this.health < 0) {
                 this.status.loadTexture('reallyneedswater');
                 sprinklerHealthBar.health -= 0.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             }
         } 
     }
     
     house3.sprinkler.anchor.setTo(0.5, 0.5);
     house3.sprinkler.inputEnabled = true;
+    var sprinklerSound3 = game.add.audio('sprinklerSound');
     house3.sprinkler.events.onInputDown.add(function(){
         game.sound.play('btn');
         if (house3.sprinklerStatus) {
             house3.sprinklerStatus = false;
+            if (sprinklerSound3.play()) {
+                sprinklerSound3.pause();
+            }
         } else {
             house3.sprinklerStatus = true;
+            sprinklerSound3.play();
         }
     }, this);
     
@@ -427,7 +442,7 @@ function minigameSprinkler() {
             if (this.health > 20) {
                 this.status.loadTexture('toomuchwater');
                 sprinklerHealthBar.health -= 4.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             } else if (this.health >= 15 && this.health <= 20) {
                 this.status.loadTexture('haswater');
             } else if (this.health <= 5 && this.health >= 0) {
@@ -435,19 +450,24 @@ function minigameSprinkler() {
             } else if (this.health < 0) {
                 this.status.loadTexture('reallyneedswater');
                 sprinklerHealthBar.health -= 0.5;
-                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 50) * 100);
+                sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             }
         } 
     }
     
     house4.sprinkler.anchor.setTo(0.5, 0.5);
     house4.sprinkler.inputEnabled = true;
+    var sprinklerSound4 = game.add.audio('sprinklerSound');
     house4.sprinkler.events.onInputDown.add(function(){
         game.sound.play('btn');
         if (house4.sprinklerStatus) {
             house4.sprinklerStatus = false;
+            if (sprinklerSound4.play()) {
+                sprinklerSound4.pause();
+            }
         } else {
             house4.sprinklerStatus = true;
+            sprinklerSound4.play();
         }
     }, this);
     
@@ -466,7 +486,7 @@ function minigameSprinkler() {
         house2.waterStatus();
         
         house3.status.anchor.setTo(0.5, 0.5);
-        house3.health -= 8;
+        house3.health -= 5.5;
         house3.sprinklerOn();
         house3.waterStatus();
         
@@ -481,15 +501,24 @@ function minigameSprinkler() {
                 alreadyDone = true;
                 house1.sprinkler.kill();
                 house1.status.kill();
+                sprinklerSound1.stop();
+                sprinklerSound1.destroy();
 
                 house2.sprinkler.kill();
                 house2.status.kill();
+                sprinklerSound2.stop();
+                sprinklerSound2.destroy();
 
                 house3.sprinkler.kill();
                 house3.status.kill();
+                sprinklerSound3.stop();
+                sprinklerSound3.destroy();
 
                 house4.sprinkler.kill();
                 house4.status.kill();
+                sprinklerSound4.stop();
+                sprinklerSound4.destroy();
+                
                 sprinklerBackground.kill();
                 sprinklerHealthBar.kill();
 
@@ -526,19 +555,29 @@ function minigameSprinkler() {
     game.time.events.add(Phaser.Timer.SECOND * 12.5, function() {
         if (sprinklerHealthBar.health <= 0 & !alreadyDone) {
             alreadyDone = true;
-            sprinklerBackground.kill();
-            sprinklerHealthBar.kill();
+            
             house1.sprinkler.kill();
             house1.status.kill();
-            
+            sprinklerSound1.stop();
+            sprinklerSound1.destroy();
+
             house2.sprinkler.kill();
             house2.status.kill();
-            
+            sprinklerSound2.stop();
+            sprinklerSound2.destroy();
+
             house3.sprinkler.kill();
             house3.status.kill();
-            
+            sprinklerSound3.stop();
+            sprinklerSound3.destroy();
+
             house4.sprinkler.kill();
             house4.status.kill();
+            sprinklerSound4.stop();
+            sprinklerSound4.destroy();
+                
+            sprinklerBackground.kill();
+            sprinklerHealthBar.kill();
             
             game.sound.play('timesupSound');
             
@@ -565,19 +604,29 @@ function minigameSprinkler() {
         } else {
             if (!alreadyDone) {
                 alreadyDone = true;
-                sprinklerBackground.kill();
-                sprinklerHealthBar.kill();
+                
                 house1.sprinkler.kill();
                 house1.status.kill();
+                sprinklerSound1.stop();
+                sprinklerSound1.destroy();
 
                 house2.sprinkler.kill();
                 house2.status.kill();
+                sprinklerSound2.stop();
+                sprinklerSound2.destroy();
 
                 house3.sprinkler.kill();
                 house3.status.kill();
+                sprinklerSound3.stop();
+                sprinklerSound3.destroy();
 
                 house4.sprinkler.kill();
                 house4.status.kill();
+                sprinklerSound4.stop();
+                sprinklerSound4.destroy();
+                
+                sprinklerBackground.kill();
+                sprinklerHealthBar.kill();
                 game.sound.play('successSound');
 
                 var success = game.add.image(540, 850, 'success');
@@ -611,7 +660,7 @@ function minigameFaucet() {
         width: 800,
         height: 70,
         x: 540, 
-        y: 360,
+        y: 600,
         bg: {
             color: '#1c4167'
         },
@@ -623,7 +672,7 @@ function minigameFaucet() {
 	var faucetHealthBar = new HealthBar(this.game, barConfig);
     
     // Faucet sprite
-    var faucetBoss = game.add.sprite(540, 960, 'faucetBoss');
+    var faucetBoss = game.add.sprite(540, 1160, 'faucetBoss');
     faucetBoss.anchor.setTo(0.5, 0.5);
     faucetBoss.scale.setTo(6, 6);
     faucetBoss.inputEnabled = true;
@@ -638,6 +687,7 @@ function minigameFaucet() {
         if (faucetBoss.health > 0) {
             faucetBoss.kill();
             faucetHealthBar.kill();
+             overlay.kill();
             
             game.sound.play('timesupSound');
             
@@ -646,7 +696,6 @@ function minigameFaucet() {
             
             game.time.events.add(Phaser.Timer.SECOND * 1, function() {
                 timesup.kill();
-                overlay.kill();
                 if (health <= 20) {
                     health = 0;
                 } else {
@@ -674,6 +723,7 @@ function minigameFaucet() {
         } else {
             faucetBoss.kill();
             faucetHealthBar.kill();
+            overlay.kill();
             game.sound.play('successSound');
             
             var success = game.add.image(540, 850, 'success');
@@ -681,7 +731,7 @@ function minigameFaucet() {
             
             game.time.events.add(Phaser.Timer.SECOND * 1, function() {
                 success.kill();
-                overlay.kill();
+                
                 if (health > 80) {
                     health = 100;
                 } else {
@@ -709,15 +759,151 @@ function minigameFaucet() {
 }
 
 // FAUCET MINIGAME
+// Bubble position: 540, 690
 function minigameShower() {
-    console.log("MINIGAME FUCK YEA");
-    if (health > 80) {
-        health = 100;
-    } else {
-        health += 20;
-    }    
-    minigame = false;
+    var clicked = false;
+    var showerSound = game.add.audio('showerSound');
+    showerSound.play();
+    var showerBackground = game.add.image(0, 0, 'showerBackground');
+    showerBackground.inputEnabled = true;
+    
+    var status = game.add.sprite(540, 690, 'showering');
+    status.anchor.setTo(0.5, 0.5);
+    
+    // Health bar
+    var barConfig = {
+        width: 1080,
+        height: 90,
+        x: 540, 
+        y: 1700,
+        bg: {
+            color: '#1c4167'
+        },
+        bar: {
+            color: '#0d91df'
+        },
+        animationDuration: 10
+    };
+	var showerHealthBar = new HealthBar(this.game, barConfig);
+    showerHealthBar.health = 0;
+    showerHealthBar.setPercent(0);
+    
+    // Marker: (50)300 - 985
+    // 51px (width)
+    var markerPlace = (Math.random() * 686) + 300;
+    var marker = game.add.image(markerPlace, 1700, 'marker');
+    marker.anchor.setTo(0.5, 0.5);
+    
+    var showerHealthSpeed = (Math.random() * 10) + 15;
+    // Wait for the health to go to 0 first
+    var loop = game.time.events.add(Phaser.Timer.SECOND, function() {
+        game.time.events.loop(10, function() {
+            if (!clicked) {
+               if (showerHealthBar.health >= 1080) {
+                    showerHealthSpeed *= -1;
+                    showerHealthBar.health += showerHealthSpeed;
+                    showerHealthBar.setPercent((showerHealthBar.health / 1080) * 100);
+                } else if (showerHealthBar.health < 0) {
+                    showerHealthSpeed *= -1;
+                    showerHealthBar.health += showerHealthSpeed;
+                    showerHealthBar.setPercent((showerHealthBar.health / 1080) * 100);
+                } else {
+                    showerHealthBar.health += showerHealthSpeed;
+                    showerHealthBar.setPercent((showerHealthBar.health / 1080) * 100);
+                }
+            } else {
+                this.stop();   
+            }
+        }, this);
+    }, this);
+    
+    showerBackground.events.onInputDown.add(function(){
+        console.log(showerHealthBar.health);
+        console.log(marker.worldPosition.x);
+        clicked = true;
+        checkShowerMinigame();
+    }, this);
+    
+    var showerSpeechBubble; 
+    function checkShowerMinigame() {
+        game.sound.play('knock');
+        showerSpeechBubble = game.add.image(-50, 1200, 'dontshowertoolong');
+    
+        game.time.events.add(Phaser.Timer.SECOND * 1.1, function() {
+            if (showerHealthBar.health - marker.worldPosition.x >= -35 && 
+                showerHealthBar.health - marker.worldPosition.x <= 35) {
+                game.sound.play('okaySound');
+                status.loadTexture('ok');
+                console.log("win");
+                game.time.events.add(Phaser.Timer.SECOND * 2, function() {
+                    showerBackground.kill();
+                    marker.kill();
+                    showerHealthBar.kill();
+                    showerSpeechBubble.kill();
+                    status.kill();
+                    
+                    showerSound.pause();
+                    game.sound.play('successSound');
+                    
+                    var success = game.add.image(540, 850, 'success');
+                    success.anchor.setTo(0.5, 0.5);
+
+                    game.time.events.add(Phaser.Timer.SECOND * 1, function() {
+                        success.kill();
+                        
+                        if (health > 80) {
+                            health = 100;
+                        } else {
+                            health += 20;
+                        }
+                        score += 50;
+                        scoreDisplay.text = score;
+                        minigame = false;
+                        spawnBubbles();
+                    }, this);
+                }, this);
+            } else {
+                status.loadTexture('no');
+                game.sound.play('noSound');
+                console.log("lose");
+                
+                game.time.events.add(Phaser.Timer.SECOND * 2, function() {
+                    marker.kill();
+                    showerBackground.kill();
+                    showerHealthBar.kill();
+                    showerSpeechBubble.kill();
+                    status.kill();
+                    
+                    showerSound.pause();
+                    game.sound.play('timesupSound');
+                    
+                    var toolong = game.add.image(540, 850, 'showeredtoolong');
+                    toolong.anchor.setTo(0.5, 0.5);
+
+                    game.time.events.add(Phaser.Timer.SECOND * 1, function() {
+                        toolong.kill();
+                        
+                        if (health <= 20) {
+                            health = 0;
+                        } else {
+                            health -= 20;
+                        }
+                        if (score <= 20) {
+                            score = 0;
+                        } else {
+                            score -= 40;
+                        }
+                        scoreDisplay.text = score;
+                        minigame = false;
+                        spawnBubbles();
+                    }, this);
+                }, this);
+            }
+        }, this);
+    }
 }
+
+
 
 function pauseBtn() {
     if (!minigame && !pause) {
