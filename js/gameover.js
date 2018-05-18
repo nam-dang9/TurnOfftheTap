@@ -34,23 +34,25 @@ var gameover = {
         twitter.scale.setTo(0.8, 0.8);
         twitter.inputEnabled = true;
         twitter.events.onInputDown.add(twitterBtn, this);
-                                    
-//        window.twttr = (function(d, s, id) {
-//            var js, fjs = d.getElementsByTagName(s)[0],
-//            t = window.twttr || {};
-//            if (d.getElementById(id)) return t;
-//            js = d.createElement(s);
-//            js.id = id;
-//            js.src = "https://platform.twitter.com/widgets.js";
-//            fjs.parentNode.insertBefore(js, fjs);
-//            t._e = [];
-//            t.ready = function(f) {
-//                t._e.push(f);
-//            };
-//            return t;
-//            }(document, "script", "twitter-wjs"));
-//        
-//        document.getElementById('hideTwitter').innerHTML = '<a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Check%20out%20my%20new%20score: ' + highScore + ' %20on%20Turn%20Off%20the%20Tap\"data-size="large" id="twitter-wjs">Tweet</a>';
+
+        // importing the twitter API
+        window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+            t._e = [];
+            t.ready = function(f) {
+                t._e.push(f);
+            };
+            return t;
+            }(document, "script", "twitter-wjs"));
+        
+        document.getElementById('hideTwitter').innerHTML = 
+            '<a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Check%20out%20my%20new%20score:' + highScore + ' %20on%20Turn%20Off%20the%20Tap%0A"data-size="large" data-url="https://TurnOfftheTap.today" id="twitter-wjs">Tweet</a>';
         
            var scoreNumber = game.add.text(540, 970, highScore, {
                     font: "75px Arial",
