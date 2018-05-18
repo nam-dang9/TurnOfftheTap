@@ -50,6 +50,7 @@ var load = {
         game.load.image('minigameSprinkler', 'Images/minigameSprinkler.png');
         game.load.image('minigameShower', 'Images/minigameShower.png');
         game.load.image('minigameFaucet', 'Images/minigameFaucet.png');
+        
         // Character
         game.load.image('body', 'Images/character/body.png');
         game.load.image('face', 'Images/character/face.png');
