@@ -12,10 +12,6 @@ var load = {
         game.load.image('bannerDark', 'Images/Banner-Dark.png');
         game.load.image('bannerLong', 'Images/Banner-Long.png');
         game.load.image('bannerLight', 'Images/banner-Light.png');
-        game.load.image('backBtn', 'Images/Btn-Back.png');
-        game.load.image('customizeBtn', 'Images/Btn-CustomizeIcon.png');
-        game.load.image('homeBtn', 'Images/Btn-HomeIcon.png');
-        game.load.image('settingsBtn', 'Images/Btn-SettingsIcon.png');
         game.load.image('healthBar', 'Images/HealthBar.png');
         game.load.image('healthBarData', 'Images/HealthBar-Health.png');
         game.load.image('healthDisplayBanner', 'Images/HealthDisplayBanner.png');
@@ -23,23 +19,29 @@ var load = {
         game.load.image('map', 'Images/Map.png');
         game.load.image('bannerHidden', 'Images/HiddenBanner.png');
         game.load.image('bannerInput', 'Images/InputBanner.png');
-        game.load.image('letsgoBtn', 'Images/btn-letsgo.png');
         game.load.image('logo', 'Images/TurnOfftheTap Logo1.png');
         game.load.image('water', 'Images/Water.png');
         game.load.image('waterDrop', 'Images/Waterdrop.png');
         game.load.image('tutorialBanner', 'Images/tutorialbanner.png');
         game.load.image('easteregg', 'Images/easteregg.png');
         game.load.image('gameover', 'Images/gameover.png');
-        game.load.image('replay', 'Images/btn-replay.png');
         game.load.image('score', 'Images/score.png');
         game.load.image('trophy', 'Images/trophy.png');
         game.load.image('scoreDisplayBanner', 'Images/scoredisplaybanner.png');
         game.load.image('overlay', 'Images/overlay.png');
-        game.load.image('pause', 'Images/btn-pause.png');
-        game.load.image('unpause', 'Images/btn-unpause.png');
         game.load.image('timesup', 'Images/timesup.png');
         game.load.image('success', 'Images/success.png');
         
+        // Buttons
+        game.load.image('backBtn', 'Images/Btn-Back.png');
+        game.load.image('customizeBtn', 'Images/Btn-CustomizeIcon.png');
+        game.load.image('homeBtn', 'Images/Btn-HomeIcon.png');
+        game.load.image('settingsBtn', 'Images/Btn-SettingsIcon.png');
+        game.load.image('letsgoBtn', 'Images/btn-letsgo.png');
+        game.load.image('replay', 'Images/btn-replay.png');
+        game.load.image('pause', 'Images/btn-pause.png');
+        game.load.image('unpause', 'Images/btn-unpause.png');
+        game.load.image('twitterIcon', 'Images/btn-twitter.png');
         
         // Event bubbles
         game.load.image('shower', 'Images/shower.png');
@@ -66,6 +68,10 @@ var load = {
         game.load.audio('timesupSound', 'sounds/timesup.wav');
         game.load.audio('albertlaugh', 'sounds/albertlaugh.wav');
         game.load.audio('sprinklerSound', 'sounds/sprinkler.wav');
+        game.load.audio('showerSound', 'sounds/shower.wav');
+        game.load.audio('knock', 'sounds/knock.wav');
+        game.load.audio('okaySound', 'sounds/okay.wav');
+        game.load.audio('noSound', 'sounds/no.wav');
         
         // Faucet Minigame Assets
         game.load.spritesheet('faucetBoss', 'Images/sprites/faucetBoss-spritesheet.png', 105, 140, 16);
@@ -79,6 +85,16 @@ var load = {
         game.load.image('overwatered', 'Images/overwatered.png');
         game.load.spritesheet('sprinklerBoss', 'Images/sprites/sprinklerBoss-spritesheet.png', 288, 265, 7);
         game.load.image('nothing', 'Images/nothing.png');
+        
+        // Shower Minigame Assets
+        game.load.image('showerBackground', 'Images/showerminigameBackground.png');
+        game.load.image('showering', 'Images/showering.png');
+        game.load.image('ok', 'Images/ok.png');
+        game.load.image('no', 'Images/no.png');
+        game.load.image('marker', 'Images/marker.png');
+        game.load.image('showeredtoolong', 'Images/showeredtoolong.png');
+        game.load.image('dontshowertoolong', 'Images/dontshowertoolong.png');
+        
     },
     
     create: function() {
