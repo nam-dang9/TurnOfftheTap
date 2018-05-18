@@ -389,7 +389,7 @@ function minigameSprinkler() {
             this.status.anchor.setTo(0.5, 0.5);
             if (this.health > 20) {
                 this.status.loadTexture('toomuchwater');
-                sprinklerHealthBar.health -= 0.5;
+                sprinklerHealthBar.health -= 5.5;
                 sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             } else if (this.health >= 15 && this.health <= 20) {
                 this.status.loadTexture('haswater');
@@ -820,12 +820,14 @@ function minigameShower() {
     showerBackground.events.onInputDown.add(function(){
         console.log(showerHealthBar.health);
         console.log(marker.worldPosition.x);
-        clicked = true;
-        checkShowerMinigame();
+        if (!clicked) {
+           checkShowerMinigame(); 
+        }
     }, this);
     
     var showerSpeechBubble; 
     function checkShowerMinigame() {
+        clicked = true;
         game.sound.play('knock');
         showerSpeechBubble = game.add.image(-50, 1200, 'dontshowertoolong');
     
