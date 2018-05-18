@@ -197,7 +197,7 @@ function tapOnBubble(bubble) {
 }
 
 function createBubble() {
-    var currentEvent, currentBubble = Math.floor(Math.random() * 20);
+    var currentEvent, currentBubble = Math.floor(Math.random() * 6);
     if (currentBubble == 0) {
         currentBubble = Math.floor(Math.random() * minigameNames.length);
         currentEvent = minigameNames[currentBubble];
@@ -741,7 +741,7 @@ function minigameSprinkler() {
 
 // FAUCET MINIGAME
 function minigameFaucet() {
-    overlay = game.add.image(0, 0, 'overlay');
+    overlay = game.add.image(0, 0, 'faucetBackground');
     
     // Health bar
     var barConfig = {
@@ -845,7 +845,7 @@ function minigameFaucet() {
     }, this);
 }
 
-// FAUCET MINIGAME
+// SHOWER MINIGAME
 // Bubble position: 540, 690
 function minigameShower() {
     var clicked = false;

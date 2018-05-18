@@ -75,6 +75,7 @@ var load = {
         
         // Faucet Minigame Assets
         game.load.spritesheet('faucetBoss', 'Images/sprites/faucetBoss-spritesheet.png', 105, 140, 16);
+        game.load.image('faucetBackground', 'Images/faucetminigameBackground.png');
         
         // Sprinkler Minigame Assets
         game.load.image('sprinklerBackground', 'Images/sprinklerminigameBackground.png');
