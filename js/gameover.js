@@ -17,16 +17,24 @@ var gameover = {
         
         replay = game.add.image(540,1190, "replay");
         replay.anchor.setTo(0.5, 0.5);
+        replay.scale.setTo(0.8, 0.8);
         replay.inputEnabled = true;
         // the replayBtn function is in main.js
         replay.events.onInputDown.add(replayBtn, this);
         
-        var home = game.add.image(540,1500, "homeBtn");
+        var home = game.add.image(540,1440, "homeBtn");
         home.anchor.setTo(0.5, 0.5);
-        home.scale.setTo(1.599, 1.599);
+        home.scale.setTo(1.3, 1.3);
         home.inputEnabled = true;
         // the homeBtn function is in main.js
         home.events.onInputDown.add(homeBtn, this);
+        
+        var twitter = game.add.image(540, 1690, 'twitterIcon');
+        twitter.anchor.setTo(0.5, 0.5);
+        twitter.scale.setTo(0.8, 0.8);
+        twitter.inputEnabled = true;
+        twitter.events.onInputDown.add(twitterBtn, this);
+
         // importing the twitter API
         window.twttr = (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0],
@@ -80,7 +88,22 @@ var gameover = {
     }
 }
 
-
-
-
+function twitterBtn() {
+    window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+            t._e = [];
+            t.ready = function(f) {
+                t._e.push(f);
+            };
+            return t;
+            }(document, "script", "twitter-wjs"));
+        
+        window.open("https://twitter.com/intent/tweet?text=Check%20out%20my%20new%20score: " + score + " on http://turnoffthetap.today/", "_blank");
+}
 
