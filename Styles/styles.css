@@ -257,6 +257,10 @@ canvas {
         margin-bottom: 2.5%;
     }
     
+    .indexBtn {
+        width: 11%;
+    }
+    
     .banner {
         height: 86%;
         width: auto;
@@ -286,7 +290,7 @@ canvas {
     }
     
     .indexBtn {
-        width: 11%;
+        width: 10%;
     }
     
     .banner {

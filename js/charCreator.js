@@ -51,12 +51,12 @@ var face;
 function preload() {
     game.load.image('loadingLogo', 'Images/TurnOfftheTap Logo2.png');
     game.load.image('background', 'Images/VancouverBackground.png');
-    game.load.image('arrowLeft', 'Images/Arrow-Left.png');
-    game.load.image('arrowRight', 'Images/Arrow-Right.png');
-    game.load.image('banner', 'Images/banner-Light.png');
-    game.load.image('displayBanner', 'Images/banner-charDisplay.png');
-    game.load.image('looksgood', 'Images/btn-LooksGood.png');
-    game.load.image('back', 'Images/btn-Back.png');
+    game.load.image('arrowLeft', 'Images/btns/Arrow-Left.png');
+    game.load.image('arrowRight', 'Images/btns/Arrow-Right.png');
+    game.load.image('banner', 'Images/banners/banner-Light.png');
+    game.load.image('displayBanner', 'Images/banners/banner-charDisplay.png');
+    game.load.image('looksgood', 'Images/btns/btn-LooksGood.png');
+    game.load.image('back', 'Images/btns/btn-Back.png');
 
     game.load.image('body', 'Images/character/body.png');
     game.load.image('face', 'Images/character/face.png');
