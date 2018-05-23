@@ -1,3 +1,5 @@
+var logIn = document.getElementById("loggedIn");
+var hide = document.getElementById("notLoggedIn");
 const config = {
     apiKey: "AIzaSyB9iAfpDb7RZgzYmpz7Gi6lkrV6lLWbr2Q",
     authDomain: "demo2-b13f2.firebaseapp.com",
@@ -9,6 +11,13 @@ const config = {
 
 firebase.initializeApp(config);
 
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    logIn.style.display = "block";
+  } else {
+    hide.style.display = "block";
+  }
+});
 
 function log_Out(){
 	console.log(firebase.auth().currentUser.displayName);
