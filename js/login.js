@@ -14,15 +14,19 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     name = user.displayName;
     email = user.email;
-    var checkName = (name != "null")?  name: "Welcome!";
+    var checkName = (name != "null")?  name: "Friend!";
     logIn.innerHTML += "<h3 class='title titleLogin'>HELLO,   </h3>"
     logIn.innerHTML += "<h3 class='name'>" + checkName + "</h3></br>";
     login.innerHTML += "<p class='loginEmail'>email: " + email + "</p>";
     loginBtns.style.visibility = "visible";
     loginCharDisplay.style.visibility = "visible";
-    hide.style.display = "none";
+    logIn.style.display = "block";
+    document.getElementById("loggedIn").style.display = "block";
+
   } else {
-    logIn.style.display = "none";
+   document.getElementById("notLoggedIn").style.display = "block";
+    hide.style.display = "block";
+
   }
 });
 

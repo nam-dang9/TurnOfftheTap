@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class="authentBanner">
-				<div id="loginHid">
+				<div id="loginHid" style = "display:none">
 				<h3 class="title">LOG IN</h3>
 				<h5 class="inputLabel">Email</h5>
 				<input type ="email" id="txtEmail" class="bannerInput" /><br />
@@ -27,7 +27,12 @@
                 <a href="charCreation.html"><img src="Images/btns/btn-character.png" class="btn loginBtn" /></a>
             </div>
         </div>
-        <img src="Images/btns/Btn-Login.png" onclick="logInF()" class="btn authentBtn" id="imgClick"/>
+        <div id= "loggedIn" style = "display:none">
+            <img src="Images/btns/btn-logout.png" onclick="logOut()" class="btn authentBtn" id="imgClick"/>
+        </div>
+        <div id= "notLoggedIn" style = "display:none">
+            <img src="Images/btns/Btn-Login.png" onclick="logInF()" class="btn authentBtn" id="imgClick"/>
+        </div>
         <a href="index.html"><img src="Images/btns/btn-backlong.png" class="btn authentBtn" /></a>
     </body>
 <script src="js/dbLink.js"></script>
