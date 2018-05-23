@@ -9,7 +9,7 @@ var db = firebase.firestore();
 const list_div = document.querySelector("#list_div");
 
 // Set Top 3 in the list with DESC order
-db.collection("Users").orderBy("scores").limit(3).onSnapshot(function(snapshot) {
+db.collection("Users").orderBy("scores").limit(10).onSnapshot(function(snapshot) {
     snapshot.docChanges.forEach(function(change) {
 
     if(change.type == "added"){
