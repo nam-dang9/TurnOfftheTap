@@ -113,11 +113,11 @@ var main = {
 
         var body = character.create(charX, charY, 'body');
         body.smoothed = false;
-        body.tint = bodyTint;
+        body.tint = userSkin;
 
         var hair = character.create(charX, charY, 'hair');
         hair.smoothed = false;
-        hair.tint = hairTint;
+        hair.tint = userHairColor;
 
         character.create(charX, charY, 'shirt').smoothed = false;
         character.create(charX, charY, 'face').smoothed = false;

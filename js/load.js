@@ -60,8 +60,8 @@ var load = {
         // Character
         game.load.image('body', 'Images/character/body.png');
         game.load.image('face', 'Images/character/face.png');
-        game.load.image('hair', 'Images/character/hair2.png');
-        game.load.image('shirt', 'Images/character/shirt2.png');
+        game.load.image('hair', 'Images/character/' + hair + '.png');
+        game.load.image('shirt', 'Images/character/' + userBody + '.png');
         
         // Faucet Minigame Assets
         game.load.spritesheet('faucetBoss', 'Images/sprites/faucetBoss-spritesheet.png', 105, 140, 16);
