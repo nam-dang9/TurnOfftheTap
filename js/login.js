@@ -14,7 +14,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     name = user.displayName;
     email = user.email;
-    var checkName = (name != "null")?  name: "Friend!";
+    var checkName = (name != "null")?  name: "friend!";
     logIn.innerHTML += "<h3 class='title titleLogin'>HELLO,   </h3>"
     logIn.innerHTML += "<h3 class='name'>" + checkName + "</h3></br>";
     login.innerHTML += "<p class='loginEmail'>email: " + email + "</p>";

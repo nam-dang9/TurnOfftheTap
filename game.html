@@ -8,7 +8,6 @@
         <script type="text/javascript" src="js/phaser.js"></script>
         <script type="text/javascript" src="js/boot.js"></script>
         <script type="text/javascript" src="js/load.js"></script>
-        <script type="text/javascript" src="js/tutorial.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/gameover.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
@@ -24,7 +23,6 @@
             var game = new Phaser.Game(config1);
             game.state.add('boot', boot);
             game.state.add('load', load);
-            game.state.add('tutorial', tutorial);
             game.state.add('main', main);
             game.state.add('gameover', gameover);
             game.state.start('boot');

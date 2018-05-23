@@ -1,20 +1,20 @@
-var tutorial = {
-    create: function() {
-        // Setting up background
-        var background = game.add.image(0, 0, 'background');
-        background.height = game.height;
-        background.width = game.width;
-        
-        var banner = game.add.image(540, 960, 'tutorialBanner');
-        banner.anchor.setTo(0.5, 0.5);
-        
-        var btn = game.add.image(540, 1750, 'letsgoBtn');
-        btn.anchor.setTo(0.5, 0.5);
-        btn.inputEnabled = true;
-        btn.events.onInputDown.add(startGame, this);
+var counter = 0;
+var tut = ['tut1', 'tut2' , 'tut3', 'tut4', 'tut5', 'tut6'];
+
+function nextTut() {
+    if (counter === 5) {
+        counter = 0;
+        window.location.href="index.html";
+    } else {
+        document.getElementById(tut[counter]).style.display = "none";
+        counter++;
+        document.getElementById(tut[counter]).style.display = "block";
     }
+    
 }
 
-function startGame() {
-    game.state.start('main');
+function prevTut() {
+    document.getElementById(tut[counter]).style.display = "none";
+    counter--;
+    document.getElementById(tut[counter]).style.display = "block";
 }
