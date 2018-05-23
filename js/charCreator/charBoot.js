@@ -1,11 +1,11 @@
-var boot = {
-    init: function() {
+var charBoot = {
+    init: function () {
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.scale.pageAlignVertically = true;
         game.scale.pageAlignHorizontally = true;
     },
-    
-    preload: function() {
+
+    preload: function () {
         game.load.image('loadingLogo', 'Images/TurnOfftheTap Logo2.png');
         game.load.image('background', 'Images/VancouverBackground.png');
     },
@@ -23,12 +23,12 @@ var boot = {
         logo.scale.setTo(2, 2);
         
         
-    },  
+    }, 
 
     update: function() {
 
         if(loadedData) {
-            game.state.start('load');
+            game.state.start('creator');
         }
     }
 };
