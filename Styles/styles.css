@@ -94,13 +94,40 @@ canvas {
     margin-bottom: 10px;
 }
 
+.titleLogin {
+    margin-bottom: 2.5px;
+    display: inline-block;
+    color: lightgrey;
+}
+
+.name {
+    display: inline-block;
+    font-size: 30px;
+}
+
 .inputLabel {
     font-size: 15px;
     padding: 7px;
 }
 
+.loginEmail {
+    display: inline-block;
+}
 
-/******* LOGIN *******/
+#loginCharDisplay {
+    visibility: hidden;
+    width: 200px;
+    height: 200px;
+    background-color: lightgrey;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+#loginBtns {
+    visibility: hidden;
+}
 
 /******* MEDIA QUERIES *******/
 /* Extra small devices (phones, 600px and down) */
@@ -151,6 +178,31 @@ canvas {
         width: 200px;
         margin: 5px;
     }
+    
+    .name {
+        display: inline-block;
+        font-size: 25px;
+    }
+    
+    .titleLogin {
+        font-size: 30px;
+        margin: 0;
+    }
+    
+    .loginEmail {
+        font-size: 15px;
+    }
+    
+    .loginBtn {
+        width: 41%;
+    }
+    
+    #loginCharDisplay {
+        width: 175px;
+        height: 175px;
+        margin-top: 20px;
+        margin-bottom: 15px;
+    }
 }
 
 
@@ -184,6 +236,17 @@ canvas {
         margin-top: 4px;
         width: 25%;
     }
+    
+    .loginBtn {
+        width: 33%;
+    }
+    
+    #loginCharDisplay {
+        width: 225px;
+        height: 225px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -214,6 +277,17 @@ canvas {
     .authentBtn {
         margin-top: 4px;
         width: 20%;
+    }
+    
+    .loginBtn {
+        width: 33%;
+    }
+    
+     #loginCharDisplay {
+        width: 225px;
+        height: 225px;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 } 
 
@@ -247,6 +321,17 @@ canvas {
         margin-top: 4px;
         width: 19%;
     }
+    
+    .loginBtn {
+        width: 33%;
+    }
+    
+    #loginCharDisplay {
+        width: 250px;
+        height: 250px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -279,6 +364,17 @@ canvas {
         margin-top: 4px;
         width: 15%;
     }
+    
+    .loginBtn {
+        width: 37%;
+    }
+    
+    #loginCharDisplay {
+        width: 200px;
+        height: 200px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -310,6 +406,16 @@ canvas {
     .authentBtn {
         margin-top: 4px;
         width: 10%;
+    }
+    
+    .loginCharDisplay {
+        width: 200px;
+        height: 200px;
+        background-color: lightgrey;
+    }
+    
+    .loginBtn {
+        width: 30%;
     }
     
 }

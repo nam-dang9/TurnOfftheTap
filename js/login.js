@@ -15,8 +15,11 @@ firebase.auth().onAuthStateChanged(function(user) {
     name = user.displayName;
     email = user.email;
     var checkName = (name != "null")?  name: "Welcome!";
-    logIn.innerHTML += checkName + "</br>";
-    login.innerHTML += "Email: " + email;
+    logIn.innerHTML += "<h3 class='title titleLogin'>HELLO,   </h3>"
+    logIn.innerHTML += "<h3 class='name'>" + checkName + "</h3></br>";
+    login.innerHTML += "<p class='loginEmail'>email: " + email + "</p>";
+    loginBtns.style.visibility = "visible";
+    loginCharDisplay.style.visibility = "visible";
     hide.style.display = "none";
   } else {
     logIn.style.display = "none";
@@ -37,16 +40,16 @@ function logInF(){
     var promise = auth.signInWithEmailAndPassword(email, password);     
 
 	    promise.then(function(){
-		//refresh the page
-		window.location.href = 'logIn.html';
+            //refresh the page
+            window.location.href = 'logIn.html';
 		})
         .catch(function(error) {
 			// Show error msg in the div html page 
             console.log(error.code);
             err_msg.innerHTML = error.code;
-
         }); 
-
+    
+    
 };
 
 
