@@ -1,6 +1,5 @@
 var load = {
     preload: function() {
-
         // Loading screen
         var background = game.add.image(540, 960, "background");
         background.anchor.setTo(0.5, 0.5);
@@ -61,8 +60,8 @@ var load = {
         // Character
         game.load.image('body', 'Images/character/body.png');
         game.load.image('face', 'Images/character/face.png');
-        game.load.image('hair', 'Images/character/' + hair + '.png');
-        game.load.image('shirt', 'Images/character/' + userBody + '.png');
+        game.load.image('hair', 'Images/character/hair2.png');
+        game.load.image('shirt', 'Images/character/shirt2.png');
         
         // Faucet Minigame Assets
         game.load.spritesheet('faucetBoss', 'Images/sprites/faucetBoss-spritesheet.png', 105, 140, 16);
@@ -105,4 +104,3 @@ var load = {
         game.state.start('main');
     }
 };
-

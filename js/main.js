@@ -31,8 +31,11 @@ var character;
 var charX = -5;
 var charY = +5;
 
-var logo;
+var bodyTint = "0xdc9556";
+var hairTint = "0x006aff";
 
+var logo;
+ 
 
 var minigame = false;
 var pause = false;
@@ -47,7 +50,7 @@ var pauseStart;
 var timer;
 
 var main = {
-    create: function () {
+    create: function() {
 
         startTime = Date.now();
 
@@ -55,29 +58,29 @@ var main = {
         var background = game.add.image(0, 0, 'water');
         background.height = game.height;
         background.width = game.width;
-
+        
         // Setting up UI
         var map = game.add.image(540, 960, "map");
         map.anchor.setTo(0.5, 0.5);
         map.scale.setTo(1.1, 1.1);
-
+         
         //game.add.image(-15, -25, "bannerLong"); 
-        game.add.image(-15, 1735, "bannerLong");
-
+        game.add.image(-15, 1735, "bannerLong"); 
+        
         logo = game.add.image(30, 1775, "logo");
         logo.inputEnabled = true;
         logo.events.onInputDown.add(tapOnLogo, this);
         logo.taps = 9;
-
+        
         // UI buttons
         mainPause = game.add.image(880, 1740, "pause");
         mainPause.inputEnabled = true;
         mainPause.events.onInputDown.add(pauseBtn, this);
-
+       
         mainHome = game.add.image(680, 1740, "homeBtn");
         mainHome.inputEnabled = true;
         mainHome.events.onInputDown.add(homeBtn, this);
-
+        
         // Health display
         var healthDisplayBanner = game.add.image(960, 110, "healthDisplayBanner");
         healthDisplayBanner.anchor.setTo(0.5, 0.5);
@@ -92,44 +95,44 @@ var main = {
                     align: "center"
         });
         healthDisplay.anchor.setTo(0.5, 0.5);
-
+        
         // Score display
         var scoreDisplayBanner = game.add.image(600, 110, "scoreDisplayBanner");
         scoreDisplayBanner.anchor.setTo(0.5, 0.5);
         scoreDisplay = game.add.text(650, 110, score, {
-            font: "45px Pixelate",
-            fill: "#ffffff",
-            align: "right"
+                    font: "45px Pixelate",
+                    fill: "#ffffff",
+                    align: "right"
         });
         scoreDisplay.anchor.setTo(0.5, 0.5);
         var trophy = game.add.image(500, 110, "trophy");
         trophy.anchor.setTo(0.5, 0.5);
-
+        
         // Character
         character = game.add.group();
 
         var body = character.create(charX, charY, 'body');
         body.smoothed = false;
-        body.tint = userSkin;
+        body.tint = bodyTint;
 
         var hair = character.create(charX, charY, 'hair');
         hair.smoothed = false;
-        hair.tint = userHairColor;
+        hair.tint = hairTint;
 
         character.create(charX, charY, 'shirt').smoothed = false;
         character.create(charX, charY, 'face').smoothed = false;
 
         character.scale.setTo(8);
-
+        
         bubbles = game.add.group();
-
+    
         spawnBubbles();
-
+        
     },
-
-    update: function () {
+    
+    update: function() {
         if (!pause && !minigame) {
-            if (health < 100) {
+            if(health < 100) {
                 health += healthRegen;
             }
 
@@ -146,7 +149,7 @@ var main = {
         }
     },
 
-    render: function () {
+    render: function() {
 
       game.debug.font = "35px Arial";   
 
@@ -159,48 +162,36 @@ var main = {
       //game.debug.text("Roll: " + Math.round(debugRand * 100), 530, 400);
         
 
-
     }
-
+   
 };
 
 function tapOnBubble(bubble) {
     if (!pause && !minigame) {
         if (bubble.type == 'minigameSprinkler') {
-
             game.sound.play('minigameSound');
-            bubble.destroy();
+            bubble.kill();
             minigame = true;
             minigameSprinkler();
             game.sound.play('minigameSound');
-
         } else if (bubble.type == 'minigameFaucet') {
-
             minigame = true;
             minigameFaucet();
-
         } else if (bubble.type == 'minigameShower') {
-
             game.sound.play('minigameSound');
             minigame = true;
             minigameShower();
-
         } else {
             game.sound.play('pop');
         }
 
         bubble.damage(1);
         bubble.healthBar.setPercent((bubble.health / bubble.maxHealth) * 100);
-        if (!bubble.alive) {
-
+        if(!bubble.alive) {
             bubble.healthBar.kill();
             bubble.destroy();
-
-            if (minigameNames.includes(bubble.type)) {
-                score += 10;
-                scoreDisplay.text = score;
-            }
-            
+            score += 10;
+            scoreDisplay.text = score;   
         }
     }
 }
@@ -209,43 +200,47 @@ function createBubble() {
     var currentEvent, currentBubble = Math.floor(Math.random() * 6);
     if (currentBubble == 0) {
         currentBubble = Math.floor(Math.random() * minigameNames.length);
-        currentEvent = minigameNames[0];
+        currentEvent = minigameNames[currentBubble];
     } else {
         currentBubble = Math.floor(Math.random() * bubbleNames.length);
         currentEvent = bubbleNames[currentBubble];
     }
-
+            
     // Boundary
     // x: 120 < --- < 880
     // y: 270 < --- < 1200
-
+            
     // While the x coordinate exceeds the boundaries, assign it a new value
     var currentX = Math.random() * 880 + 15;
     while (currentX > 880 || currentX < 120) {
         currentX = Math.random() * 880 + 15;
     }
-
+                
     // While the y coordinate exceeds the boundaries, assign it a new value
     var currentY = Math.random() * 1200 + 20
     while (currentY > 1200 || currentY < 500) {
         currentY = Math.random() * 1200 + 20;
     }
-
-    bubble = bubbles.create(currentX, currentY, currentEvent);
+            
+    bubble =  bubbles.create(currentX, currentY, currentEvent); 
     bubble.type = currentEvent;
     bubble.anchor.setTo(0.5, 0.5);
     bubble.inputEnabled = true;
     bubble.events.onInputDown.add(tapOnBubble, this);
-    if (minigameNames.includes(bubble.type)) {
+    if (minigameNames.includes(bubble.type)){
         bubble.health = 1;
     } else {
         bubble.health = bubble.maxHealth = bubbleHealth[bubble.type];
     }
-    
+
+    // bubble.healthBar = game.add.text(bubble.x - 10, bubble.y - bubble.width/2, bubble.health, {
+    //     font: "50px Arial",
+    //     fill: "#ffffff"
+    // });
     var barConfig = {
         width: 100,
         height: 30,
-        x: bubble.x,
+        x: bubble.x, 
         y: bubble.y - 120,
         bg: {
             color: '#1c4167'
@@ -277,14 +272,14 @@ function spawnBubbles() {
 
         var weights = [spawn1, spawn2, spawn3];
 
-        function bubbleCount() {
+        function bubbleCount(){
             var rand = Math.random();
             debugRand = rand;
             var prev = 0;
             var cur;
-            for (i = 0; i < weights.length; i++) {
+            for (i=0; i < weights.length; i++) {
                 cur = prev + weights[i];
-                if ((prev < rand) && (cur > rand)) {
+                if((prev < rand ) && (cur > rand)) {
                     return i + 1;
                 }
                 prev = cur;
@@ -293,15 +288,16 @@ function spawnBubbles() {
         }
 
         var toSpawn = bubbleCount();
+        
 
 
         for (i = 0; i < toSpawn; i++){
             createBubble();
         }
-
+        
 
         // Set interval until next Bubble spawns
-        var adjustment = maxDifficulty * 4 * Math.log2(difficulty / 10 + 1);
+        var adjustment = maxDifficulty * 4 * Math.log2(difficulty/10 + 1);
         spawnInterval = baseInterval - adjustment;
 
 
@@ -332,15 +328,14 @@ function tapOnLogo(logo) {
 // House 3: Bubble = 188, 990, Sprinkler = 370, 1110
 // House 4: Bubble = 910, 990, Sprinkler = 720, 1310
 function minigameSprinkler() {
-    console.log("entering sprinkler minigame");
     var sprinklerBackground = game.add.image(0, 0, 'sprinklerBackground');
     var alreadyDone = false;
-
+    
     // Health bar
     var barConfig = {
         width: 1000,
         height: 90,
-        x: 540,
+        x: 540, 
         y: 1700,
         bg: {
             color: '#1c4167'
@@ -354,14 +349,14 @@ function minigameSprinkler() {
     sprinklerHealthBar.health = 40;
     
     var startingHealth = Math.floor(Math.random() * 26);
-
-
+    
+    
     // HOUSE 1
     var house1 = {
         health: startingHealth,
         sprinklerStatus: false,
         sprinkler: game.add.sprite(377, 796, 'sprinklerBoss'),
-        sprinklerOn: function () {
+        sprinklerOn: function() {
             if (this.sprinklerStatus) {
                 this.sprinkler.animations.add('on', [0, 1, 2, 3, 4]);
                 this.sprinkler.animations.play('on', 30, true);
@@ -369,10 +364,10 @@ function minigameSprinkler() {
             } else {
                 this.sprinkler.animations.add('on', [5, 6]);
                 this.sprinkler.animations.play('on', 30, true);
-            }
+            } 
         },
         status: game.add.sprite(188, 490, 'nothing'),
-        waterStatus: function () {
+        waterStatus: function() {
             this.status.anchor.setTo(0.5, 0.5);
             if (this.health > 20) {
                 this.status.loadTexture('toomuchwater');
@@ -387,10 +382,10 @@ function minigameSprinkler() {
                 sprinklerHealthBar.health -= 2.5;
                 sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             }
-        }
+        } 
     }
-
-
+    
+    
     house1.sprinkler.anchor.setTo(0.5, 0.5);
     house1.sprinkler.inputEnabled = true;
     var sprinklerSound1 = game.add.audio('sprinklerSound');
@@ -406,16 +401,16 @@ function minigameSprinkler() {
             sprinklerSound1.play();
         }
     }, this);
-
-
+    
+    
     startingHealth = Math.floor(Math.random() * 26);
-
+    
     // HOUSE 2
     var house2 = {
         health: startingHealth,
         sprinklerStatus: false,
         sprinkler: game.add.sprite(725, 598, 'sprinklerBoss'),
-        sprinklerOn: function () {
+        sprinklerOn: function() {
             if (this.sprinklerStatus) {
                 this.sprinkler.animations.add('on', [0, 1, 2, 3, 4]);
                 this.sprinkler.animations.play('on', 30, true);
@@ -423,10 +418,10 @@ function minigameSprinkler() {
             } else {
                 this.sprinkler.animations.add('on', [6]);
                 this.sprinkler.animations.play('on', 30, true);
-            }
+            } 
         },
         status: game.add.sprite(910, 490, 'nothing'),
-        waterStatus: function () {
+        waterStatus: function() {
             this.status.anchor.setTo(0.5, 0.5);
             if (this.health > 20) {
                 this.status.loadTexture('toomuchwater');
@@ -441,9 +436,9 @@ function minigameSprinkler() {
                 sprinklerHealthBar.health -= 4.5;
                 sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             }
-        }
+        } 
     }
-
+    
     house2.sprinkler.anchor.setTo(0.5, 0.5);
     house2.sprinkler.inputEnabled = true;
     var sprinklerSound2 = game.add.audio('sprinklerSound');
@@ -459,15 +454,15 @@ function minigameSprinkler() {
             sprinklerSound2.play();
         }
     }, this);
-
+    
     startingHealth = Math.floor(Math.random() * 26);
-
+    
     // HOUSE 3
     var house3 = {
         health: startingHealth,
         sprinklerStatus: false,
         sprinkler: game.add.sprite(370, 1110, 'sprinklerBoss'),
-        sprinklerOn: function () {
+        sprinklerOn: function() {
             if (this.sprinklerStatus) {
                 this.sprinkler.animations.add('on', [0, 1, 2, 3, 4]);
                 this.sprinkler.animations.play('on', 30, true);
@@ -475,10 +470,10 @@ function minigameSprinkler() {
             } else {
                 this.sprinkler.animations.add('on', [6]);
                 this.sprinkler.animations.play('on', 30, true);
-            }
+            } 
         },
         status: game.add.sprite(188, 990, 'nothing'),
-        waterStatus: function () {
+        waterStatus: function() {
             this.status.anchor.setTo(0.5, 0.5);
             if (this.health > 20) {
                 this.status.loadTexture('toomuchwater');
@@ -493,9 +488,9 @@ function minigameSprinkler() {
                 sprinklerHealthBar.health -= 0.5;
                 sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             }
-        }
+        } 
     }
-
+    
     house3.sprinkler.anchor.setTo(0.5, 0.5);
     house3.sprinkler.inputEnabled = true;
     var sprinklerSound3 = game.add.audio('sprinklerSound');
@@ -511,15 +506,15 @@ function minigameSprinkler() {
             sprinklerSound3.play();
         }
     }, this);
-
+    
     startingHealth = Math.floor(Math.random() * 26);
-
+    
     // HOUSE 4
     var house4 = {
         health: startingHealth,
         sprinklerStatus: false,
         sprinkler: game.add.sprite(720, 1310, 'sprinklerBoss'),
-        sprinklerOn: function () {
+        sprinklerOn: function() {
             if (this.sprinklerStatus) {
                 this.sprinkler.animations.add('on', [0, 1, 2, 3, 4]);
                 this.sprinkler.animations.play('on', 30, true);
@@ -527,10 +522,10 @@ function minigameSprinkler() {
             } else {
                 this.sprinkler.animations.add('on', [6]);
                 this.sprinkler.animations.play('on', 30, true);
-            }
+            } 
         },
         status: game.add.sprite(910, 990, 'nothing'),
-        waterStatus: function () {
+        waterStatus: function() {
             this.status.anchor.setTo(0.5, 0.5);
             if (this.health > 20) {
                 this.status.loadTexture('toomuchwater');
@@ -545,9 +540,9 @@ function minigameSprinkler() {
                 sprinklerHealthBar.health -= 0.5;
                 sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             }
-        }
+        } 
     }
-
+    
     house4.sprinkler.anchor.setTo(0.5, 0.5);
     house4.sprinkler.inputEnabled = true;
     var sprinklerSound4 = game.add.audio('sprinklerSound');
@@ -614,9 +609,7 @@ function minigameSprinkler() {
         
         
         if (sprinklerHealthBar.health <= 0) {
-            
             if (!alreadyDone) {
-                console.log("fail condition");
                 alreadyDone = true;
                 destroyAll();
 
@@ -625,71 +618,42 @@ function minigameSprinkler() {
                 var overwatered = game.add.image(540, 850, 'overwatered');
                 overwatered.anchor.setTo(0.5, 0.5);
 
-                game.time.events.add(Phaser.Timer.SECOND * 1, function () {
-
-                    overwatered.destroy();
-
+                game.time.events.add(Phaser.Timer.SECOND * 1, function() {
+                    overwatered.kill();
                     if (health <= 20) {
                         health = 0;
                     } else {
                         health -= 20;
                     }
-
                     if (score <= 20) {
                         score = 0;
                     } else {
                         score -= 40;
                     }
-
                     scoreDisplay.text = score;
                     healthDisplay.text = Math.round(health) + ' / 100';
                     minigame = false;
                     spawnBubbles();
                 }, this);
-                this.stop();
+                this.stop();   
             }
-        } else {
-            console.log("grassloop alive");
-
-            house1.status.anchor.setTo(0.5, 0.5);
-            house1.health -= 3;
-            house1.sprinklerOn();
-            house1.waterStatus();
-
-            house2.status.anchor.setTo(0.5, 0.5);
-            house2.health -= 4;
-            house2.sprinklerOn();
-            house2.waterStatus();
-
-            house3.status.anchor.setTo(0.5, 0.5);
-            house3.health -= 8;
-            house3.sprinklerOn();
-            house3.waterStatus();
-
-            house4.status.anchor.setTo(0.5, 0.5);
-            house4.health -= 5;
-            house4.sprinklerOn();
-            house4.waterStatus();
         }
     }, this);
-
-
+    
+    
     // The overall timer of the minigame 
-    game.time.events.add(Phaser.Timer.SECOND * 12.5, function () {
-        console.log("end minigame");
+    game.time.events.add(Phaser.Timer.SECOND * 12.5, function() {
         if (sprinklerHealthBar.health <= 0 & !alreadyDone) {
-            console.log("win condition");
-
             alreadyDone = true;
             destroyAll();
             
             game.sound.play('timesupSound');
-
+            
             var overwatered = game.add.image(540, 850, 'overwatered');
             overwatered.anchor.setTo(0.5, 0.5);
-
-            game.time.events.add(Phaser.Timer.SECOND * 1, function () {
-                overwatered.destroy();
+            
+            game.time.events.add(Phaser.Timer.SECOND * 1, function() {
+                overwatered.kill();
                 if (health <= 20) {
                     health = 0;
                 } else {
@@ -715,8 +679,8 @@ function minigameSprinkler() {
                 var success = game.add.image(540, 850, 'success');
                 success.anchor.setTo(0.5, 0.5);
 
-                game.time.events.add(Phaser.Timer.SECOND * 1, function () {
-                    success.destroy();
+                game.time.events.add(Phaser.Timer.SECOND * 1, function() {
+                    success.kill();
                     if (health > 80) {
                         health = 100;
                     } else {
@@ -726,7 +690,6 @@ function minigameSprinkler() {
                     scoreDisplay.text = score;
                     healthDisplay.text = Math.round(health) + ' / 100';
                     minigame = false;
-                    game.time.events.remove(grassHealthLoop);
                     spawnBubbles();
                 }, this);
             }
@@ -736,7 +699,7 @@ function minigameSprinkler() {
 
 // FAUCET MINIGAME
 function minigameFaucet() {
-    overlay = game.add.image(0, 0, 'overlay');
+    overlay = game.add.image(0, 0, 'faucetBackground');
     
     // Health bar
     var barConfig = {
@@ -750,30 +713,30 @@ function minigameFaucet() {
         bar: {
             color: '#0d91df'
         }
-
+        
     };
-    var faucetHealthBar = new HealthBar(this.game, barConfig);
-
+	var faucetHealthBar = new HealthBar(this.game, barConfig);
+    
     // Faucet sprite
     var faucetBoss = game.add.sprite(540, 1160, 'faucetBoss');
     faucetBoss.anchor.setTo(0.5, 0.5);
     faucetBoss.scale.setTo(6, 6);
     faucetBoss.inputEnabled = true;
     faucetBoss.health = 10;
-
+    
     // Faucet sprite animation
     var running = faucetBoss.animations.add('running', [0, 1, 2, 3, 4, 5, 6, 7]);
     faucetBoss.animations.play('running', 30, true);
-
+    
     // Timer
-    game.time.events.add(Phaser.Timer.SECOND * 7, function () {
+    game.time.events.add(Phaser.Timer.SECOND * 7, function() {
         if (faucetBoss.health > 0) {
-            faucetBoss.destroy();
+            faucetBoss.kill();
             faucetHealthBar.kill();
              overlay.destroy();
             
             game.sound.play('timesupSound');
-
+            
             var timesup = game.add.image(540, 850, 'timesup');
             timesup.anchor.setTo(0.5, 0.5);
             
@@ -794,22 +757,20 @@ function minigameFaucet() {
                 spawnBubbles();
             }, this);
         }
-    }, this);
-
+    } , this);
+    
     // Handle if faucet gets tapped on
-    faucetBoss.events.onInputDown.add(function () {
+    faucetBoss.events.onInputDown.add(function() {
         game.sound.play('btn');
         if (faucetBoss.health > 0) {
-
             faucetBoss.health -= 1;
             faucetHealthBar.setPercent((faucetBoss.health / 10) * 100);
-
         } else {
-            faucetBoss.destroy();
+            faucetBoss.kill();
             faucetHealthBar.kill();
             overlay.destroy();
             game.sound.play('successSound');
-
+            
             var success = game.add.image(540, 850, 'success');
             success.anchor.setTo(0.5, 0.5);
             
@@ -828,9 +789,9 @@ function minigameFaucet() {
             }, this);
         }
     }, this);
-
+    
     // While the faucet health is over 0, keep regenerating it
-    var regenLoop = game.time.events.loop(10, function () {
+    game.time.events.loop(10, function() {
         if (faucetBoss.health > 0) {
             if (faucetBoss.health < 10) {
                 faucetBoss.health += 0.1;
@@ -1004,12 +965,12 @@ function pauseBtn() {
         unpause.anchor.setTo(0.5, 0.5);
         unpause.scale.setTo(1.7, 1.7);
         unpause.inputEnabled = true;
-        unpause.events.onInputDown.add(function () {
+        unpause.events.onInputDown.add(function() {
             game.sound.play('btn');
             pausedTime += game.time.elapsedSince(pauseStart);
-            overlay.destroy();
-            unpause.destroy();
-            replay.destroy();
+            overlay.kill();
+            unpause.kill();
+            replay.kill();
             pause = false;
             mainHome.inputEnabled = true;
             mainPause.inputEnabled = true;

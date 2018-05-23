@@ -1,5 +1,3 @@
-console.log("in charCreator.js");
-console.log(hair);
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyB9iAfpDb7RZgzYmpz7Gi6lkrV6lLWbr2Q",
@@ -8,13 +6,11 @@ var config = {
     projectId: "demo2-b13f2",
     storageBucket: "demo2-b13f2.appspot.com",
     messagingSenderId: "641975222602"
-};
-
+  };
 firebase.initializeApp(config);
 var db = firebase.firestore();
   const settings = {/* your settings... */ timestampsInSnapshots: true};
 db.settings(settings);
-
 
 var config = {
     width: 1080,
@@ -30,24 +26,20 @@ var config = {
 }
 
 var game = new Phaser.Game(config);
-
 function init() {
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.scale.pageAlignVertically = true;
     game.scale.pageAlignHorizontally = true;
-    //readData();
+    
 }
 
+var hairIndex = 0;
+var shirtIndex = 0;
 
 var hairArr = ['hair1', 'hair2', 'hair3', 'hair4', 'hair5', 'hair6'];
 var shirtArr = ['shirt1', 'shirt2', 'shirt3', 'shirt4', 'shirt5'];
-var hairTint = '0x002aff';
-var skinTint = '0xdc9556';
-
-//var hairIndex = hairArr.findIndex(hair);
-//var shirtIndex = shirtArr.findIndex(userBody);
-var hairIndex = 0;
-var shirtIndex = 0;
+var hairTint = "0x002aff";
+var skinTint = "0xdc9556";
 
 var character;
 
@@ -81,7 +73,6 @@ function preload() {
     game.load.image('shirt3', 'Images/character/shirt3.png');
     game.load.image('shirt4', 'Images/character/shirt4.png');
     game.load.image('shirt5', 'Images/character/shirt5.png');
-
 }
 
 function create() {
@@ -266,18 +257,14 @@ function looksgoodBtn() {
                     body: shirtArr[shirtIndex],
                     skin: skinTint
                 }).then(function() {
-                    //alert("Update data successful.");
+                    alert("Update data successful.");
                 }).catch(function(error) {
-                    //alert("Update data failed.");
+                    alert("Update data failed.");
                 });
             }
     });	
 
-    game.time.events.add(200, function() {
-        window.location.href = "game.html";
-    });
-
-    
+    window.location.href = "game.html";
 }
 
 function backBtn() {
