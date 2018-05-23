@@ -320,7 +320,7 @@ function tapOnLogo(logo) {
     
     if(logo.taps < 0) {
         baseInterval =  750;
-        logo.kill();
+        logo.destroy();
         game.sound.play('albertlaugh');
         logo = game.add.image(5, 1675, "easteregg");
     }
@@ -367,7 +367,7 @@ function minigameSprinkler() {
                 this.sprinkler.animations.play('on', 30, true);
                 this.health += 8;
             } else {
-                this.sprinkler.animations.add('on', [6]);
+                this.sprinkler.animations.add('on', [5, 6]);
                 this.sprinkler.animations.play('on', 30, true);
             }
         },
@@ -564,7 +564,31 @@ function minigameSprinkler() {
         }
     }, this);
 
+     function destroyAll() {
+        house1.sprinkler.kill();
+        house1.status.kill();
+        sprinklerSound1.stop();
+        sprinklerSound1.destroy();
 
+        house2.sprinkler.kill();
+        house2.status.kill();
+        sprinklerSound2.stop();
+        sprinklerSound2.destroy();
+
+        house3.sprinkler.kill();
+        house3.status.kill();
+        sprinklerSound3.stop();
+        sprinklerSound3.destroy();
+
+        house4.sprinkler.kill();
+        house4.status.kill();
+        sprinklerSound4.stop();
+        sprinklerSound4.destroy();
+                
+        sprinklerBackground.kill();
+        sprinklerHealthBar.kill();
+    }
+    
 
     // The overall loop that reduces the grass health
     game.time.events.loop(Phaser.Timer.SECOND, function() {
@@ -594,29 +618,7 @@ function minigameSprinkler() {
             if (!alreadyDone) {
                 console.log("fail condition");
                 alreadyDone = true;
-                house1.sprinkler.kill();
-                house1.status.kill();
-                sprinklerSound1.stop();
-                sprinklerSound1.destroy();
-
-                house2.sprinkler.kill();
-                house2.status.kill();
-                sprinklerSound2.stop();
-                sprinklerSound2.destroy();
-
-                house3.sprinkler.kill();
-                house3.status.kill();
-                sprinklerSound3.stop();
-                sprinklerSound3.destroy();
-
-                house4.sprinkler.kill();
-                house4.status.kill();
-                sprinklerSound4.stop();
-                sprinklerSound4.destroy();
-                
-                sprinklerBackground.kill();
-                sprinklerHealthBar.kill();
-
+                destroyAll();
 
                 game.sound.play('timesupSound');
 
@@ -679,29 +681,7 @@ function minigameSprinkler() {
             console.log("win condition");
 
             alreadyDone = true;
-            
-            house1.sprinkler.kill();
-            house1.status.kill();
-            sprinklerSound1.stop();
-            sprinklerSound1.destroy();
-
-            house2.sprinkler.kill();
-            house2.status.kill();
-            sprinklerSound2.stop();
-            sprinklerSound2.destroy();
-
-            house3.sprinkler.kill();
-            house3.status.kill();
-            sprinklerSound3.stop();
-            sprinklerSound3.destroy();
-
-            house4.sprinkler.kill();
-            house4.status.kill();
-            sprinklerSound4.stop();
-            sprinklerSound4.destroy();
-                
-            sprinklerBackground.kill();
-            sprinklerHealthBar.kill();
+            destroyAll();
             
             game.sound.play('timesupSound');
 
@@ -728,29 +708,8 @@ function minigameSprinkler() {
         } else {
             if (!alreadyDone) {
                 alreadyDone = true;
+                destroyAll();
                 
-                house1.sprinkler.kill();
-                house1.status.kill();
-                sprinklerSound1.stop();
-                sprinklerSound1.destroy();
-
-                house2.sprinkler.kill();
-                house2.status.kill();
-                sprinklerSound2.stop();
-                sprinklerSound2.destroy();
-
-                house3.sprinkler.kill();
-                house3.status.kill();
-                sprinklerSound3.stop();
-                sprinklerSound3.destroy();
-
-                house4.sprinkler.kill();
-                house4.status.kill();
-                sprinklerSound4.stop();
-                sprinklerSound4.destroy();
-                
-                sprinklerBackground.kill();
-                sprinklerHealthBar.kill();
                 game.sound.play('successSound');
 
                 var success = game.add.image(540, 850, 'success');
@@ -772,8 +731,7 @@ function minigameSprinkler() {
                 }, this);
             }
         }
-    }, this);
-
+    } , this);
 }
 
 // FAUCET MINIGAME
@@ -812,6 +770,7 @@ function minigameFaucet() {
         if (faucetBoss.health > 0) {
             faucetBoss.destroy();
             faucetHealthBar.kill();
+             overlay.destroy();
             
             game.sound.play('timesupSound');
 
@@ -819,7 +778,7 @@ function minigameFaucet() {
             timesup.anchor.setTo(0.5, 0.5);
             
             game.time.events.add(Phaser.Timer.SECOND * 1, function() {
-                timesup.kill();
+                timesup.destroy();
                 if (health <= 20) {
                     health = 0;
                 } else {
@@ -848,7 +807,7 @@ function minigameFaucet() {
         } else {
             faucetBoss.destroy();
             faucetHealthBar.kill();
-            overlay.kill();
+            overlay.destroy();
             game.sound.play('successSound');
 
             var success = game.add.image(540, 850, 'success');
@@ -963,11 +922,11 @@ function minigameShower() {
                 status.loadTexture('ok');
                 console.log("win");
                 game.time.events.add(Phaser.Timer.SECOND * 2, function() {
-                    showerBackground.kill();
-                    marker.kill();
+                    showerBackground.destroy();
+                    marker.destroy();
                     showerHealthBar.kill();
-                    showerSpeechBubble.kill();
-                    status.kill();
+                    showerSpeechBubble.destroy();
+                    status.destroy();
                     
                     showerSound.pause();
                     game.sound.play('successSound');
@@ -976,7 +935,7 @@ function minigameShower() {
                     success.anchor.setTo(0.5, 0.5);
 
                     game.time.events.add(Phaser.Timer.SECOND * 1, function() {
-                        success.kill();
+                        success.destroy();
                         
                         if (health > 80) {
                             health = 100;
@@ -996,10 +955,10 @@ function minigameShower() {
                 
                 game.time.events.add(Phaser.Timer.SECOND * 2, function() {
                     marker.kill();
-                    showerBackground.kill();
+                    showerBackground.destroy();
                     showerHealthBar.kill();
-                    showerSpeechBubble.kill();
-                    status.kill();
+                    showerSpeechBubble.destroy();
+                    status.destroy();
                     
                     showerSound.pause();
                     game.sound.play('timesupSound');
@@ -1008,7 +967,7 @@ function minigameShower() {
                     toolong.anchor.setTo(0.5, 0.5);
 
                     game.time.events.add(Phaser.Timer.SECOND * 1, function() {
-                        toolong.kill();
+                        toolong.destroy();
                         
                         if (health <= 20) {
                             health = 0;

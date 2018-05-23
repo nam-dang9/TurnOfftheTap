@@ -9,56 +9,81 @@ var load = {
         logo.anchor.setTo(0.5, 0.5);
         logo.scale.setTo(2, 2);
         
-        game.load.image('banner', 'Images/Banner.png');
-        game.load.image('bannerDark', 'Images/Banner-Dark.png');
-        game.load.image('bannerLong', 'Images/Banner-Long.png');
-        game.load.image('bannerLight', 'Images/banner-Light.png');
-        game.load.image('healthBar', 'Images/HealthBar.png');
-        game.load.image('healthBarData', 'Images/HealthBar-Health.png');
-        game.load.image('healthDisplayBanner', 'Images/HealthDisplayBanner.png');
-        game.load.image('charDisplayBanner', 'Images/charDisplayBanner.png');
+        // General
         game.load.image('map', 'Images/Map.png');
-        game.load.image('bannerHidden', 'Images/HiddenBanner.png');
-        game.load.image('bannerInput', 'Images/InputBanner.png');
         game.load.image('logo', 'Images/TurnOfftheTap Logo1.png');
         game.load.image('water', 'Images/Water.png');
         game.load.image('waterDrop', 'Images/Waterdrop.png');
-        game.load.image('tutorialBanner', 'Images/tutorialbanner.png');
         game.load.image('easteregg', 'Images/easteregg.png');
         game.load.image('gameover', 'Images/gameover.png');
         game.load.image('score', 'Images/score.png');
         game.load.image('trophy', 'Images/trophy.png');
-        game.load.image('scoreDisplayBanner', 'Images/scoredisplaybanner.png');
         game.load.image('overlay', 'Images/overlay.png');
-        game.load.image('timesup', 'Images/timesup.png');
-        game.load.image('success', 'Images/success.png');
         
-        // Buttons
-        game.load.image('backBtn', 'Images/Btn-Back.png');
-        game.load.image('customizeBtn', 'Images/Btn-CustomizeIcon.png');
-        game.load.image('homeBtn', 'Images/Btn-HomeIcon.png');
-        game.load.image('settingsBtn', 'Images/Btn-SettingsIcon.png');
-        game.load.image('letsgoBtn', 'Images/btn-letsgo.png');
-        game.load.image('replay', 'Images/btn-replay.png');
-        game.load.image('pause', 'Images/btn-pause.png');
-        game.load.image('unpause', 'Images/btn-unpause.png');
-        game.load.image('twitterIcon', 'Images/btn-twitter.png');
+        // Banners
+        game.load.image('banner', 'Images/banners/Banner.png');
+        game.load.image('bannerDark', 'Images/banners/Banner-Dark.png');
+        game.load.image('bannerLong', 'Images/banners/Banner-Long.png');
+        game.load.image('bannerLight', 'Images/banners/banner-Light.png');
+        game.load.image('healthDisplayBanner', 'Images/banners/HealthDisplayBanner.png');
+        game.load.image('charDisplayBanner', 'Images/banners/charDisplayBanner.png');
+        game.load.image('bannerHidden', 'Images/banners/HiddenBanner.png');
+        game.load.image('tutorialBanner', 'Images/banners/tutorialbanner.png');
+        game.load.image('scoreDisplayBanner', 'Images/banners/scoredisplaybanner.png');
         
-        // Event bubbles
-        game.load.image('shower', 'Images/shower.png');
-        game.load.image('faucet', 'Images/faucet.png');
-        game.load.image('carwash', 'Images/carwash.png');
-        game.load.image('sprinkler', 'Images/sprinkler.png');
-        game.load.image('bathtub', 'Images/bathtub.png');
-        game.load.image('minigameSprinkler', 'Images/minigameSprinkler.png');
-        game.load.image('minigameShower', 'Images/minigameShower.png');
-        game.load.image('minigameFaucet', 'Images/minigameFaucet.png');
+        // Btns
+        game.load.image('backBtn', 'Images/btns/Btn-Back.png');
+        game.load.image('customizeBtn', 'Images/btns/Btn-CustomizeIcon.png');
+        game.load.image('homeBtn', 'Images/btns/Btn-HomeIcon.png');
+        game.load.image('settingsBtn', 'Images/btns/Btn-SettingsIcon.png');
+        game.load.image('letsgoBtn', 'Images/btns/btn-letsgo.png');
+        game.load.image('replay', 'Images/btns/btn-replay.png');
+        game.load.image('pause', 'Images/btns/btn-pause.png');
+        game.load.image('unpause', 'Images/btns/btn-unpause.png');
+        game.load.image('twitterIcon', 'Images/btns/btn-twitter.png');
+        
+        // Bubbles
+        game.load.image('shower', 'Images/bubbles/shower.png');
+        game.load.image('faucet', 'Images/bubbles/faucet.png');
+        game.load.image('carwash', 'Images/bubbles/carwash.png');
+        game.load.image('sprinkler', 'Images/bubbles/sprinkler.png');
+        game.load.image('bathtub', 'Images/bubbles/bathtub.png');
+        game.load.image('minigameSprinkler', 'Images/bubbles/minigameSprinkler.png');
+        game.load.image('minigameShower', 'Images/bubbles/minigameShower.png');
+        game.load.image('minigameFaucet', 'Images/bubbles/minigameFaucet.png');
+        
+        // endBanners    
+        game.load.image('timesup', 'Images/endBanners/timesup.png');
+        game.load.image('success', 'Images/endBanners/success.png');
+        game.load.image('showeredtoolong', 'Images/endBanners/showeredtoolong.png');
+        game.load.image('overwatered', 'Images/endBanners/overwatered.png');
         
         // Character
         game.load.image('body', 'Images/character/body.png');
         game.load.image('face', 'Images/character/face.png');
         game.load.image('hair', 'Images/character/' + hair + '.png');
         game.load.image('shirt', 'Images/character/' + userBody + '.png');
+        
+        // Faucet Minigame Assets
+        game.load.spritesheet('faucetBoss', 'Images/sprites/faucetBoss-spritesheet.png', 105, 140, 16);
+        game.load.image('faucetBackground', 'Images/faucetMinigame/faucetminigameBackground.png');
+        
+        // Sprinkler Minigame Assets
+        game.load.image('sprinklerBackground', 'Images/sprinklerMinigame/sprinklerminigameBackground.png');
+        game.load.image('needswater', 'Images/sprinklerMinigame/needswater.png');
+        game.load.image('reallyneedswater', 'Images/sprinklerMinigame/reallyneedswater.png');
+        game.load.image('haswater', 'Images/sprinklerMinigame/haswater.png');
+        game.load.image('toomuchwater', 'Images/sprinklerMinigame/toomuchwater.png');
+        game.load.spritesheet('sprinklerBoss', 'Images/sprites/sprinklerBoss-spritesheet.png', 288, 265, 7);
+        game.load.image('nothing', 'Images/nothing.png');
+        
+        // Shower Minigame Assets
+        game.load.image('showerBackground', 'Images/showerMinigame/showerminigameBackground.png');
+        game.load.image('showering', 'Images/showerMinigame/showering.png');
+        game.load.image('ok', 'Images/showerMinigame/ok.png');
+        game.load.image('no', 'Images/showerMinigame/no.png');
+        game.load.image('marker', 'Images/showerMinigame/marker.png');
+        game.load.image('dontshowertoolong', 'Images/showerMinigame/dontshowertoolong.png');
         
         // Sounds
         game.load.audio('pop', 'sounds/pop.wav');
@@ -73,29 +98,6 @@ var load = {
         game.load.audio('knock', 'sounds/knock.wav');
         game.load.audio('okaySound', 'sounds/okay.wav');
         game.load.audio('noSound', 'sounds/no.wav');
-        
-        // Faucet Minigame Assets
-        game.load.spritesheet('faucetBoss', 'Images/sprites/faucetBoss-spritesheet.png', 105, 140, 16);
-        game.load.image('faucetBackground', 'Images/faucetminigameBackground.png');
-        
-        // Sprinkler Minigame Assets
-        game.load.image('sprinklerBackground', 'Images/sprinklerminigameBackground.png');
-        game.load.image('needswater', 'Images/needswater.png');
-        game.load.image('reallyneedswater', 'Images/reallyneedswater.png');
-        game.load.image('haswater', 'Images/haswater.png');
-        game.load.image('toomuchwater', 'Images/toomuchwater.png');
-        game.load.image('overwatered', 'Images/overwatered.png');
-        game.load.spritesheet('sprinklerBoss', 'Images/sprites/sprinklerBoss-spritesheet.png', 288, 265, 7);
-        game.load.image('nothing', 'Images/nothing.png');
-        
-        // Shower Minigame Assets
-        game.load.image('showerBackground', 'Images/showerminigameBackground.png');
-        game.load.image('showering', 'Images/showering.png');
-        game.load.image('ok', 'Images/ok.png');
-        game.load.image('no', 'Images/no.png');
-        game.load.image('marker', 'Images/marker.png');
-        game.load.image('showeredtoolong', 'Images/showeredtoolong.png');
-        game.load.image('dontshowertoolong', 'Images/dontshowertoolong.png');
         
     },
     
