@@ -55,7 +55,7 @@ function looksgoodBtn() {
             }
     });	
 
-    game.time.events.add(200, function() {
+    game.time.events.add(300, function() {
         window.location.href = "game.html";
     });
 

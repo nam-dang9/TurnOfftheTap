@@ -64,6 +64,8 @@ function readData() {
                     userHairColor = '0x002aff';
                     userSkin = '0xdc9556';
 
+                    loadedData = true;
+
                     console.log("No such doc!");
                 }
 

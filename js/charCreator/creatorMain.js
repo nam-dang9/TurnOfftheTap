@@ -19,8 +19,8 @@ var creatorMain = {
         game.load.image('arrowRight', 'Images/btns/Arrow-Right.png');
         game.load.image('banner', 'Images/banners/banner-Light.png');
         game.load.image('displayBanner', 'Images/banners/banner-charDisplay.png');
-        game.load.image('looksgood', 'Images/btns/btn-LooksGood.png');
-        game.load.image('back', 'Images/btns/btn-Back.png');
+        game.load.image('looksgood', 'Images/btns/Btn-LooksGood.png');
+        game.load.image('back', 'Images/btns/Btn-Back.png');
         
         game.load.image('body', 'Images/character/body.png');
         game.load.image('face', 'Images/character/face.png');

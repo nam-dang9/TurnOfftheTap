@@ -47,7 +47,7 @@ function sign_Up(){
 //				console.log("display name: " + txtName.value);
 				
 				
-           firebase.auth().createUserWithEmailAndPassword(email,password)
+        firebase.auth().createUserWithEmailAndPassword(email,password)
 			.then(function(user) {
 			   console.log("signup sucessfully");  
 		   }).catch(function(error){
@@ -84,10 +84,10 @@ function after_signUp(){
 				db.collection("Users").doc(uid).set({
 				email: email,
 				displayName: dpName,
-				hair: "demo",
-				body: "demo",
-				hairColor: "demo",
-				skin: "demo",
+				hair: "hair1",
+				body: "shirt1",
+				hairColor: "0x002aff",
+				skin: "0xdc9556",
 				scores: 0
 			}).then(function() {
 //				console.log("Document successfully written on db !");
