@@ -1,6 +1,7 @@
 // SHOWER MINIGAME
 // Bubble position: 540, 690
 function minigameShower() {
+    pauseTime();
     var clicked = false;
     var showerSound = game.add.audio('showerSound');
     showerSound.play();
@@ -36,8 +37,8 @@ function minigameShower() {
     
     var showerHealthSpeed = (Math.random() * 10) + 15;
     // Wait for the health to go to 0 first
-    var loop = game.time.events.add(Phaser.Timer.SECOND, function() {
-        game.time.events.loop(10, function() {
+    var loop = minigameTimer.add(Phaser.Timer.SECOND, function() {
+        minigameTimer.loop(10, function() {
             if (!clicked) {
                if (showerHealthBar.health >= 1080) {
                     showerHealthSpeed *= -1;
@@ -71,13 +72,13 @@ function minigameShower() {
         game.sound.play('knock');
         showerSpeechBubble = game.add.image(-50, 1200, 'dontshowertoolong');
     
-        game.time.events.add(Phaser.Timer.SECOND * 1.1, function() {
+        minigameTimer.add(Phaser.Timer.SECOND * 1.1, function() {
             if (showerHealthBar.health - marker.worldPosition.x >= -35 && 
                 showerHealthBar.health - marker.worldPosition.x <= 35) {
                 game.sound.play('okaySound');
                 status.loadTexture('ok');
                 console.log("win");
-                game.time.events.add(Phaser.Timer.SECOND * 2, function() {
+                minigameTimer.add(Phaser.Timer.SECOND * 2, function() {
                     showerBackground.destroy();
                     marker.destroy();
                     showerHealthBar.kill();
@@ -90,7 +91,7 @@ function minigameShower() {
                     var success = game.add.image(540, 850, 'success');
                     success.anchor.setTo(0.5, 0.5);
 
-                    game.time.events.add(Phaser.Timer.SECOND * 1, function() {
+                    minigameTimer.add(Phaser.Timer.SECOND * 1, function() {
                         success.destroy();
                         
                         if (health > 80) {
@@ -101,7 +102,8 @@ function minigameShower() {
                         score += 50;
                         scoreDisplay.text = score;
                         minigame = false;
-                        spawnBubbles();
+                        unpauseTime();
+                        //spawnBubbles();
                     }, this);
                 }, this);
             } else {
@@ -109,7 +111,7 @@ function minigameShower() {
                 game.sound.play('noSound');
                 console.log("lose");
                 
-                game.time.events.add(Phaser.Timer.SECOND * 2, function() {
+                minigameTimer.add(Phaser.Timer.SECOND * 2, function() {
                     marker.kill();
                     showerBackground.destroy();
                     showerHealthBar.kill();
@@ -122,7 +124,7 @@ function minigameShower() {
                     var toolong = game.add.image(540, 850, 'showeredtoolong');
                     toolong.anchor.setTo(0.5, 0.5);
 
-                    game.time.events.add(Phaser.Timer.SECOND * 1, function() {
+                    minigameTimer.add(Phaser.Timer.SECOND * 1, function() {
                         toolong.destroy();
                         
                         if (health <= 20) {
@@ -137,7 +139,8 @@ function minigameShower() {
                         }
                         scoreDisplay.text = score;
                         minigame = false;
-                        spawnBubbles();
+                        unpauseTime();
+                        //spawnBubbles();
                     }, this);
                 }, this);
             }

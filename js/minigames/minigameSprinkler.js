@@ -4,6 +4,7 @@
 // House 3: Bubble = 188, 990, Sprinkler = 370, 1110
 // House 4: Bubble = 910, 990, Sprinkler = 720, 1310
 function minigameSprinkler() {
+    pauseTime();
     var sprinklerBackground = game.add.image(0, 0, 'sprinklerBackground');
     var alreadyDone = false;
     
@@ -261,7 +262,7 @@ function minigameSprinkler() {
     
 
     // The overall loop that reduces the grass health
-    game.time.events.loop(Phaser.Timer.SECOND, function() {
+    minigameTimer.loop(Phaser.Timer.SECOND, function() {
         house1.status.anchor.setTo(0.5, 0.5);
         house1.health -= 3;
         house1.sprinklerOn();
@@ -293,7 +294,7 @@ function minigameSprinkler() {
                 var overwatered = game.add.image(540, 850, 'overwatered');
                 overwatered.anchor.setTo(0.5, 0.5);
  
-                game.time.events.add(Phaser.Timer.SECOND * 1, function() {
+                minigameTimer.add(Phaser.Timer.SECOND * 1, function() {
                     overwatered.kill();
                     if (health <= 20) {
                         health = 0;
@@ -308,7 +309,8 @@ function minigameSprinkler() {
                     scoreDisplay.text = score;
                     healthDisplay.text = Math.round(health) + ' / 100';
                     minigame = false;
-                    spawnBubbles();
+                    unpauseTime();
+                    //spawnBubbles();
                 }, this);
                 this.stop();   
             }
@@ -317,7 +319,7 @@ function minigameSprinkler() {
 
 
     // The overall timer of the minigame 
-    game.time.events.add(Phaser.Timer.SECOND * 12.5, function() {
+    minigameTimer.add(Phaser.Timer.SECOND * 12.5, function() {
         if (sprinklerHealthBar.health <= 0 & !alreadyDone) {
             alreadyDone = true;
             destroyAll();
@@ -327,7 +329,7 @@ function minigameSprinkler() {
             var overwatered = game.add.image(540, 850, 'overwatered');
             overwatered.anchor.setTo(0.5, 0.5);
             
-            game.time.events.add(Phaser.Timer.SECOND * 1, function() {
+            minigameTimer.add(Phaser.Timer.SECOND * 1, function() {
                 overwatered.kill();
                 if (health <= 20) {
                     health = 0;
@@ -342,7 +344,8 @@ function minigameSprinkler() {
                 scoreDisplay.text = score;
                 healthDisplay.text = Math.round(health) + ' / 100';
                 minigame = false;
-                spawnBubbles();
+                unpauseTime();
+                //spawnBubbles();
             }, this);
         } else {
             if (!alreadyDone) {
@@ -354,7 +357,7 @@ function minigameSprinkler() {
                 var success = game.add.image(540, 850, 'success');
                 success.anchor.setTo(0.5, 0.5);
  
-                game.time.events.add(Phaser.Timer.SECOND * 1, function() {
+                minigameTimer.add(Phaser.Timer.SECOND * 1, function() {
                     success.kill();
                     if (health > 80) {
                         health = 100;
@@ -365,7 +368,8 @@ function minigameSprinkler() {
                     scoreDisplay.text = score;
                     healthDisplay.text = Math.round(health) + ' / 100';
                     minigame = false;
-                    spawnBubbles();
+                    unpauseTime();
+                    //spawnBubbles();
                 }, this);
             }
         }

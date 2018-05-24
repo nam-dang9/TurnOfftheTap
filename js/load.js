@@ -10,6 +10,7 @@ var load = {
         
         // General
         game.load.image('map', 'Images/Map.png');
+        game.load.image('snowMap', 'Images/Map-Snow.png');
         game.load.image('logo', 'Images/TurnOfftheTap Logo1.png');
         game.load.image('water', 'Images/Water.png');
         game.load.image('waterDrop', 'Images/Waterdrop.png');
@@ -18,6 +19,7 @@ var load = {
         game.load.image('score', 'Images/score.png');
         game.load.image('trophy', 'Images/trophy.png');
         game.load.image('overlay', 'Images/overlay.png');
+        game.load.image('particle', 'Images/waterParticle.png');
         
         // Banners
         game.load.image('banner', 'Images/banners/Banner.png');
