@@ -97,7 +97,7 @@ function after_signUp(){
 			});	
 			
 			setTimeout(function() {
-				window.location.href = "login.html"}, 200);
+				window.location.href = "login.html"}, 500);
 		}
 	});	
 }
