@@ -9,7 +9,7 @@ var db = firebase.firestore();
 const list_div = document.querySelector("#list_div");
 
 // Set Top 3 in the list with DESC order
-db.collection("Users").orderBy("scores").limit(10).onSnapshot(function(snapshot) {
+db.collection("Users").orderBy("scores", "desc").limit(10).onSnapshot(function(snapshot) {
     snapshot.docChanges.forEach(function(change) {
 
     if(change.type == "added"){
@@ -39,7 +39,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       login_Detail.innerHTML += "User Email: " + email; 
   } else {
     //Console for testing. 
-    console.log("No user is signed in.");
-    login_Detail.innerHTML += "No user is signed in.";
+//    console.log("No user is signed in.");
+//    login_Detail.innerHTML += "No user is signed in.";
   }
 });
