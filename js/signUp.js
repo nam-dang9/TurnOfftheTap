@@ -19,8 +19,9 @@ const db = firebase.firestore();
 	var notLogin = document.getElementById("notLoginIn");
 	var logOutBtn = document.getElementById("hidebtn");
 	var btnSignUp = document.getElementById("btnSignUp");
+
     
-function sign_Up(){
+function start_signUp(){
 	
 		if(txtEmail.value ==""){
 			console.log("Please enter Email");
@@ -95,18 +96,29 @@ function after_signUp(){
 			}).catch(function(error){
 				console.log("Document is not successfully written on db !",error); 
 			});	
-			
 			setTimeout(function() {
 				window.location.href = "login.html"}, 500);
+
 		}
+
 	});	
 }
+
+//
+//function redirectPage(){
+//	
+//	window.location.href = "logIn.html";
+//}
 
 
 firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
-//            window.location.href = "login.html";
+			
+		setTimeout(function() {
+				window.location.href = "login.html"}, 300);
+
 		} else {
+			
 			logOutBtn.style.display = "none";
 			console.log("Not log in yet.")
 
