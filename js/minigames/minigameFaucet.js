@@ -35,7 +35,6 @@ function minigameFaucet() {
             faucetBoss.kill();
             faucetHealthBar.kill();
              overlay.destroy();
-            
             game.sound.play('timesupSound');
             
             var timesup = game.add.image(540, 850, 'timesup');
