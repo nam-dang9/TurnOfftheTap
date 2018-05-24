@@ -210,14 +210,14 @@ var main = {
 
         game.debug.font = "35px Arial";
 
-        var minutes = Math.floor(timer / 60000);
+        // var minutes = Math.floor(timer / 60000);
 
-        game.debug.text("Time: " + minutes + ":" + (Math.floor(timer / 1000) - (minutes * 60)), 530, 500, "yellow");
-        game.debug.text("Spawn Interval: " + Math.round(spawnInterval) / 1000, 530, 250, "cyan");
-        game.debug.text("Difficulty: " + difficulty, 530, 300, "yellow");
-        game.debug.text("Spawn Ratios: " + Math.round(debugSpawn1 * 100) + " : " + Math.round(debugSpawn2 * 100) + " : " + Math.round(debugSpawn3 * 100), 530, 350, "yellow");
-        game.debug.text("Roll: " + Math.round(debugRand * 100), 530, 400, "yellow");
-        game.debug.text("isWinter:" + winter, 530, 450, "yellow");
+        // game.debug.text("Time: " + minutes + ":" + (Math.floor(timer / 1000) - (minutes * 60)), 530, 500, "yellow");
+        // game.debug.text("Spawn Interval: " + Math.round(spawnInterval) / 1000, 530, 250, "cyan");
+        // game.debug.text("Difficulty: " + difficulty, 530, 300, "yellow");
+        // game.debug.text("Spawn Ratios: " + Math.round(debugSpawn1 * 100) + " : " + Math.round(debugSpawn2 * 100) + " : " + Math.round(debugSpawn3 * 100), 530, 350, "yellow");
+        // game.debug.text("Roll: " + Math.round(debugRand * 100), 530, 400, "yellow");
+        // game.debug.text("isWinter:" + winter, 530, 450, "yellow");
 
     }
 
