@@ -19,6 +19,7 @@ var load = {
         game.load.image('score', 'Images/score.png');
         game.load.image('trophy', 'Images/trophy.png');
         game.load.image('overlay', 'Images/overlay.png');
+        game.load.image('particle', 'Images/waterParticle.png');
         
         // Banners
         game.load.image('banner', 'Images/banners/Banner.png');

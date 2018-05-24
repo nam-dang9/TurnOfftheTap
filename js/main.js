@@ -173,6 +173,14 @@ var main = {
         spawnBubbles();
 
         game.time.events.add(seasonDuration, changeSeason);
+
+        emitter = game.add.emitter(0, 0, 50);
+        emitter.makeParticles('particle');
+        emitter.setScale(1, 2, 1, 2);
+        emitter.setAlpha(1, 0.2, 400);
+        emitter.setXSpeed(-400, 400);
+        emitter.setYSpeed(-150, 500);
+        emitter.gravity = 600;
     },
 
     update: function () {
@@ -249,6 +257,12 @@ function tapOnBubble(bubble) {
                 bubble.healthBar.kill();
             }
 
+
+            emitter.x = bubble.x;
+            emitter.y = bubble.y;
+            emitter.explode(400, 30);
+
+
             bubble.destroy();
 
             if (bubbleNames.includes(bubble.type)) {
@@ -258,6 +272,14 @@ function tapOnBubble(bubble) {
 
         }
     }
+}
+
+function onTap(bubble) {
+    bubble.scale.setTo(.8);
+}
+
+function onRelease(bubble) {
+    bubble.scale.setTo(1);
 }
 
 function createBubble() {
@@ -291,6 +313,8 @@ function createBubble() {
     bubble.anchor.setTo(0.5, 0.5);
     bubble.inputEnabled = true;
     bubble.events.onInputDown.add(tapOnBubble, this);
+    bubble.events.onInputDown.add(onTap, this);
+    bubble.events.onInputUp.add(onRelease, this);
     if (minigameNames.includes(bubble.type)) {
         bubble.health = 1;
     } else {
