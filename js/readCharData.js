@@ -76,6 +76,11 @@ function readData() {
             });
 
         } else {
+            userBody = 'shirt1';
+                    hair = 'hair6';
+                    userHairColor = '0x002aff';
+                    userSkin = '0xdc9556';
+            loadedData = true;
             console.log("Cannot read the data from the db");
         }
     });
