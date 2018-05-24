@@ -19,7 +19,7 @@ db.collection("Users").orderBy("scores").limit(10).onSnapshot(function(snapshot)
         var limitScore =change.doc.data().scores;
 
        list_div.innerHTML += "<div class='list-name'><p1>Name: " + limitUser + "</p1></div>"
-       list_div.innerHTML += "<div class='list-score'><p2>Scores: " + limitScore + "</p2></div>"
+       list_div.innerHTML += "<div class='list-score'><p2>Score: " + limitScore + "</p2></div><br />"
     }
     });
 

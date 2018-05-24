@@ -114,6 +114,11 @@ canvas {
     display: inline-block;
 }
 
+#loggedIn, #notloggedIn {
+    width: 100%;
+    height: auto;
+}
+
 #loginCharDisplay {
     visibility: hidden;
     width: 200px;
@@ -136,6 +141,23 @@ canvas {
 
 #tut2, #tut3, #tut4, #tut5, #tut6 {
     display: none;
+}
+
+#errMsg {
+    color: #db1561;
+}
+
+#counterbody {
+    overflow: auto;
+}
+
+#login_Detail, #list_div {
+    font-family: Pixelate;
+}
+
+.list-name {
+    color: #db1561;
+    font-weight: bold;
 }
 
 /******* MEDIA QUERIES *******/
@@ -357,6 +379,10 @@ canvas {
     .indexBtnSmall {
         width: 7%;
     }
+    
+    #login_Detail, #list_div {
+        font-size: 30px;
+    }
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -404,6 +430,10 @@ canvas {
     .indexBtnSmall {
         width: 5%;
     }
+    
+    #login_Detail, #list_div {
+        font-size: 25px;
+    }
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -449,6 +479,10 @@ canvas {
     
     .indexBtnSmall {
         width: 4%;
+    }
+    
+    #login_Detail, #list_div {
+        font-size: 15px;
     }
     
 }
