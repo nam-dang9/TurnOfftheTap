@@ -21,10 +21,10 @@ firebase.auth().onAuthStateChanged(function(user) {
     loginBtns.style.visibility = "visible";
     loginCharDisplay.style.visibility = "visible";
     logIn.style.display = "block";
-    document.getElementById("loggedIn").style.display = "block";
+    document.getElementById("loggedIn").style.display = "inline-block";
 
   } else {
-   document.getElementById("notLoggedIn").style.display = "block";
+   document.getElementById("notLoggedIn").style.display = "inline-block";
     hide.style.display = "block";
 
   }
@@ -33,7 +33,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 function logOut(){
     firebase.auth().signOut();
 	// chnage the URL page.
-    window.location.href = 'logIn.html';
+    window.location.href = 'index.html';
 };
 
 

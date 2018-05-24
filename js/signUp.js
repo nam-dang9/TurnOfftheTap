@@ -101,15 +101,7 @@ function after_signUp(){
 
 firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
-			btnSignUp.style.display = "none";
-			notLogin.style.display ="none";
-    		console.log("logged In");
-			console.log(user);
-			name = user.displayName;
-    		email = user.email;
-    		var checkName = (name != "null")?  name: "Welcome!";
-    		loginUser.innerHTML += checkName + "</br>";
-    		loginUser.innerHTML += "Email: " + email + "</br>";
+            window.location.href = "login.html";
 		} else {
 			logOutBtn.style.display = "none";
 			console.log("Not log in yet.")
@@ -122,6 +114,6 @@ firebase.auth().onAuthStateChanged(function(user) {
 function log_out(){
 	firebase.auth().signOut();
 	// chnage the URL page.
-    window.location.href = 'signUp.html';
+    window.location.href = 'index.html';
 }
 	   
