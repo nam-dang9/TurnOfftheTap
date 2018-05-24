@@ -96,9 +96,6 @@ function after_signUp(){
 			}).catch(function(error){
 				console.log("Document is not successfully written on db !",error); 
 			});	
-			setTimeout(function() {
-				window.location.href = "login.html"}, 500);
-
 		}
 
 	});	
