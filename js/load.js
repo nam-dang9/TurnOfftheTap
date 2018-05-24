@@ -10,6 +10,7 @@ var load = {
         
         // General
         game.load.image('map', 'Images/Map.png');
+        game.load.image('snowMap', 'Images/Map-Snow.png');
         game.load.image('logo', 'Images/TurnOfftheTap Logo1.png');
         game.load.image('water', 'Images/Water.png');
         game.load.image('waterDrop', 'Images/Waterdrop.png');

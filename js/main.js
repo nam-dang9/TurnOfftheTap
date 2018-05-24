@@ -1,15 +1,23 @@
+var winter = false;
+var seasonDuration = 25000;
+var summerInterval = 1000;
+var winterInterval = 1200;
+var winterRegen = 0.04;
+var summerRegen = 0.02;
+
 var healthDisplay;
 var health = 100;
-var healthRegen = 0.05;
+var healthRegen = summerRegen;
+var healthBar;
 
 var score = 0;
 var scoreDisplay;
 var startTime;
-var baseInterval = 1000;
+var baseInterval = summerInterval;
 
 var difficulty = 1;
-var maxDifficulty = 50;
-var difficultyRate = 5000;
+var maxDifficulty = 100;
+var difficultyRate = 7500;
 var debugSpawn1, debugSpawn2, debugSpawn3;
 var debugRand;
 var debugCount;
@@ -35,7 +43,8 @@ var bodyTint = "0xdc9556";
 var hairTint = "0x006aff";
 
 var logo;
- 
+var map;
+var seasonDisplay;
 
 var minigame = false;
 var pause = false;
@@ -50,7 +59,11 @@ var pauseStart;
 var timer;
 
 var main = {
-    create: function() {
+    create: function () {
+
+        minigameTimer = game.time.create(false);
+
+        minigameTimer.start();
 
         startTime = Date.now();
 
@@ -58,29 +71,29 @@ var main = {
         var background = game.add.image(0, 0, 'water');
         background.height = game.height;
         background.width = game.width;
-        
+
         // Setting up UI
-        var map = game.add.image(540, 960, "map");
+        map = game.add.image(540, 960, "map");
         map.anchor.setTo(0.5, 0.5);
         map.scale.setTo(1.1, 1.1);
-         
+
         //game.add.image(-15, -25, "bannerLong"); 
-        game.add.image(-15, 1735, "bannerLong"); 
-        
+        game.add.image(-15, 1735, "bannerLong");
+
         logo = game.add.image(30, 1775, "logo");
         logo.inputEnabled = true;
         logo.events.onInputDown.add(tapOnLogo, this);
         logo.taps = 9;
-        
+
         // UI buttons
         mainPause = game.add.image(880, 1740, "pause");
         mainPause.inputEnabled = true;
         mainPause.events.onInputDown.add(pauseBtn, this);
-       
+
         mainHome = game.add.image(680, 1740, "homeBtn");
         mainHome.inputEnabled = true;
         mainHome.events.onInputDown.add(homeBtn, this);
-        
+
         // Health display
         var healthDisplayBanner = game.add.image(960, 110, "healthDisplayBanner");
         healthDisplayBanner.anchor.setTo(0.5, 0.5);
@@ -90,26 +103,57 @@ var main = {
         waterdrop.scale.setTo(0.7, 0.7);
         game.add.image(0, -40, "charDisplayBanner");
         healthDisplay = game.add.text(970, 110, health + '/100', {
-                    font: "35px Pixelate",
-                    fill: "#ffffff",
-                    align: "center"
+            font: "45px Pixelate",
+            fill: "#ffffff",
+            align: "center"
         });
         healthDisplay.anchor.setTo(0.5, 0.5);
-        
+
         // Score display
         var scoreDisplayBanner = game.add.image(600, 110, "scoreDisplayBanner");
         scoreDisplayBanner.anchor.setTo(0.5, 0.5);
         scoreDisplay = game.add.text(650, 110, score, {
-                    font: "45px Pixelate",
-                    fill: "#ffffff",
-                    align: "right"
+            font: "45px Pixelate",
+            fill: "#ffffff",
+            align: "right"
         });
         scoreDisplay.anchor.setTo(0.5, 0.5);
         var trophy = game.add.image(500, 110, "trophy");
         trophy.anchor.setTo(0.5, 0.5);
-        
+
+        // Season display
+        seasonDisplay = game.add.text(200, 450, "Summer", {
+            font: "60px Pixelate",
+            fill: "#ffffff",
+            align: "right"
+        });
+        seasonDisplay.anchor.setTo(0.5);
+
+
+        // Health Bar
+        var healthBarBanner = game.add.image(540, 1680, "bannerLong");
+        healthBarBanner.scale.setTo(0.99, 0.5);
+        healthBarBanner.anchor.setTo(0.5);
+
+        var barConfig = {
+            width: 1050,
+            height: 90,
+            x: 540,
+            y: 1680,
+            bg: {
+                color: '#1c4167'
+            },
+            bar: {
+                color: '#0d91df'
+            },
+            animationDuration: 30
+        };
+        healthBar = new HealthBar(game, barConfig);
+
+
         // Character
         character = game.add.group();
+
 
         var body = character.create(charX, charY, 'body');
         body.smoothed = false;
@@ -123,16 +167,18 @@ var main = {
         character.create(charX, charY, 'face').smoothed = false;
 
         character.scale.setTo(8);
-        
+
         bubbles = game.add.group();
-    
+
         spawnBubbles();
-        
+
+        game.time.events.add(seasonDuration, changeSeason);
     },
-    
-    update: function() {
+
+    update: function () {
+
         if (!pause && !minigame) {
-            if(health < 100) {
+            if (health < 100) {
                 health += healthRegen;
             }
 
@@ -146,25 +192,32 @@ var main = {
             // Update difficulty based on elapsed time
             timer = game.time.elapsedSince(startTime) - pausedTime;
             difficulty = Math.round(timer / difficultyRate);
+
+
+            healthBar.setPercent((health / 100) * 100);
         }
     },
 
-    render: function() {
+    render: function () {
 
-      game.debug.font = "35px Arial";   
+        game.debug.font = "35px Arial";
 
-      //var minutes = Math.round(timer/60000);
+        var minutes = Math.floor(timer / 60000);
 
-      //game.debug.text("Time: " + minutes + ":" + (Math.round(timer/1000) - (minutes*60)), 530, 200);
-      //game.debug.text("Spawn Interval: " + Math.round(spawnInterval)/1000, 530, 250);
-      //game.debug.text("Difficulty: " + difficulty, 530, 300);
-      //game.debug.text("Spawn Ratios: " + Math.round(debugSpawn1 * 100) + " : " + Math.round(debugSpawn2 * 100) + " : " + Math.round(debugSpawn3 * 100), 530, 350);
-      //game.debug.text("Roll: " + Math.round(debugRand * 100), 530, 400);
-        
+        game.debug.text("Time: " + minutes + ":" + (Math.floor(timer / 1000) - (minutes * 60)), 530, 500, "yellow");
+        game.debug.text("Spawn Interval: " + Math.round(spawnInterval) / 1000, 530, 250, "cyan");
+        game.debug.text("Difficulty: " + difficulty, 530, 300, "yellow");
+        game.debug.text("Spawn Ratios: " + Math.round(debugSpawn1 * 100) + " : " + Math.round(debugSpawn2 * 100) + " : " + Math.round(debugSpawn3 * 100), 530, 350, "yellow");
+        game.debug.text("Roll: " + Math.round(debugRand * 100), 530, 400, "yellow");
+        game.debug.text("isWinter:" + winter, 530, 450, "yellow");
 
     }
-   
+
 };
+
+function damageHealth(bubble) {
+    health -= 0.005 * bubble.health;
+}
 
 function tapOnBubble(bubble) {
     if (!pause && !minigame) {
@@ -186,23 +239,23 @@ function tapOnBubble(bubble) {
         }
 
         bubble.damage(1);
-        if(bubble.healthBar != undefined) {
+        if (bubble.healthBar != undefined) {
             bubble.healthBar.setPercent((bubble.health / bubble.maxHealth) * 100);
         }
-        
+
         if (!bubble.alive) {
 
-            if(bubble.healthBar != undefined) {
+            if (bubble.healthBar != undefined) {
                 bubble.healthBar.kill();
             }
-            
+
             bubble.destroy();
 
             if (bubbleNames.includes(bubble.type)) {
                 score += 10;
                 scoreDisplay.text = score;
             }
-            
+
         }
     }
 }
@@ -216,29 +269,29 @@ function createBubble() {
         currentBubble = Math.floor(Math.random() * bubbleNames.length);
         currentEvent = bubbleNames[currentBubble];
     }
-            
+
     // Boundary
     // x: 120 < --- < 880
     // y: 270 < --- < 1200
-            
+
     // While the x coordinate exceeds the boundaries, assign it a new value
     var currentX = Math.random() * 880 + 15;
     while (currentX > 880 || currentX < 120) {
         currentX = Math.random() * 880 + 15;
     }
-                
+
     // While the y coordinate exceeds the boundaries, assign it a new value
     var currentY = Math.random() * 1200 + 20
     while (currentY > 1200 || currentY < 500) {
         currentY = Math.random() * 1200 + 20;
     }
-            
-    bubble =  bubbles.create(currentX, currentY, currentEvent); 
+
+    bubble = bubbles.create(currentX, currentY, currentEvent);
     bubble.type = currentEvent;
     bubble.anchor.setTo(0.5, 0.5);
     bubble.inputEnabled = true;
     bubble.events.onInputDown.add(tapOnBubble, this);
-    if (minigameNames.includes(bubble.type)){
+    if (minigameNames.includes(bubble.type)) {
         bubble.health = 1;
     } else {
         bubble.health = bubble.maxHealth = bubbleHealth[bubble.type];
@@ -251,7 +304,7 @@ function createBubble() {
     var barConfig = {
         width: 100,
         height: 30,
-        x: bubble.x, 
+        x: bubble.x,
         y: bubble.y - 120,
         bg: {
             color: '#1c4167'
@@ -266,14 +319,14 @@ function createBubble() {
         bubble.healthBar = new HealthBar(game, barConfig);
         bubble.healthBar.health = bubble.health;
     }
-    
+
 }
 
 function spawnBubbles() {
     if (!pause && !minigame) {
 
-        var spawn1 = Math.pow(1.023, 1 - difficulty);
-        var spawn3 = Math.pow(1.03, difficulty - maxDifficulty) - 0.33;
+        var spawn1 = Math.pow(1.02, (1 - difficulty) / 3);
+        var spawn3 = 1 / 1.8 * Math.pow(1.02, difficulty - maxDifficulty) - 0.2;
         if (spawn3 < 0) {
             spawn3 = 0;
         }
@@ -283,14 +336,14 @@ function spawnBubbles() {
 
         var weights = [spawn1, spawn2, spawn3];
 
-        function bubbleCount(){
+        function bubbleCount() {
             var rand = Math.random();
             debugRand = rand;
             var prev = 0;
             var cur;
-            for (i=0; i < weights.length; i++) {
+            for (i = 0; i < weights.length; i++) {
                 cur = prev + weights[i];
-                if((prev < rand ) && (cur > rand)) {
+                if ((prev < rand) && (cur > rand)) {
                     return i + 1;
                 }
                 prev = cur;
@@ -299,16 +352,16 @@ function spawnBubbles() {
         }
 
         var toSpawn = bubbleCount();
-        
 
 
-        for (i = 0; i < toSpawn; i++){
+
+        for (i = 0; i < toSpawn; i++) {
             createBubble();
         }
-        
+
 
         // Set interval until next Bubble spawns
-        var adjustment = maxDifficulty * 4 * Math.log2(difficulty/10 + 1);
+        var adjustment = maxDifficulty * 3 * Math.log2(difficulty / 10 + 1);
         spawnInterval = baseInterval - adjustment;
 
 
@@ -317,27 +370,55 @@ function spawnBubbles() {
     }
 }
 
-function damageHealth(bubble) {
-    health -= 0.01 * bubble.health;
+function changeSeason() {
+
+    if (winter) {
+        winter = false;
+        baseInterval = summerInterval;
+        healthRegen = summerRegen;
+        map.loadTexture('map');
+        seasonDisplay.text = "Summer";
+        seasonDisplay.fill = "white";
+    } else {
+        winter = true;
+        baseInterval = winterInterval;
+        healthRegen = winterRegen;
+        map.loadTexture('snowMap');
+        seasonDisplay.text = "Winter";
+        seasonDisplay.fill = "black";
+    }
+
+    game.time.events.add(seasonDuration, changeSeason);
 }
 
 // EASTER EGG 
 function tapOnLogo(logo) {
     logo.taps -= 1;
-    
-    if(logo.taps < 0) {
-        baseInterval =  750;
+
+    if (logo.taps < 0) {
+        baseInterval = 750;
         logo.destroy();
         game.sound.play('albertlaugh');
         logo = game.add.image(5, 1675, "easteregg");
     }
 }
 
+function pauseTime() {
+    pauseStart = Date.now();
+    game.time.events.pause();
+    pause = true;
+}
+
+function unpauseTime() {
+    pausedTime += game.time.elapsedSince(pauseStart);
+    game.time.events.resume();
+    pause = false;
+}
+
 function pauseBtn() {
     if (!minigame && !pause) {
         game.sound.play('btn');
-        pauseStart = Date.now();
-        pause = true;
+        pauseTime();
         overlay = game.add.image(0, 0, 'overlay');
         mainHome.inputEnabled = false;
         mainPause.inputEnabled = false;
@@ -345,13 +426,12 @@ function pauseBtn() {
         unpause.anchor.setTo(0.5, 0.5);
         unpause.scale.setTo(1.7, 1.7);
         unpause.inputEnabled = true;
-        unpause.events.onInputDown.add(function() {
+        unpause.events.onInputDown.add(function () {
             game.sound.play('btn');
-            pausedTime += game.time.elapsedSince(pauseStart);
+            unpauseTime();
             overlay.kill();
             unpause.kill();
             replay.kill();
-            pause = false;
             mainHome.inputEnabled = true;
             mainPause.inputEnabled = true;
             spawnBubbles();

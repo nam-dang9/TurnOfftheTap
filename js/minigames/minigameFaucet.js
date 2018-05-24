@@ -1,4 +1,5 @@
 function minigameFaucet() {
+    pauseTime();
     overlay = game.add.image(0, 0, 'faucetBackground');
     
     // Health bar
@@ -29,7 +30,7 @@ function minigameFaucet() {
     faucetBoss.animations.play('running', 30, true);
     
     // Timer
-    game.time.events.add(Phaser.Timer.SECOND * 7, function() {
+    minigameTimer.add(Phaser.Timer.SECOND * 7, function() {
         if (faucetBoss.health > 0) {
             faucetBoss.kill();
             faucetHealthBar.kill();
@@ -40,7 +41,7 @@ function minigameFaucet() {
             var timesup = game.add.image(540, 850, 'timesup');
             timesup.anchor.setTo(0.5, 0.5);
             
-            game.time.events.add(Phaser.Timer.SECOND * 1, function() {
+            minigameTimer.add(Phaser.Timer.SECOND * 1, function() {
                 timesup.destroy();
                 if (health <= 20) {
                     health = 0;
@@ -54,7 +55,7 @@ function minigameFaucet() {
                 }
                 scoreDisplay.text = score;
                 minigame = false;
-                spawnBubbles();
+                unpauseTime();
             }, this);
         }
     } , this);
@@ -74,7 +75,7 @@ function minigameFaucet() {
             var success = game.add.image(540, 850, 'success');
             success.anchor.setTo(0.5, 0.5);
             
-            game.time.events.add(Phaser.Timer.SECOND * 1, function() {
+            minigameTimer.add(Phaser.Timer.SECOND * 1, function() {
                 success.kill();
                 
                 if (health > 80) {
@@ -85,13 +86,14 @@ function minigameFaucet() {
                 score += 50;
                 scoreDisplay.text = score;
                 minigame = false;
-                spawnBubbles();
+                unpauseTime();
+                //spawnBubbles();
             }, this);
         }
     }, this);
     
     // While the faucet health is over 0, keep regenerating it
-    game.time.events.loop(10, function() {
+    minigameTimer.loop(10, function() {
         if (faucetBoss.health > 0) {
             if (faucetBoss.health < 10) {
                 faucetBoss.health += 0.1;

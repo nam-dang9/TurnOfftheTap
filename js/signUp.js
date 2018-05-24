@@ -62,6 +62,7 @@ function sign_Up(){
 function after_signUp(){
 			
 	const dpName = txtName.value;
+	const email = txtEmail.value;
 	
 	firebase.auth().onAuthStateChanged(function(user) {
 
@@ -101,7 +102,7 @@ function after_signUp(){
 
 firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
-            window.location.href = "login.html";
+            //window.location.href = "login.html";
 		} else {
 			logOutBtn.style.display = "none";
 			console.log("Not log in yet.")
