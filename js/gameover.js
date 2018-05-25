@@ -3,10 +3,20 @@ var gameover = {
     create: function() {
 		bgmusic.pause();
         bgmusic.destroy();
+		
+		//Create an Object to call fireBase
 		const db = firebase.firestore();
+		
+		//Update Setting for firebase
 		const settings = {/* your settings... */ timestampsInSnapshots: true};
 		db.settings(settings);
+		
+		//Store high Scores when GameOver
 		var highScore;
+		
+		//Create an object to store the highScores from User db
+		var UserDbScores = 0;
+		
         var background = game.add.image(540, 960, "background");
         background.anchor.setTo(0.5, 0.5);
         background.scale.setTo(10, 10);
@@ -65,26 +75,54 @@ var gameover = {
         scoreNumber.anchor.setTo(0.5, 0.5);
         
         game.sound.play('gameoverSound');
-		console.log("highScore: " + highScore);
         
 		firebase.auth().onAuthStateChanged(function(user) {
   		if (user) {
-		var uid = firebase.auth().currentUser.uid;
-		//testing please delete it after the game done (console)
-		console.log("Uid: " +uid);
-		console.log(firebase.auth().currentUser.displayName);
-		
-		var updateScore = db.collection("Users").doc(uid);
-		
-		updateScore.update({
-		
-			"scores": highScore
-		})
-		.then(function() {
-			console.log("Document successfully updated!");
-		});
+			
+			//save user Uid in an object
+			var uid = firebase.auth().currentUser.uid;
+			//testing please delete it after the game done (console)
+//			console.log("Uid: " +uid);
+
+			//Show User Display Name
+//			console.log(firebase.auth().currentUser.displayName);
+
+			//Create an object to read in user db 
+			var updateScore = db.collection("Users").doc(uid);
+
+
+			//getting the high scores in User DB	
+			//If the highScores high that the user DB scores , it will replace it 
+			updateScore.get().then(function (doc) {
+				if (doc.exists) {
+					   UserDbScores = doc.data().scores;	
+//					   console.log("Db User Scores:" + UserDbScores);
+					
+							if(highScore > UserDbScores){
+
+								updateScore.update({
+
+								"scores": highScore
+							})
+							.then(function() {
+//								console.log("Document successfully updated!");
+							});			
+
+							}
+				} else {
+//					console.log("cannot read Scores!");
+					}    
+			}).catch(function (error) {
+//				console.log("Error getting doc", error);
+			});
+
+
+//			console.log("High Scores After games: " + highScore);
+
+	
+
 		}else{
-			console.log("User have not login");
+//			console.log("User have not login");
 		}
 
 	   });
