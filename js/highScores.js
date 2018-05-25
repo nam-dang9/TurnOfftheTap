@@ -34,9 +34,7 @@ var email;
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
    //Console for testing. 
-   console.log("user", user);
       email = user.displayName;
-      login_Detail.innerHTML += "User Email: " + email; 
   } else {
     //Console for testing. 
 //    console.log("No user is signed in.");

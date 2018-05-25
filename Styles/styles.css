@@ -9,7 +9,15 @@ html {
     height: 100%;
     overflow: hidden;
 }
-
+#list_div {
+    background-color:cornflowerblue;
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 25px;
+    border-style: solid;
+    border-width: 3px;
+}
 body {
     height: 100%;
     width: 100%;
