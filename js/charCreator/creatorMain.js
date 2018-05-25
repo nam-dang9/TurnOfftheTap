@@ -272,7 +272,7 @@ var creatorMain = {
     
         hairLumText.anchor.setTo(0.5);
 
-        var hairText = game.add.text(xColLeft + xDiff/2, yBase + 2.15*yDiff, "Hair", {
+        var hairText = game.add.text(xColLeft + xDiff/2, yBase + 2*yDiff, "Hair", {
             font: "45px Pixelate",
             fill: "#ffffff",
             align: "right"
@@ -280,7 +280,7 @@ var creatorMain = {
 
         hairText.anchor.setTo(0.5);
     
-        var shirtText = game.add.text(xColLeft + xDiff/2 + 15, yBase + 3.15*yDiff, "Shirt", {
+        var shirtText = game.add.text(xColLeft + xDiff/2, yBase + 3*yDiff, "Shirt", {
             font: "45px Pixelate",
             fill: "#ffffff",
             align: "right"
