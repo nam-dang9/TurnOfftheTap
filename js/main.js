@@ -47,6 +47,7 @@ var hairTint = "0x006aff";
 var logo;
 var map;
 var seasonDisplay;
+//var minigameCounter;
 
 var minigame = false;
 var pause = false;
@@ -66,6 +67,8 @@ var main = {
         minigameTimer = game.time.create(false);
 
         minigameTimer.start();
+
+        //minigameCounter = game.add.text(50, 50, "");
 
         startTime = Date.now();
 
@@ -308,10 +311,10 @@ function onRelease(bubble) {
 // The bubble is then placed randomly within the spawning boundry, callback functions are applied,
 // and its health and healthbar is set.
 function createBubble() {
-    var currentEvent, currentBubble = Math.floor(Math.random() * 20);
+    var currentEvent, currentBubble = Math.floor(Math.random() * 4);
     if (currentBubble == 0) {
         currentBubble = Math.floor(Math.random() * minigameNames.length);
-        currentEvent = minigameNames[currentBubble];
+        currentEvent = minigameNames[1];
     } else {
         currentBubble = Math.floor(Math.random() * bubbleNames.length);
         currentEvent = bubbleNames[currentBubble];
