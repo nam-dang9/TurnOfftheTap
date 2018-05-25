@@ -224,9 +224,12 @@ var main = {
                 face.frameName = 'character/face5.png';
             }
 
+            
 
             healthBar.setPercent((health / 100) * 100);
         }
+
+        //console.log("Running " + game.time.events.running);
     },
 
     render: function () {
@@ -326,10 +329,10 @@ function onRelease(bubble) {
 // The bubble is then placed randomly within the spawning boundry, callback functions are applied,
 // and its health and healthbar is set.
 function createBubble() {
-    var currentEvent, currentBubble = Math.floor(Math.random() * 4);
+    var currentEvent, currentBubble = Math.floor(Math.random() * 20);
     if (currentBubble == 0) {
         currentBubble = Math.floor(Math.random() * minigameNames.length);
-        currentEvent = minigameNames[1];
+        currentEvent = minigameNames[currentBubble];
     } else {
         currentBubble = Math.floor(Math.random() * bubbleNames.length);
         currentEvent = bubbleNames[currentBubble];
@@ -394,7 +397,8 @@ function createBubble() {
 // (current difficulty) of the game. After spawning the next spawn call is set on an
 // interval also based on the game duration.
 function spawnBubbles() {
-    if (!pause && !minigame) {
+
+    if(!pause && !minigame) {
 
         var spawn1 = Math.pow(1.02, (1 - difficulty) / 3);
         var spawn3 = 1 / 1.8 * Math.pow(1.02, difficulty - maxDifficulty) - 0.2;
@@ -436,8 +440,10 @@ function spawnBubbles() {
 
 
         // Initiate timer delay for next bubble spawn
-        game.time.events.add(spawnInterval, spawnBubbles, this);
+        
     }
+    game.time.events.add(spawnInterval, spawnBubbles, this);
+
 }
 
 
@@ -476,13 +482,16 @@ function tapOnLogo(logo) {
 
 // Pauses the game time and all running time events
 function pauseTime() {
+    console.log("Paused");
     pauseStart = Date.now();
     game.time.events.pause();
+
     pause = true;
 }
 
 // Unpauses the game time and resumes time events
 function unpauseTime() {
+    console.log("Unpause");
     pausedTime += game.time.elapsedSince(pauseStart);
     game.time.events.resume();
     pause = false;
@@ -496,10 +505,12 @@ function pauseBtn() {
         overlay = game.add.image(0, 0, 'overlay');
         mainHome.inputEnabled = false;
         mainPause.inputEnabled = false;
+
         unpause = game.add.image(540, 800, 'sprites', 'btn-unpause.png');
         unpause.anchor.setTo(0.5, 0.5);
         unpause.scale.setTo(1.7, 1.7);
         unpause.inputEnabled = true;
+
         unpause.events.onInputDown.add(function () {
             game.sound.play('btn');
             unpauseTime();
@@ -508,8 +519,8 @@ function pauseBtn() {
             replay.kill();
             mainHome.inputEnabled = true;
             mainPause.inputEnabled = true;
-            spawnBubbles();
         }, this);
+
         replay = game.add.image(540, 1100, 'sprites', 'btn-replay.png');
         replay.anchor.setTo(0.5, 0.5);
         replay.inputEnabled = true;

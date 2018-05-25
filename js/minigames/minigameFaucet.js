@@ -10,6 +10,18 @@ function minigameFaucet() {
     });
     minigameCounter.anchor.setTo(0.5);
     
+    var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+
+    function timer() {
+        count=count-1;
+        if (count <= 0) {
+            clearInterval(counter);
+            return;
+        }
+        minigameCounter.text = count;
+    }
+
+
     // Health bar
     var barConfig = {
         width: 800,
@@ -40,18 +52,6 @@ function minigameFaucet() {
     var running = faucetBoss.animations.add('running', Phaser.Animation.generateFrameNames('faucetMinigame/faucetboss/', 1, 7, '.png', 2));
     faucetBoss.animations.play('running', 30, true);
     
-
-    var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
-
-    function timer() {
-        count=count-1;
-        if (count <= 0) {
-            clearInterval(counter);
-            return;
-        }
-        minigameCounter.text = count;
-        //document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
-    }
 
     // Timer
     minigameTimer.add(Phaser.Timer.SECOND * 7, function() {

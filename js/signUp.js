@@ -112,7 +112,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			
 			setTimeout(function() {
-				window.location.href = "charCreation.html"}, 500);
+				window.location.href = "charCreation.html"}, 2000);
 
 		} else {
 			
