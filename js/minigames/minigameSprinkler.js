@@ -317,10 +317,23 @@ function minigameSprinkler() {
         }
     }, this);
 
+    var count=13;
+
+    var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+
+    function timer() {
+        count=count-1;
+        if (count <= 0) {
+            clearInterval(counter);
+            return;
+        }
+        document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
+    }
 
     // The overall timer of the minigame 
     minigameTimer.add(Phaser.Timer.SECOND * 12.5, function() {
         if (sprinklerHealthBar.health <= 0 & !alreadyDone) {
+            timer();
             alreadyDone = true;
             destroyAll();
             

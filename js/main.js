@@ -184,7 +184,9 @@ var main = {
 
         if (!pause && !minigame) {
 
+
             // Regenerate Health
+            document.getElementById("timer").innerHTML="";
             if (health < 100) {
                 health += healthRegen;
             }
