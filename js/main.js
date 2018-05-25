@@ -68,17 +68,17 @@ var main = {
         startTime = Date.now();
 
         // Setting up background
-        var background = game.add.image(0, 0, 'water');
+        var background = game.add.image(0, 0, "water");
         background.height = game.height;
         background.width = game.width;
-
+        
         // Setting up UI
         map = game.add.image(540, 960, "map");
         map.anchor.setTo(0.5, 0.5);
         map.scale.setTo(1.1, 1.1);
 
-        //game.add.image(-15, -25, "bannerLong"); 
-        game.add.image(-15, 1735, "bannerLong");
+        // Setting up UI
+        var ui = game.add.image(0, 0, 'ui');
 
         logo = game.add.image(30, 1775, "logo");
         logo.inputEnabled = true;
@@ -95,39 +95,23 @@ var main = {
         mainHome.events.onInputDown.add(homeBtn, this);
 
         // Health display
-        var healthDisplayBanner = game.add.image(960, 110, "healthDisplayBanner");
-        healthDisplayBanner.anchor.setTo(0.5, 0.5);
-        healthDisplayBanner.scale.setTo(1, 1);
-        var waterdrop = game.add.image(837, 110, "waterDrop");
-        waterdrop.anchor.setTo(0.5, 0.5);
-        waterdrop.scale.setTo(0.7, 0.7);
-        game.add.image(0, -40, "charDisplayBanner");
         healthDisplay = game.add.text(970, 110, health + '/100', {
-            font: "45px Pixelate",
+            font: "35px Pixelate",
             fill: "#ffffff",
             align: "center"
         });
         healthDisplay.anchor.setTo(0.5, 0.5);
 
         // Score display
-        var scoreDisplayBanner = game.add.image(600, 110, "scoreDisplayBanner");
-        scoreDisplayBanner.anchor.setTo(0.5, 0.5);
         scoreDisplay = game.add.text(650, 110, score, {
             font: "45px Pixelate",
             fill: "#ffffff",
             align: "right"
         });
         scoreDisplay.anchor.setTo(0.5, 0.5);
-        var trophy = game.add.image(500, 110, "trophy");
-        trophy.anchor.setTo(0.5, 0.5);
-
-        // Season display
-        seasonDisplay = game.add.text(200, 450, "Summer", {
-            font: "60px Pixelate",
-            fill: "#ffffff",
-            align: "right"
-        });
-        seasonDisplay.anchor.setTo(0.5);
+        seasonDisplay = game.add.sprite(200, 470, "summerBanner");
+        seasonDisplay.anchor.setTo(0.5, 0.5);
+        seasonDisplay.scale.setTo(1.1, 1.1);
 
 
         // Health Bar
@@ -149,8 +133,7 @@ var main = {
             animationDuration: 30
         };
         healthBar = new HealthBar(game, barConfig);
-
-
+        
         // Character
         character = game.add.group();
 
@@ -401,15 +384,13 @@ function changeSeason() {
         baseInterval = summerInterval;
         healthRegen = summerRegen;
         map.loadTexture('map');
-        seasonDisplay.text = "Summer";
-        seasonDisplay.fill = "white";
+        seasonDisplay.loadTexture('summerBanner');
     } else {
         winter = true;
         baseInterval = winterInterval;
         healthRegen = winterRegen;
         map.loadTexture('snowMap');
-        seasonDisplay.text = "Winter";
-        seasonDisplay.fill = "black";
+        seasonDisplay.loadTexture('winterBanner');
     }
 
     game.time.events.add(seasonDuration, changeSeason);
