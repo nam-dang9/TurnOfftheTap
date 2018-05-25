@@ -18,6 +18,7 @@ var baseInterval = summerInterval;
 var difficulty = 1;
 var maxDifficulty = 100;
 var difficultyRate = 7500;
+var hardModeBonus = 0;
 var debugSpawn1, debugSpawn2, debugSpawn3;
 var debugRand;
 var debugCount;
@@ -81,28 +82,6 @@ var main = {
         // Setting up UI
         var ui = game.add.image(0, 0, 'ui');
 
-        logo = game.add.image(30, 1775, "sprites", "TurnOfftheTap Logo1.png");
-        logo.inputEnabled = true;
-        logo.events.onInputDown.add(tapOnLogo, this);
-        logo.taps = 9;
-
-        // UI buttons
-        mainPause = game.add.image(880, 1740, "sprites", "btn-pause.png");
-        mainPause.inputEnabled = true;
-        mainPause.events.onInputDown.add(pauseBtn, this);
-
-        mainHome = game.add.image(680, 1740, "sprites", "Btn-HomeIcon.png");
-        mainHome.inputEnabled = true;
-        mainHome.events.onInputDown.add(homeBtn, this);
-
-        // Health display
-        var healthDisplayBanner = game.add.image(960, 110, "healthDisplayBanner");
-        healthDisplayBanner.anchor.setTo(0.5, 0.5);
-        healthDisplayBanner.scale.setTo(1, 1);
-        var waterdrop = game.add.image(837, 110, "sprites", "Waterdrop.png");
-        waterdrop.anchor.setTo(0.5, 0.5);
-        waterdrop.scale.setTo(0.7, 0.7);
-        game.add.image(0, -40, "charDisplayBanner");
         healthDisplay = game.add.text(970, 110, health + '/100', {
             font: "35px Pixelate",
             fill: "#ffffff",
@@ -117,12 +96,6 @@ var main = {
             align: "right"
         });
         scoreDisplay.anchor.setTo(0.5, 0.5);
-        var trophy = game.add.image(500, 110, "sprites", "trophy.png");
-        trophy.anchor.setTo(0.5, 0.5);
-        seasonDisplay = game.add.sprite(200, 470, "summerBanner");
-        seasonDisplay.anchor.setTo(0.5, 0.5);
-        seasonDisplay.scale.setTo(1.1, 1.1);
-
 
         // Health Bar
         var healthBarBanner = game.add.image(540, 1680, "bannerLong");
@@ -143,21 +116,41 @@ var main = {
             animationDuration: 30
         };
         healthBar = new HealthBar(game, barConfig);
+
+        // Setting up bottom UI
+
+        // Logo
+        logo = game.add.image(30, 1775, "sprites", "TurnOfftheTap Logo1.png");
+        logo.inputEnabled = true;
+        logo.events.onInputDown.add(tapOnLogo, this);
+        logo.taps = 9;
+
+        // UI buttons
+
+        // Pause Button
+        mainPause = game.add.image(880, 1740, "sprites", "btn-pause.png");
+        mainPause.inputEnabled = true;
+        mainPause.events.onInputDown.add(pauseBtn, this);
+
+        // Home Button
+        mainHome = game.add.image(680, 1740, "sprites", "Btn-HomeIcon.png");
+        mainHome.inputEnabled = true;
+        mainHome.events.onInputDown.add(homeBtn, this);
+
+        // Season Display banner
+        //seasonDisplay = game.add.sprite(200, 500, 'sprites', "summer.png");
+        seasonDisplay = game.add.sprite(750, 300, 'sprites', "summer.png");
+        seasonDisplay.anchor.setTo(0.5, 0.5);
+        seasonDisplay.scale.setTo(1.1, 1.1);
         
         // Character
         character = game.add.group();
 
-
         var body = character.create(charX, charY, 'sprites', 'character/body.png');
-
-        console.log(hair);
-        console.log(userBody);
         var charHair = character.create(charX, charY, 'sprites', 'character/' + hair + '.png');
-
         var shirt = character.create(charX, charY, 'sprites', 'character/' + userBody + '.png');
         face = character.create(charX, charY, 'sprites', 'character/face2.png');
 
-        
         body.smoothed = false;
         body.tint = userSkin;
         
@@ -169,12 +162,15 @@ var main = {
 
         character.scale.setTo(8);
 
-        bubbles = game.add.group();
 
+        // Start bubble spawning
+        bubbles = game.add.group();
         spawnBubbles();
 
-        game.time.events.add(seasonDuration, changeSeason);
+        // Initiate season timer
+        game.time.events.loop(seasonDuration, changeSeason);
 
+        // Initiate the emitter for destroyed bubbles
         emitter = game.add.emitter(0, 0, 50);
         emitter.makeParticles('sprites', 'waterParticle.png');
         emitter.setScale(1, 2, 1, 2);
@@ -187,10 +183,14 @@ var main = {
     update: function () {
 
         if (!pause && !minigame) {
+
+            // Regenerate Health
             if (health < 100) {
                 health += healthRegen;
             }
 
+            // Ends the game by loading the gameover state when health
+            // reaches 0
             if (health <= 0) {
                 game.state.start('gameover');
             }
@@ -203,10 +203,11 @@ var main = {
             timer = game.time.elapsedSince(startTime) - pausedTime;
             difficulty = Math.round(timer / difficultyRate);
 
+            // Changes character emotion based on remaning health
             if(health > 80) {
-                face.frameName = 'character/face2.png';
-            } else if(health > 60) {
                 face.frameName = 'character/face1.png';
+            } else if(health > 60) {
+                face.frameName = 'character/face2.png';
             } else if(health > 40) {
                 face.frameName = 'character/face3.png';
             } else if(health > 20) {
@@ -222,11 +223,10 @@ var main = {
 
     render: function () {
 
+        // Debug Information
+
         // game.debug.font = "35px Arial";
-
         // var minutes = Math.floor(timer / 60000);
-
-        
         // game.debug.text("Time: " + minutes + ":" + (Math.floor(timer / 1000) - (minutes * 60)), 530, 500, "yellow");
         // game.debug.text("Spawn Interval: " + Math.round(spawnInterval) / 1000, 530, 250, "cyan");
         // game.debug.text("Difficulty: " + difficulty, 530, 300, "yellow");
@@ -242,11 +242,14 @@ function damageHealth(bubble) {
     health -= 0.005 * bubble.health;
 }
 
+// Function called When a bubble is tapped on.
+// Determines type of bubble, if minigame plays approriate minigame before processing it regularly.
+// First damages the bubble and updates the healthbar if applicable. If the bubble's health is 0
+// it is removed from the game, the score is updated (if a regular bubble) and a particle effect is activated.
 function tapOnBubble(bubble) {
     if (!pause && !minigame) {
         if (bubble.type == 'minigameSprinkler') {
             game.sound.play('minigameSound');
-            bubble.kill();
             minigame = true;
             minigameSprinkler();
             game.sound.play('minigameSound');
@@ -272,16 +275,14 @@ function tapOnBubble(bubble) {
                 bubble.healthBar.kill();
             }
 
-
             emitter.x = bubble.x;
             emitter.y = bubble.y;
             emitter.explode(400, 30);
 
-
             bubble.destroy();
 
             if (bubbleNames.includes(bubble.type)) {
-                score += 10;
+                score += 10 + hardModeBonus;
                 scoreDisplay.text = score;
             }
 
@@ -289,21 +290,26 @@ function tapOnBubble(bubble) {
     }
 }
 
+// Adds a "pressed down" effect when the bubble is tapped
 function onTap(bubble) {
     if(!pause){
         bubble.scale.setTo(.8);
     }
 }
 
+// Returns bubble to appropriate size when released
 function onRelease(bubble) {
     bubble.scale.setTo(1);
 }
 
+// Creates a new bubble of a random type, with a 1 in 20 chance of being a minigame bubble.
+// The bubble is then placed randomly within the spawning boundry, callback functions are applied,
+// and its health and healthbar is set.
 function createBubble() {
-    var currentEvent, currentBubble = Math.floor(Math.random() * 6);
+    var currentEvent, currentBubble = Math.floor(Math.random() * 20);
     if (currentBubble == 0) {
         currentBubble = Math.floor(Math.random() * minigameNames.length);
-        currentEvent = minigameNames[0];
+        currentEvent = minigameNames[currentBubble];
     } else {
         currentBubble = Math.floor(Math.random() * bubbleNames.length);
         currentEvent = bubbleNames[currentBubble];
@@ -363,6 +369,10 @@ function createBubble() {
 
 }
 
+
+// Randomly spawns 1 - 3 bubbles based on weighted values determined by the duration
+// (current difficulty) of the game. After spawning the next spawn call is set on an
+// interval also based on the game duration.
 function spawnBubbles() {
     if (!pause && !minigame) {
 
@@ -395,7 +405,6 @@ function spawnBubbles() {
         var toSpawn = bubbleCount();
 
 
-
         for (i = 0; i < toSpawn; i++) {
             createBubble();
         }
@@ -411,6 +420,9 @@ function spawnBubbles() {
     }
 }
 
+
+// Changes the season and adjusts the baseInterval and healthRegen appropriately
+// as well as updating the map and banner.
 function changeSeason() {
 
     if (winter) {
@@ -418,16 +430,14 @@ function changeSeason() {
         baseInterval = summerInterval;
         healthRegen = summerRegen;
         map.loadTexture('map');
-        seasonDisplay.loadTexture('summerBanner');
+        seasonDisplay.frameName = 'summer.png';
     } else {
         winter = true;
         baseInterval = winterInterval;
         healthRegen = winterRegen;
         map.loadTexture('snowMap');
-        seasonDisplay.loadTexture('winterBanner');
+        seasonDisplay.frameName = 'winter.png';
     }
-
-    game.time.events.add(seasonDuration, changeSeason);
 }
 
 // EASTER EGG 
@@ -435,25 +445,30 @@ function tapOnLogo(logo) {
     logo.taps -= 1;
 
     if (logo.taps < 0) {
-        baseInterval = 750;
+        summerInterval -= 250;
+        winterInterval -= 250;
+        hardModeBonus = 10;
         logo.destroy();
         game.sound.play('albertlaugh');
         logo = game.add.image(5, 1675, "easteregg");
     }
 }
 
+// Pauses the game time and all running time events
 function pauseTime() {
     pauseStart = Date.now();
     game.time.events.pause();
     pause = true;
 }
 
+// Unpauses the game time and resumes time events
 function unpauseTime() {
     pausedTime += game.time.elapsedSince(pauseStart);
     game.time.events.resume();
     pause = false;
 }
 
+// Pauses the game and brings up the pause menu
 function pauseBtn() {
     if (!minigame && !pause) {
         game.sound.play('btn');
@@ -482,11 +497,13 @@ function pauseBtn() {
     }
 }
 
+// Reloads the page to restart the game
 function replayBtn() {
     game.sound.play('btn');
     window.location.href = "game.html";
 }
 
+// Loads the home page
 function homeBtn() {
     if (!minigame && !pause) {
         game.sound.play('btn');

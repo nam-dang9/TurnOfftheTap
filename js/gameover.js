@@ -15,21 +15,23 @@ var gameover = {
         var scoreDisplay = game.add.image(540,860, "score");
         scoreDisplay.anchor.setTo(0.5, 0.5);
         
-        replay = game.add.image(540,1190, "replay");
+        replay = game.add.image(540,1190, 'sprites', "btn-replay.png");
         replay.anchor.setTo(0.5, 0.5);
         replay.scale.setTo(0.8, 0.8);
         replay.inputEnabled = true;
+
         // the replayBtn function is in main.js
         replay.events.onInputDown.add(replayBtn, this);
         
-        var home = game.add.image(540,1440, "homeBtn");
+        var home = game.add.image(540,1440, 'sprites', "Btn-HomeIcon.png");
         home.anchor.setTo(0.5, 0.5);
         home.scale.setTo(1.3, 1.3);
         home.inputEnabled = true;
+        
         // the homeBtn function is in main.js
         home.events.onInputDown.add(homeBtn, this);
         
-        var twitter = game.add.image(540, 1690, 'twitterIcon');
+        var twitter = game.add.image(540, 1690, 'sprites', 'btn-twitter.png');
         twitter.anchor.setTo(0.5, 0.5);
         twitter.scale.setTo(0.8, 0.8);
         twitter.inputEnabled = true;

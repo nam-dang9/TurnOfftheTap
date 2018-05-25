@@ -21,20 +21,22 @@ var creatorMain = {
         game.load.image('displayBanner', 'Images/banners/banner-charDisplay.png');
         game.load.image('looksgood', 'Images/btns/Btn-LooksGood.png');
         game.load.image('back', 'Images/btns/Btn-Back.png');
+
+        game.load.atlasJSONHash('sprites', 'Images/sprites.png', 'Images/sprites.json');
         
-        game.load.image('body', 'Images/character/body.png');
-        game.load.image('face', 'Images/character/face.png');
-        game.load.image('hair1', 'Images/character/hair1.png');
-        game.load.image('hair2', 'Images/character/hair2.png');
-        game.load.image('hair3', 'Images/character/hair3.png');
-        game.load.image('hair4', 'Images/character/hair4.png');
-        game.load.image('hair5', 'Images/character/hair5.png');
-        game.load.image('hair6', 'Images/character/hair6.png');
-        game.load.image('shirt1', 'Images/character/shirt1.png');
-        game.load.image('shirt2', 'Images/character/shirt2.png');
-        game.load.image('shirt3', 'Images/character/shirt3.png');
-        game.load.image('shirt4', 'Images/character/shirt4.png');
-        game.load.image('shirt5', 'Images/character/shirt5.png');
+        // game.load.image('body', 'Images/character/body.png');
+        // game.load.image('face', 'Images/character/face.png');
+        // game.load.image('hair1', 'Images/character/hair1.png');
+        // game.load.image('hair2', 'Images/character/hair2.png');
+        // game.load.image('hair3', 'Images/character/hair3.png');
+        // game.load.image('hair4', 'Images/character/hair4.png');
+        // game.load.image('hair5', 'Images/character/hair5.png');
+        // game.load.image('hair6', 'Images/character/hair6.png');
+        // game.load.image('shirt1', 'Images/character/shirt1.png');
+        // game.load.image('shirt2', 'Images/character/shirt2.png');
+        // game.load.image('shirt3', 'Images/character/shirt3.png');
+        // game.load.image('shirt4', 'Images/character/shirt4.png');
+        // game.load.image('shirt5', 'Images/character/shirt5.png');
     
     },
 
@@ -289,16 +291,16 @@ var creatorMain = {
         // Character
         character = game.add.group();
     
-        body = character.create(0, 0, 'body');
+        body = character.create(0, 0, 'sprites', 'character/body.png');
         body.smoothed = false;
     
-        shirt = character.create(0, 0, shirtArr[shirtIndex]);
+        shirt = character.create(0, 0, 'sprites', 'character/' + shirtArr[shirtIndex] + '.png');
         shirt.smoothed = false;
     
-        hair = character.create(0, 0, hairArr[hairIndex]);
+        hair = character.create(0, 0, 'sprites', 'character/' + hairArr[hairIndex] + '.png');
         hair.smoothed = false;
     
-        face = character.create(0, 0, 'face');
+        face = character.create(0, 0, 'sprites', 'character/face2.png');
         face.smoothed = false;
     
         character.x = 165;
@@ -309,8 +311,8 @@ var creatorMain = {
 
     update: function() {
 
-        shirt.loadTexture(shirtArr[shirtIndex]);
-        hair.loadTexture(hairArr[hairIndex]);
+        shirt.frameName = 'character/' + shirtArr[shirtIndex] + '.png';
+        hair.frameName = 'character/' + hairArr[hairIndex] + '.png';
     
         hair.tint = hairTint;
         body.tint = skinTint;
