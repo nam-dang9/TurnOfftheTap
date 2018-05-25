@@ -8,7 +8,7 @@ function minigameShower() {
     var showerBackground = game.add.image(0, 0, 'showerBackground');
     showerBackground.inputEnabled = true;
     
-    var status = game.add.sprite(540, 690, 'showering');
+    var status = game.add.sprite(540, 690, 'sprites', 'showerMinigame/showering.png');
     status.anchor.setTo(0.5, 0.5);
     
     // Health bar
@@ -32,7 +32,7 @@ function minigameShower() {
     // Marker: (50)300 - 985
     // 51px (width)
     var markerPlace = (Math.random() * 686) + 300;
-    var marker = game.add.image(markerPlace, 1700, 'marker');
+    var marker = game.add.image(markerPlace, 1700, 'sprites', 'showerMinigame/marker.png');
     marker.anchor.setTo(0.5, 0.5);
     
     var showerHealthSpeed = (Math.random() * 10) + 15;
@@ -76,7 +76,7 @@ function minigameShower() {
             if (showerHealthBar.health - marker.worldPosition.x >= -35 && 
                 showerHealthBar.health - marker.worldPosition.x <= 35) {
                 game.sound.play('okaySound');
-                status.loadTexture('ok');
+                status.frameName = 'showerMinigame/ok.png';
                 console.log("win");
                 minigameTimer.add(Phaser.Timer.SECOND * 2, function() {
                     showerBackground.destroy();
@@ -107,7 +107,7 @@ function minigameShower() {
                     }, this);
                 }, this);
             } else {
-                status.loadTexture('no');
+                status.frameName = 'showerMinigame/no.png';
                 game.sound.play('noSound');
                 console.log("lose");
                 

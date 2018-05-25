@@ -111,8 +111,8 @@ function after_signUp(){
 firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			
-		setTimeout(function() {
-				window.location.href = "logIn.html"}, 300);
+			setTimeout(function() {
+				window.location.href = "charCreation.html"}, 500);
 
 		} else {
 			

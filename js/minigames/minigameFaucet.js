@@ -19,14 +19,17 @@ function minigameFaucet() {
 	var faucetHealthBar = new HealthBar(this.game, barConfig);
     
     // Faucet sprite
-    var faucetBoss = game.add.sprite(540, 1160, 'faucetBoss');
+    var faucetBoss = game.add.sprite(540, 1160, 'sprites', 'faucetMinigame/faucetboss/01.png');
     faucetBoss.anchor.setTo(0.5, 0.5);
     faucetBoss.scale.setTo(6, 6);
     faucetBoss.inputEnabled = true;
     faucetBoss.health = 10;
+
+    
     
     // Faucet sprite animation
-    var running = faucetBoss.animations.add('running', [0, 1, 2, 3, 4, 5, 6, 7]);
+    //var running = faucetBoss.animations.add('running', [0, 1, 2, 3, 4, 5, 6, 7]);
+    var running = faucetBoss.animations.add('running', Phaser.Animation.generateFrameNames('faucetMinigame/faucetboss/', 1, 7, '.png', 2));
     faucetBoss.animations.play('running', 30, true);
     var count=7;
 
