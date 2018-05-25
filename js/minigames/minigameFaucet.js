@@ -1,6 +1,14 @@
 function minigameFaucet() {
     pauseTime();
     overlay = game.add.image(0, 0, 'faucetBackground');
+
+    var count=7;
+    var minigameCounter = game.add.text(540, 1500, count, {
+        font: "150px Pixelate",
+        fill: "#ffffff",
+        align: "right"
+    });
+    minigameCounter.anchor.setTo(0.5);
     
     // Health bar
     var barConfig = {
@@ -31,7 +39,7 @@ function minigameFaucet() {
     //var running = faucetBoss.animations.add('running', [0, 1, 2, 3, 4, 5, 6, 7]);
     var running = faucetBoss.animations.add('running', Phaser.Animation.generateFrameNames('faucetMinigame/faucetboss/', 1, 7, '.png', 2));
     faucetBoss.animations.play('running', 30, true);
-    var count=7;
+    
 
     var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
 
@@ -41,7 +49,8 @@ function minigameFaucet() {
             clearInterval(counter);
             return;
         }
-        document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
+        minigameCounter.text = count;
+        //document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
     }
 
     // Timer
@@ -50,11 +59,14 @@ function minigameFaucet() {
             timer();
             faucetBoss.kill();
             faucetHealthBar.kill();
-             overlay.destroy();
+            overlay.destroy();
+            minigameCounter.destroy();
             game.sound.play('timesupSound');
             
             var timesup = game.add.image(540, 850, 'timesup');
             timesup.anchor.setTo(0.5, 0.5);
+
+            
             
             minigameTimer.add(Phaser.Timer.SECOND * 1, function() {
                 timesup.destroy();
@@ -86,6 +98,7 @@ function minigameFaucet() {
             faucetBoss.kill();
             faucetHealthBar.kill();
             overlay.destroy();
+            minigameCounter.destroy();
             game.sound.play('successSound');
             
             var success = game.add.image(540, 850, 'success');

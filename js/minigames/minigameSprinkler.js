@@ -7,6 +7,14 @@ function minigameSprinkler() {
     pauseTime();
     var sprinklerBackground = game.add.image(0, 0, 'sprinklerBackground');
     var alreadyDone = false;
+
+    var count=13;
+    var minigameCounter = game.add.text(560, 1600, count, {
+        font: "100px Pixelate",
+        fill: "#ffffff",
+        align: "right"
+    });
+    minigameCounter.anchor.setTo(0.5);
     
     // Health bar
     var barConfig = {
@@ -258,6 +266,8 @@ function minigameSprinkler() {
                 
         sprinklerBackground.kill();
         sprinklerHealthBar.kill();
+
+        minigameCounter.destroy();
     }
     
 
@@ -315,9 +325,9 @@ function minigameSprinkler() {
                 this.stop();   
             }
         }
+
     }, this);
 
-    var count=13;
 
     var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
 
@@ -327,11 +337,12 @@ function minigameSprinkler() {
             clearInterval(counter);
             return;
         }
-        document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
+        minigameCounter.text = count;
+        //document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
     }
 
     // The overall timer of the minigame 
-    minigameTimer.add(Phaser.Timer.SECOND * 12.5, function() {
+    totalTime = minigameTimer.add(Phaser.Timer.SECOND * 12.5, function() {
         if (sprinklerHealthBar.health <= 0 & !alreadyDone) {
             timer();
             alreadyDone = true;
