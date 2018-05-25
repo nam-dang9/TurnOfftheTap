@@ -1,7 +1,8 @@
 
 var gameover = {
     create: function() {
-		
+		bgmusic.pause();
+        bgmusic.destroy();
 		const db = firebase.firestore();
 		const settings = {/* your settings... */ timestampsInSnapshots: true};
 		db.settings(settings);

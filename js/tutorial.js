@@ -1,8 +1,8 @@
 var counter = 0;
-var tut = ['tut1', 'tut2' , 'tut3', 'tut4', 'tut5', 'tut6'];
+var tut = ['tut1', 'tut2' , 'tut3', 'tut4', 'tut5', 'tut6', 'tut7'];
 
 function nextTut() {
-    if (counter === 5) {
+    if (counter === 6) {
         counter = 0;
         window.location.href="index.html";
     } else {
