@@ -3,7 +3,7 @@
     <head>
         <title>Turn Off the Tap</title>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width">
 
         <script type="text/javascript" src="js/phaser.js"></script>
         <script type="text/javascript" src="js/readCharData.js"></script>
@@ -23,7 +23,9 @@
                 width: 1080,
                 height: 1920,
                 renderer: Phaser.AUTO,
-                antialias: false
+                multiTexture: true,
+                antialias: false,
+                enableDebug: false
             }
             var game = new Phaser.Game(config1);
             game.state.add('boot', boot);

@@ -51,55 +51,137 @@ var creatorMain = {
         var displayBanner = game.add.image(540, 670, "displayBanner");
         displayBanner.anchor.setTo(0.5, 0.5);
         
-        var looksgood = game.add.image(650, 1070, "looksgood");
+        var looksgood = game.add.image(645, 1275, "looksgood");
+        looksgood.scale.setTo(0.9);
         looksgood.inputEnabled = true;
         looksgood.events.onInputDown.add(looksgoodBtn, this);
         
-        var back = game.add.image(650, 1270, "back");
+        var back = game.add.image(645, 1445, "back");
+        back.scale.setTo(0.9);
         back.inputEnabled = true;
         back.events.onInputDown.add(backBtn, this);
         
         //Customization Buttons
-        var arrowL_Skin = game.add.image(150, 1030, "arrowLeft");
-        var arrowR_Skin = game.add.image(450, 1030, "arrowRight");
+        var xColLeft = 150;
+        var xDiff = 300;
+        var xColRight = xColLeft + xDiff + 150;
+
+        var yBase = 1050;
+        var yDiff = 150;
+
+        // Arrows for changing Hue of skin
+        var arrowL_SkinHue = game.add.image(xColLeft, yBase, "arrowLeft");
+        var arrowR_SkinHue = game.add.image(xColLeft + xDiff, yBase, "arrowRight");
     
-        arrowL_Skin.inputEnabled = true;
-        arrowR_Skin.inputEnabled = true;
+        arrowL_SkinHue.inputEnabled = true;
+        arrowR_SkinHue.inputEnabled = true;
+        arrowL_SkinHue.anchor.setTo(0.5);
+        arrowR_SkinHue.anchor.setTo(0.5);
     
-        arrowL_Skin.events.onInputDown.add(function() {
+        arrowL_SkinHue.events.onInputDown.add(function() {
     
-            skinTint = shiftHueSkin(skinTint, -12);
+            skinTint = shiftHue(skinTint, -12);
             console.log(skinTint);
         });
     
-        arrowR_Skin.events.onInputDown.add(function() {
+        arrowR_SkinHue.events.onInputDown.add(function() {
     
-            skinTint = shiftHueSkin(skinTint, 12);
+            skinTint = shiftHue(skinTint, 12);
+            console.log(skinTint);
+        });
+
+        arrowL_SkinHue.events.onInputDown.add(onTap, this);
+        arrowL_SkinHue.events.onInputUp.add(onRelease, this);
+        arrowR_SkinHue.events.onInputDown.add(onTap, this);
+        arrowR_SkinHue.events.onInputUp.add(onRelease, this);
+
+        
+        // Arrows for changing Luminosity of Skin
+        var arrowL_SkinLum = game.add.image(xColRight, yBase, "arrowLeft");
+        var arrowR_SkinLum = game.add.image(xColRight + xDiff, yBase, "arrowRight");
+
+        arrowL_SkinLum.inputEnabled = true;
+        arrowR_SkinLum.inputEnabled = true;
+        arrowL_SkinLum.anchor.setTo(0.5);
+        arrowR_SkinLum.anchor.setTo(0.5);
+    
+        arrowL_SkinLum.events.onInputDown.add(function() {
+    
+            skinTint = shiftLuminosity(skinTint, -12);
             console.log(skinTint);
         });
     
-        
-        var arrowL_HairCol = game.add.image(150, 1180, "arrowLeft");
-        var arrowR_HairCol = game.add.image(450, 1180, "arrowRight");
+        arrowR_SkinLum.events.onInputDown.add(function() {
     
-        arrowL_HairCol.inputEnabled = true;
-        arrowR_HairCol.inputEnabled = true;
+            skinTint = shiftLuminosity(skinTint, 12);
+            console.log(skinTint);
+        });
+
+        arrowL_SkinLum.events.onInputDown.add(onTap, this);
+        arrowL_SkinLum.events.onInputUp.add(onRelease, this);
+        arrowR_SkinLum.events.onInputDown.add(onTap, this);
+        arrowR_SkinLum.events.onInputUp.add(onRelease, this);
+
     
-        arrowL_HairCol.events.onInputDown.add(function() {
+        // Arrows for changing Hue of hair
+        var arrowL_HairHue = game.add.image(xColLeft, yBase + yDiff, "arrowLeft");
+        var arrowR_HairHue = game.add.image(xColLeft + xDiff, yBase + yDiff, "arrowRight");
     
-            hairTint = shiftHueHair(hairTint, -15);
+        arrowL_HairHue.inputEnabled = true;
+        arrowR_HairHue.inputEnabled = true;
+        arrowL_HairHue.anchor.setTo(0.5);
+        arrowR_HairHue.anchor.setTo(0.5);
+    
+        arrowL_HairHue.events.onInputDown.add(function() {
+    
+            hairTint = shiftHue(hairTint, -10);
         });
     
-        arrowR_HairCol.events.onInputDown.add(function() {
+        arrowR_HairHue.events.onInputDown.add(function() {
     
-            hairTint = shiftHueHair(hairTint, 15);
+            hairTint = shiftHue(hairTint, 10);
         });
-        
-        var arrowL_Hair = game.add.image(150, 1330, "arrowLeft");
-        var arrowR_Hair = game.add.image(450, 1330, "arrowRight");
+
+        arrowL_HairHue.events.onInputDown.add(onTap, this);
+        arrowL_HairHue.events.onInputUp.add(onRelease, this);
+        arrowR_HairHue.events.onInputDown.add(onTap, this);
+        arrowR_HairHue.events.onInputUp.add(onRelease, this);
+
+
+        // Arrows for changing Luminosity of hair
+        var arrowL_HairLum = game.add.image(xColRight, yBase + yDiff, "arrowLeft");
+        var arrowR_HairLum = game.add.image(xColRight + xDiff, yBase + yDiff, "arrowRight");
+    
+        arrowL_HairLum.inputEnabled = true;
+        arrowR_HairLum.inputEnabled = true;
+        arrowL_HairLum.anchor.setTo(0.5);
+        arrowR_HairLum.anchor.setTo(0.5);
+    
+        arrowL_HairLum.events.onInputDown.add(function() {
+    
+            hairTint = shiftLuminosity(hairTint, -15);
+        });
+    
+        arrowR_HairLum.events.onInputDown.add(function() {
+    
+            hairTint = shiftLuminosity(hairTint, 15);
+        });
+
+        arrowL_HairLum.events.onInputDown.add(onTap, this);
+        arrowL_HairLum.events.onInputUp.add(onRelease, this);
+        arrowR_HairLum.events.onInputDown.add(onTap, this);
+        arrowR_HairLum.events.onInputUp.add(onRelease, this);
+
+
+        // Arrows for changing hair style
+        var arrowL_Hair = game.add.image(xColLeft, yBase + 2*yDiff, "arrowLeft");
+        var arrowR_Hair = game.add.image(xColLeft + xDiff, yBase + 2*yDiff, "arrowRight");
     
         arrowL_Hair.inputEnabled = true;
         arrowR_Hair.inputEnabled = true;
+        arrowL_Hair.anchor.setTo(0.5);
+        arrowR_Hair.anchor.setTo(0.5);
+
     
         arrowL_Hair.events.onInputDown.add(function() {
             if(hairIndex == 0) {
@@ -117,11 +199,20 @@ var creatorMain = {
             }
         });
         
-        var arrowL_Shirt = game.add.image(150, 1480, "arrowLeft");
-        var arrowR_Shirt = game.add.image(450, 1480, "arrowRight");
+        arrowL_Hair.events.onInputDown.add(onTap, this);
+        arrowL_Hair.events.onInputUp.add(onRelease, this);
+        arrowR_Hair.events.onInputDown.add(onTap, this);
+        arrowR_Hair.events.onInputUp.add(onRelease, this);
+
+
+        // Arrows for changing shirt style
+        var arrowL_Shirt = game.add.image(xColLeft, yBase + 3*yDiff, "arrowLeft");
+        var arrowR_Shirt = game.add.image(xColLeft + xDiff, yBase + 3*yDiff, "arrowRight");
     
         arrowL_Shirt.inputEnabled = true;
         arrowR_Shirt.inputEnabled = true;
+        arrowL_Shirt.anchor.setTo(0.5);
+        arrowR_Shirt.anchor.setTo(0.5);
     
         arrowL_Shirt.events.onInputDown.add(function() {
             if(shirtIndex == 0) {
@@ -138,32 +229,62 @@ var creatorMain = {
                 shirtIndex++;
             }
         }, this);
+
+        arrowL_Shirt.events.onInputDown.add(onTap, this);
+        arrowL_Shirt.events.onInputUp.add(onRelease, this);
+        arrowR_Shirt.events.onInputDown.add(onTap, this);
+        arrowR_Shirt.events.onInputUp.add(onRelease, this);
     
+
         //Menu Labels
     
-        game.add.text(290, 1040, "Skin\nColour", {
-            font: "45px Pixilate",
+        var skinHueText = game.add.text(xColLeft + xDiff/2, yBase, "Skin\nHue", {
+            font: "45px Pixelate",
+            fill: "#ffffff",
+            align: "center"
+        });
+
+        skinHueText.anchor.setTo(0.5);
+
+        var skinLumText = game.add.text(xColRight + xDiff/2, yBase, "Skin\nLightness", {
+            font: "45px Pixelate",
+            fill: "#ffffff",
+            align: "center"
+        });
+
+        skinLumText.anchor.setTo(0.5);
+    
+        var hairHueText = game.add.text(xColLeft + xDiff/2, yBase + yDiff, "Hair\nHue", {
+            font: "45px Pixelate",
+            fill: "#ffffff",
+            align: "center"
+        });
+
+        hairHueText.anchor.setTo(0.5);
+
+        var hairLumText = game.add.text(xColRight + xDiff/2, yBase + yDiff, "Hair\nLightness", {
+            font: "45px Pixelate",
             fill: "#ffffff",
             align: "center"
         });
     
-        game.add.text(290, 1180, "Hair\nColour", {
-            font: "45px Pixilate",
-            fill: "#ffffff",
-            align: "center"
-        });
-    
-        game.add.text(310, 1350, "Hair", {
-            font: "45px Pixilate",
+        hairLumText.anchor.setTo(0.5);
+
+        var hairText = game.add.text(xColLeft + xDiff/2, yBase + 2.15*yDiff, "Hair", {
+            font: "45px Pixelate",
             fill: "#ffffff",
             align: "right"
         });
+
+        hairText.anchor.setTo(0.5);
     
-        game.add.text(310, 1500, "Shirt", {
-            font: "45px Pixilate",
+        var shirtText = game.add.text(xColLeft + xDiff/2 + 15, yBase + 3.15*yDiff, "Shirt", {
+            font: "45px Pixelate",
             fill: "#ffffff",
             align: "right"
         });
+
+        shirtText.anchor.setTo(0.5);
     
         // Character
         character = game.add.group();
