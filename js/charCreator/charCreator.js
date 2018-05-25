@@ -21,16 +21,11 @@ var hair;
 var face;
 
 var game = new Phaser.Game(gameConfig);
+
 game.state.add('boot', charBoot);
 game.state.add('creator', creatorMain);
 
 game.state.start('boot');
-
-
-
-//var hairIndex = hairArr.findIndex(hair);
-//var shirtIndex = shirtArr.findIndex(userBody);
-console.log(hair);
 
 function onTap(button) {
     button.scale.setTo(.8);
@@ -62,10 +57,9 @@ function looksgoodBtn() {
             }
     });	
 
-    game.time.events.add(300, function() {
+    game.time.events.add(1000, function() {
         window.location.href = "game.html";
     });
-
     
 }
 
@@ -76,11 +70,7 @@ function backBtn() {
 function shiftHue(hex, degree) {
     var hsl = rgbToHsl(hexToRgb(hex));
 
-    console.log("Hue Before: " + hsl.h);
-
     hsl.h += degree;
-
-    console.log("Hue After: " + hsl.h);
 
     var rgb = hslToRgb(hsl);
     return "0x" + rgbToHex(rgb);
@@ -88,8 +78,6 @@ function shiftHue(hex, degree) {
 
 function shiftLuminosity(hex, degree) {
     var hsl = rgbToHsl(hexToRgb(hex));
-
-    console.log("Luminosity Before: " + hsl.l);
 
     hsl.l += (degree/100);
 
@@ -99,26 +87,9 @@ function shiftLuminosity(hex, degree) {
         hsl.l = 0.9;
     }
 
-    console.log("Luminosity After: " + hsl.l);
-
     var rgb = hslToRgb(hsl);
     return "0x" + rgbToHex(rgb);
 }
-
-// function shiftHueSkin(hex, degree) {
-//     var hsl = rgbToHsl(hexToRgb(hex));
-
-//     console.log("Hue Before: " + hsl.h + " Light After: " + hsl.l);
-
-//     hsl.h += degree;
-
-//     hsl.l = 0.48 + (hsl.h/1440);
-
-//     console.log("Hue After: " + hsl.h + " Light After: " + hsl.l);
-
-//     var rgb = hslToRgb(hsl);
-//     return "0x" + rgbToHex(rgb);
-// }
 
 function hexToRgb(hex) {
     var result = /([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -176,8 +147,6 @@ function hslToRgb(hsl) {
     var s = hsl.s;
     var l = hsl.l;
 
-    console.log("In hslToRgb: \nh: " + Math.round(h*100)/100 + " s: " + Math.round(s*100)/100 + " l: " + Math.round(l*100)/100);
-
         if(s == 0){
             r = g = b = l; // achromatic
         }else{
@@ -196,7 +165,6 @@ function hslToRgb(hsl) {
             g = hue2rgb(p, q, h);
             b = hue2rgb(p, q, h - 1/3);
         }
-
 
     return {
         r: Math.round(r * 255), 

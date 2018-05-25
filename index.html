@@ -1,48 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Turn Off the Tap</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="Styles/styles.css" />
-		<script src="https://www.gstatic.com/firebasejs/5.0.1/firebase.js"></script>
-        <script>
-            window.twttr = (function(d, s, id) {
+
+<head>
+    <title>Turn Off the Tap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="Styles/styles.css" />
+    <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase.js"></script>
+    <script>
+        window.twttr = (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0],
-            t = window.twttr || {};
+                t = window.twttr || {};
             if (d.getElementById(id)) return t;
             js = d.createElement(s);
             js.id = id;
             js.src = "https://platform.twitter.com/widgets.js";
             fjs.parentNode.insertBefore(js, fjs);
             t._e = [];
-            t.ready = function(f) {
+            t.ready = function (f) {
                 t._e.push(f);
             };
             return t;
-            }(document, "script", "twitter-wjs"));
-        </script>
+        }(document, "script", "twitter-wjs"));
+    </script>
 
-    </head>
-    <body>
-        <img src="Images/TurnOfftheTap%20Logo2.png" alt="Turn Off the Tap Logo" class="logo" /><br />
-        <div id = "loggedIn" style = "display:none">
-            <a href="game.html"><img src="Images/btns/btn-play.png" alt="Play Button" class="btn indexBtn" /></a><br />
-            <a href="logIn.html"><img src="Images/btns/btn-profile.png" alt="Profile Button" class="btn indexBtn" /></a><br />
-            <a href="index.html"><img onclick="log_Out()"src="Images/btns/btn-logout.png" alt="LogOut Button" class="btn indexBtn" /></a><br />
-        </div>
-        <div id="notLoggedIn" style = "display:none">
-            <a href="logIn.html"><img src="Images/btns/Btn-Login.png" alt="Login Button" class="btn indexBtn" /></a><br />
-            <a href="signUp.html"><img src="Images/btns/Btn-SignUp.png" alt="SignUp Button" class="btn indexBtn" /></a><br />
-            <a href="game.html"><img src="Images/btns/btn-guest.png" alt="Play as Guest Button" onclick="log_Out()" class="btn indexBtn" /></a><br/>
-        </div>
-        <a href="about.html"><img src="Images/btns/btn-about.png" alt="About Button" class="btn indexBtn" /></a><br />
-        <a href="tutorial.html"><img src="Images/btns/btn-tutorial.png" alt="Tutorial Button" class="btn indexBtn" /></a><br />
-        <a href="highScores.html"><img src="Images/btns/btn-highscores.png" alt="Highscores Btn" class="btn indexBtnSmall" /></a><br />
-        <a class="twitter-follow-button"
-            href="https://twitter.com/TurnOffTap"
-            data-size="large"
-            data-show-count = "false"
-            id = "twitter-wjs"></a>
-		<script type="text/javascript" src="js/indexLoutOut.js"></script>
-    </body>
+</head>
+
+<body>
+    <img src="Images/TurnOfftheTap%20Logo2.png" alt="Turn Off the Tap Logo" class="logo" />
+    <br />
+    <div id="loggedIn" style="display:none">
+        <a href="game.html">
+            <img src="Images/btns/btn-play.png" alt="Play Button" class="btn indexBtn" />
+        </a>
+        <br />
+        <a href="logIn.html">
+            <img src="Images/btns/btn-profile.png" alt="Profile Button" class="btn indexBtn" />
+        </a>
+        <br />
+        <a href="index.html">
+            <img onclick="log_Out()" src="Images/btns/btn-logout.png" alt="LogOut Button" class="btn indexBtn" />
+        </a>
+        <br />
+    </div>
+    <div id="notLoggedIn" style="display:none">
+        <a href="logIn.html">
+            <img src="Images/btns/Btn-Login.png" alt="Login Button" class="btn indexBtn" />
+        </a>
+        <br />
+        <a href="signUp.html">
+            <img src="Images/btns/Btn-SignUp.png" alt="SignUp Button" class="btn indexBtn" />
+        </a>
+        <br />
+        <a href="game.html">
+            <img src="Images/btns/btn-guest.png" alt="Play as Guest Button" onclick="log_Out()" class="btn indexBtn" />
+        </a>
+        <br/>
+    </div>
+    <a href="about.html">
+        <img src="Images/btns/btn-about.png" alt="About Button" class="btn indexBtn" />
+    </a>
+    <br />
+    <a href="tutorial.html">
+        <img src="Images/btns/btn-tutorial.png" alt="Tutorial Button" class="btn indexBtn" />
+    </a>
+    <br />
+    <a href="highScores.html">
+        <img src="Images/btns/btn-highscores.png" alt="Highscores Btn" class="btn indexBtnSmall" />
+    </a>
+    <br />
+    <a class="twitter-follow-button" href="https://twitter.com/TurnOffTap" data-size="large" data-show-count="false" id="twitter-wjs"></a>
+    <script type="text/javascript" src="js/indexLoutOut.js"></script>
+</body>
+
 </html>

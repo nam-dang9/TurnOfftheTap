@@ -21,13 +21,13 @@ var charBoot = {
         var logo = game.add.image(540, 960, "loadingLogo");
         logo.anchor.setTo(0.5, 0.5);
         logo.scale.setTo(2, 2);
-        
-        
-    }, 
 
-    update: function() {
 
-        if(loadedData) {
+    },
+
+    update: function () {
+
+        if (loadedData) {
             game.state.start('creator');
         }
     }

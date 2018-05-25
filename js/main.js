@@ -47,7 +47,6 @@ var hairTint = "0x006aff";
 var logo;
 var map;
 var seasonDisplay;
-//var minigameCounter;
 
 var minigame = false;
 var pause = false;
@@ -71,15 +70,13 @@ var main = {
 
         minigameTimer.start();
 
-        //minigameCounter = game.add.text(50, 50, "");
-
         startTime = Date.now();
 
         // Setting up background
         var background = game.add.image(0, 0, "water");
         background.height = game.height;
         background.width = game.width;
-        
+
         // Setting up UI
         map = game.add.image(540, 960, "map");
         map.anchor.setTo(0.5, 0.5);
@@ -144,11 +141,10 @@ var main = {
         mainHome.events.onInputDown.add(homeBtn, this);
 
         // Season Display banner
-        //seasonDisplay = game.add.sprite(200, 500, 'sprites', "summer.png");
         seasonDisplay = game.add.sprite(750, 300, 'sprites', "summer.png");
         seasonDisplay.anchor.setTo(0.5, 0.5);
         seasonDisplay.scale.setTo(1.1, 1.1);
-        
+
         // Character
         character = game.add.group();
 
@@ -159,7 +155,7 @@ var main = {
 
         body.smoothed = false;
         body.tint = userSkin;
-        
+
         charHair.smoothed = false;
         charHair.tint = userHairColor;
 
@@ -192,7 +188,7 @@ var main = {
 
 
             // Regenerate Health
-            document.getElementById("timer").innerHTML="";
+            document.getElementById("timer").innerHTML = "";
             if (health < 100) {
                 health += healthRegen;
             }
@@ -212,41 +208,25 @@ var main = {
             difficulty = Math.round(timer / difficultyRate);
 
             // Changes character emotion based on remaning health
-            if(health > 80) {
+            if (health > 80) {
                 face.frameName = 'character/face1.png';
-            } else if(health > 60) {
+            } else if (health > 60) {
                 face.frameName = 'character/face2.png';
-            } else if(health > 40) {
+            } else if (health > 40) {
                 face.frameName = 'character/face3.png';
-            } else if(health > 20) {
+            } else if (health > 20) {
                 face.frameName = 'character/face4.png';
             } else {
                 face.frameName = 'character/face5.png';
             }
 
-            
+
 
             healthBar.setPercent((health / 100) * 100);
         }
 
         //console.log("Running " + game.time.events.running);
-    },
-
-    render: function () {
-
-        // Debug Information
-
-        // game.debug.font = "35px Arial";
-        // var minutes = Math.floor(timer / 60000);
-        // game.debug.text("Time: " + minutes + ":" + (Math.floor(timer / 1000) - (minutes * 60)), 530, 500, "yellow");
-        // game.debug.text("Spawn Interval: " + Math.round(spawnInterval) / 1000, 530, 250, "cyan");
-        // game.debug.text("Difficulty: " + difficulty, 530, 300, "yellow");
-        // game.debug.text("Spawn Ratios: " + Math.round(debugSpawn1 * 100) + " : " + Math.round(debugSpawn2 * 100) + " : " + Math.round(debugSpawn3 * 100), 530, 350, "yellow");
-        // game.debug.text("Roll: " + Math.round(debugRand * 100), 530, 400, "yellow");
-        // game.debug.text("isWinter:" + winter, 530, 450, "yellow");
-
     }
-
 };
 
 function damageHealth(bubble) {
@@ -270,15 +250,14 @@ function tapOnBubble(bubble) {
         } else if (bubble.type == 'minigameShower') {
             game.sound.play('minigameSound');
             minigame = true;
-            
+
             showerSound = game.add.audio('showerSound');
             showerSound.play();
             showerBackground = game.add.image(0, 0, 'showerBackground');
             showerBackground.inputEnabled = true;
             var showertime = game.add.image(540, 960, 'showertime');
             showertime.anchor.setTo(0.5, 0.5);
-            var buffer = minigameTimer.add(Phaser.Timer.SECOND, function() {
-                console.log('yeet');
+            var buffer = minigameTimer.add(Phaser.Timer.SECOND, function () {
                 showertime.kill();
                 showertime.destroy();
                 minigameShower();
@@ -315,7 +294,7 @@ function tapOnBubble(bubble) {
 
 // Adds a "pressed down" effect when the bubble is tapped
 function onTap(bubble) {
-    if(!pause){
+    if (!pause) {
         bubble.scale.setTo(.8);
     }
 }
@@ -398,7 +377,7 @@ function createBubble() {
 // interval also based on the game duration.
 function spawnBubbles() {
 
-    if(!pause && !minigame) {
+    if (!pause && !minigame) {
 
         var spawn1 = Math.pow(1.02, (1 - difficulty) / 3);
         var spawn3 = 1 / 1.8 * Math.pow(1.02, difficulty - maxDifficulty) - 0.2;
@@ -428,20 +407,17 @@ function spawnBubbles() {
 
         var toSpawn = bubbleCount();
 
-
         for (i = 0; i < toSpawn; i++) {
             createBubble();
         }
-
 
         // Set interval until next Bubble spawns
         var adjustment = maxDifficulty * 3 * Math.log2(difficulty / 10 + 1);
         spawnInterval = baseInterval - adjustment;
 
-
-        // Initiate timer delay for next bubble spawn
-        
     }
+
+    // Initiate timer delay for next bubble spawn
     game.time.events.add(spawnInterval, spawnBubbles, this);
 
 }

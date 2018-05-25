@@ -1,42 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Login | Turn Off the Tap</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="Styles/styles.css">
-        <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase.js"></script>
-    </head>
-    <body>
-        <div class="authentBanner">
-				<div id="loginHid" style = "display:none">
-				<h3 class="title">LOG IN</h3>
-				<h5 class="inputLabel">Email</h5>
-				<input type ="email" id="txtEmail" class="bannerInput" /><br />
-				<h5 class="inputLabel">Password</h5>
-				<input type ="password" id="txtPassword"class="bannerInput" /><br />
-				<div id="errMsg" ></div>
-			</div>
-            <div id="login">
-                
-            </div>
-            <div id="loginCharDisplay">
-                
-            </div>
-            <div id="loginBtns">
-                <a href="game.html"><img src="Images/btns/btn-play.png" class="btn loginBtn" /></a>
-                <a href="charCreation.html"><img src="Images/btns/btn-character.png" class="btn loginBtn" /></a>
-            </div>
+
+<head>
+    <title>Login | Turn Off the Tap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Styles/styles.css">
+    <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase.js"></script>
+</head>
+
+<body>
+    <div class="authentBanner">
+        <div id="loginHid" style="display:none">
+            <h3 class="title">LOG IN</h3>
+            <h5 class="inputLabel">Email</h5>
+            <input type="email" id="txtEmail" class="bannerInput" />
+            <br />
+            <h5 class="inputLabel">Password</h5>
+            <input type="password" id="txtPassword" class="bannerInput" />
+            <br />
+            <div id="errMsg"></div>
         </div>
-        <div id="loggedIn" style="display:none">
-            <img src="Images/btns/btn-logout.png" onclick="logOut()" class="btn authentBtn" id="imgClick"/>
-            <a href="index.html"><img src="Images/btns/btn-backlong.png" class="btn authentBtn" /></a>
+        <div id="login">
+
         </div>
-        <div id="notLoggedIn" style="display:none">
-            <img src="Images/btns/Btn-Login.png" onclick="logInF()" class="btn authentBtn" id="imgClick"/>
-            <a href="index.html"><img src="Images/btns/btn-backlong.png" class="btn authentBtn" /></a>
+        <div id="loginCharDisplay">
+
         </div>
-    </body>
+        <div id="loginBtns">
+            <a href="game.html">
+                <img src="Images/btns/btn-play.png" class="btn loginBtn" />
+            </a>
+            <a href="charCreation.html">
+                <img src="Images/btns/btn-character.png" class="btn loginBtn" />
+            </a>
+        </div>
+    </div>
+    <div id="loggedIn" style="display:none">
+        <img src="Images/btns/btn-logout.png" onclick="logOut()" class="btn authentBtn" id="imgClick" />
+        <a href="index.html">
+            <img src="Images/btns/btn-backlong.png" class="btn authentBtn" />
+        </a>
+    </div>
+    <div id="notLoggedIn" style="display:none">
+        <img src="Images/btns/Btn-Login.png" onclick="logInF()" class="btn authentBtn" id="imgClick" />
+        <a href="index.html">
+            <img src="Images/btns/btn-backlong.png" class="btn authentBtn" />
+        </a>
+    </div>
+</body>
 <script src="js/dbLink.js"></script>
 <script src="js/login.js"></script>
-</html>    
- 
+
+</html>

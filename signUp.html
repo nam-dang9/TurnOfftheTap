@@ -1,45 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Sign Up | Turn Off the Tap</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="Styles/styles.css">
-		<script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+
+<head>
+    <title>Sign Up | Turn Off the Tap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Styles/styles.css">
+    <script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
 
 
-    </head>
-    <body>
-        <div class="authentBanner">
-			
-			<div id="notLoginIn">
-				<h3 class="title">SIGN UP</h3>
-				<h5 class="inputLabel">Email</h5>
-				<input type ="email" id="txtEmail" class="bannerInput" /><br />
-				<h5 class="inputLabel">Password</h5>
-				<input type ="password" id="txtPassword" class="bannerInput" /><br />
-				<h5 class="inputLabel">Nickname</h5>
-				<input type ="text" id="txtNickname" class="bannerInput" /><br />
-			</div>
-			
-			<!--Display the data    -->
-			<div class="main-list " id="mainDisplay">
-			</div>
-            <div class="userName" id ="user_Name"></div>
-            <div class="ErrorMsg" id="err_msg" style="color: #df0d64;"></div>
+</head>
+
+<body>
+    <div class="authentBanner">
+
+        <div id="notLoginIn">
+            <h3 class="title">SIGN UP</h3>
+            <h5 class="inputLabel">Email</h5>
+            <input type="email" id="txtEmail" class="bannerInput" />
+            <br />
+            <h5 class="inputLabel">Password</h5>
+            <input type="password" id="txtPassword" class="bannerInput" />
+            <br />
+            <h5 class="inputLabel">Nickname</h5>
+            <input type="text" id="txtNickname" class="bannerInput" />
+            <br />
         </div>
-		
-        <img src="Images/btns/Btn-SignUp.png" onclick="start_signUp();after_signUp()" id="btnSignUp" class="btn authentBtn" />
-        <a href="index.html"><img src="Images/btns/btn-backlong.png" class="btn authentBtn" /></a>
-		
-        <div id="hidebtn">
-            <img src="Images/btns/btn-logout.png" onclick="log_out()" class="btn authentBtn" />
-        </div>
-		
 
-		
+        <!--Display the data    -->
+        <div class="main-list " id="mainDisplay">
+        </div>
+        <div class="userName" id="user_Name"></div>
+        <div class="ErrorMsg" id="err_msg" style="color: #df0d64;"></div>
+    </div>
+
+    <img src="Images/btns/Btn-SignUp.png" onclick="start_signUp();after_signUp()" id="btnSignUp" class="btn authentBtn" />
+    <a href="index.html">
+        <img src="Images/btns/btn-backlong.png" class="btn authentBtn" />
+    </a>
+
+    <div id="hidebtn">
+        <img src="Images/btns/btn-logout.png" onclick="log_out()" class="btn authentBtn" />
+    </div>
+
+
+
     <!-- Add my js file   -->
-		<script src="js/dbLink.js"></script>
-		<script src="js/signUp.js"></script>
+    <script src="js/dbLink.js"></script>
+    <script src="js/signUp.js"></script>
 
-    </body>
+</body>
+
 </html>

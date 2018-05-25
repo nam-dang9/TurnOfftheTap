@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Turn Off the Tap</title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width">
 
-        <script type="text/javascript" src="js/phaser.js"></script>
-        <script type="text/javascript" src="js/readCharData.js"></script>
-        <script type="text/javascript" src="js/boot.js"></script>
-        <script type="text/javascript" src="js/load.js"></script>
-        <script type="text/javascript" src="js/tutorial.js"></script>
-        <script type="text/javascript" src="js/minigames/minigameSprinkler.js"></script>
-        <script type="text/javascript" src="js/minigames/minigameShower.js"></script>
-        <script type="text/javascript" src="js/minigames/minigameFaucet.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
-		<script type="text/javascript" src="js/gameover.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
-		<script type="text/javascript" src="js/dbLink.js"></script>
-        <script type="text/javascript" src="js/healthbar.js"></script>
-        <script type="text/javascript">
-            var config1 = {
-                width: 1080,
-                height: 1920,
-                renderer: Phaser.AUTO,
-                multiTexture: true,
-                antialias: false,
-                enableDebug: false
-            }
-            var game = new Phaser.Game(config1);
-            game.state.add('boot', boot);
-            game.state.add('load', load);
-            game.state.add('main', main);
-            game.state.add('gameover', gameover);
-            game.state.start('boot');
-        </script>
-        <link rel="stylesheet" type="text/css" href="Styles/styles.css">
-        </head>
-        <body>
-            <span id="timer"></span>
+<head>
+    <title>Turn Off the Tap</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width">
 
-        <div id = "hideTwitter">
-        </div>
-    </body>
+    <script type="text/javascript" src="js/phaser.js"></script>
+    <script type="text/javascript" src="js/readCharData.js"></script>
+    <script type="text/javascript" src="js/boot.js"></script>
+    <script type="text/javascript" src="js/load.js"></script>
+    <script type="text/javascript" src="js/tutorial.js"></script>
+    <script type="text/javascript" src="js/minigames/minigameSprinkler.js"></script>
+    <script type="text/javascript" src="js/minigames/minigameShower.js"></script>
+    <script type="text/javascript" src="js/minigames/minigameFaucet.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/gameover.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+    <script type="text/javascript" src="js/dbLink.js"></script>
+    <script type="text/javascript" src="js/healthbar.js"></script>
+    <script type="text/javascript">
+        var config1 = {
+            width: 1080,
+            height: 1920,
+            renderer: Phaser.AUTO,
+            multiTexture: true,
+            antialias: false,
+            enableDebug: false
+        }
+        var game = new Phaser.Game(config1);
+        game.state.add('boot', boot);
+        game.state.add('load', load);
+        game.state.add('main', main);
+        game.state.add('gameover', gameover);
+        game.state.start('boot');
+    </script>
+    <link rel="stylesheet" type="text/css" href="Styles/styles.css">
+</head>
+
+<body>
+    <span id="timer"></span>
+
+    <div id="hideTwitter">
+    </div>
+</body>
+
 </html>
