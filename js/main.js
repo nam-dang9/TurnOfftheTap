@@ -191,10 +191,11 @@ var main = {
 
     render: function () {
 
-        game.debug.font = "35px Arial";
+        // game.debug.font = "35px Arial";
 
         // var minutes = Math.floor(timer / 60000);
 
+        
         // game.debug.text("Time: " + minutes + ":" + (Math.floor(timer / 1000) - (minutes * 60)), 530, 500, "yellow");
         // game.debug.text("Spawn Interval: " + Math.round(spawnInterval) / 1000, 530, 250, "cyan");
         // game.debug.text("Difficulty: " + difficulty, 530, 300, "yellow");
@@ -258,7 +259,9 @@ function tapOnBubble(bubble) {
 }
 
 function onTap(bubble) {
-    bubble.scale.setTo(.8);
+    if(!pause){
+        bubble.scale.setTo(.8);
+    }
 }
 
 function onRelease(bubble) {

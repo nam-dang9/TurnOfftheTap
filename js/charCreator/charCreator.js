@@ -32,6 +32,13 @@ game.state.start('boot');
 //var shirtIndex = shirtArr.findIndex(userBody);
 console.log(hair);
 
+function onTap(button) {
+    button.scale.setTo(.8);
+}
+
+function onRelease(button) {
+    button.scale.setTo(1);
+}
 
 function looksgoodBtn() {
 				
@@ -66,7 +73,7 @@ function backBtn() {
     window.location.href = "index.html";
 }
 
-function shiftHueHair(hex, degree) {
+function shiftHue(hex, degree) {
     var hsl = rgbToHsl(hexToRgb(hex));
 
     console.log("Hue Before: " + hsl.h);
@@ -79,20 +86,39 @@ function shiftHueHair(hex, degree) {
     return "0x" + rgbToHex(rgb);
 }
 
-function shiftHueSkin(hex, degree) {
+function shiftLuminosity(hex, degree) {
     var hsl = rgbToHsl(hexToRgb(hex));
 
-    console.log("Hue Before: " + hsl.h + " Light After: " + hsl.l);
+    console.log("Luminosity Before: " + hsl.l);
 
-    hsl.h += degree;
+    hsl.l += (degree/100);
 
-    hsl.l = 0.48 + (hsl.h/1440);
+    if (hsl.l < 0.1) {
+        hsl.l = 0.1;
+    } else if (hsl.l > 0.9) {
+        hsl.l = 0.9;
+    }
 
-    console.log("Hue After: " + hsl.h + " Light After: " + hsl.l);
+    console.log("Luminosity After: " + hsl.l);
 
     var rgb = hslToRgb(hsl);
     return "0x" + rgbToHex(rgb);
 }
+
+// function shiftHueSkin(hex, degree) {
+//     var hsl = rgbToHsl(hexToRgb(hex));
+
+//     console.log("Hue Before: " + hsl.h + " Light After: " + hsl.l);
+
+//     hsl.h += degree;
+
+//     hsl.l = 0.48 + (hsl.h/1440);
+
+//     console.log("Hue After: " + hsl.h + " Light After: " + hsl.l);
+
+//     var rgb = hslToRgb(hsl);
+//     return "0x" + rgbToHex(rgb);
+// }
 
 function hexToRgb(hex) {
     var result = /([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -149,6 +175,8 @@ function hslToRgb(hsl) {
     var h = hsl.h / 360;
     var s = hsl.s;
     var l = hsl.l;
+
+    console.log("In hslToRgb: \nh: " + Math.round(h*100)/100 + " s: " + Math.round(s*100)/100 + " l: " + Math.round(l*100)/100);
 
         if(s == 0){
             r = g = b = l; // achromatic
