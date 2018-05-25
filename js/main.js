@@ -60,9 +60,12 @@ var pauseStart;
 
 var timer;
 
+var bgmusic;
+
 var main = {
     create: function () {
-
+        bgmusic = game.add.audio('bgmusic');
+        bgmusic.play();
         minigameTimer = game.time.create(false);
 
         minigameTimer.start();
@@ -261,7 +264,19 @@ function tapOnBubble(bubble) {
         } else if (bubble.type == 'minigameShower') {
             game.sound.play('minigameSound');
             minigame = true;
-            minigameShower();
+            
+            showerSound = game.add.audio('showerSound');
+            showerSound.play();
+            showerBackground = game.add.image(0, 0, 'showerBackground');
+            showerBackground.inputEnabled = true;
+            var showertime = game.add.image(540, 960, 'showertime');
+            showertime.anchor.setTo(0.5, 0.5);
+            var buffer = minigameTimer.add(Phaser.Timer.SECOND, function() {
+                console.log('yeet');
+                showertime.kill();
+                showertime.destroy();
+                minigameShower();
+            }, this);
         } else {
             game.sound.play('pop');
         }

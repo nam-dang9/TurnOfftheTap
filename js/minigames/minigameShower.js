@@ -1,12 +1,12 @@
+var showerbackground;
+var showersound;
+
 // SHOWER MINIGAME
 // Bubble position: 540, 690
 function minigameShower() {
     pauseTime();
     var clicked = false;
-    var showerSound = game.add.audio('showerSound');
-    showerSound.play();
-    var showerBackground = game.add.image(0, 0, 'showerBackground');
-    showerBackground.inputEnabled = true;
+    
     
     var status = game.add.sprite(540, 690, 'sprites', 'showerMinigame/showering.png');
     status.anchor.setTo(0.5, 0.5);

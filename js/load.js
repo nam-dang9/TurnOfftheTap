@@ -61,6 +61,7 @@ var load = {
         game.load.audio('knock', 'sounds/knock.wav');
         game.load.audio('okaySound', 'sounds/okay.wav');
         game.load.audio('noSound', 'sounds/no.wav');
+        game.load.audio('bgmusic', 'sounds/bgmusic.wav');
         
     },
     
