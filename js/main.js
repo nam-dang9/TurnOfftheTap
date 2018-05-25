@@ -169,6 +169,7 @@ var main = {
     update: function () {
 
         if (!pause && !minigame) {
+            document.getElementById("timer").innerHTML="";
             if (health < 100) {
                 health += healthRegen;
             }
