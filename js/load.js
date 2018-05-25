@@ -12,25 +12,23 @@ var load = {
         game.load.image('map', 'Images/Map.png');
         game.load.image('snowMap', 'Images/Map-Snow.png');
         game.load.image('logo', 'Images/TurnOfftheTap Logo1.png');
-        game.load.image('water', 'Images/Water.png');
-        game.load.image('waterDrop', 'Images/Waterdrop.png');
         game.load.image('easteregg', 'Images/easteregg.png');
         game.load.image('gameover', 'Images/gameover.png');
         game.load.image('score', 'Images/score.png');
-        game.load.image('trophy', 'Images/trophy.png');
         game.load.image('overlay', 'Images/overlay.png');
         game.load.image('particle', 'Images/waterParticle.png');
+        game.load.image('summerBanner', 'Images/summer.png');
+        game.load.image('winterBanner', 'Images/winter.png');
+        game.load.image('ui', 'Images/ui.png');
+        game.load.image('water', 'Images/water.png');
         
         // Banners
         game.load.image('banner', 'Images/banners/Banner.png');
         game.load.image('bannerDark', 'Images/banners/Banner-Dark.png');
         game.load.image('bannerLong', 'Images/banners/Banner-Long.png');
         game.load.image('bannerLight', 'Images/banners/banner-Light.png');
-        game.load.image('healthDisplayBanner', 'Images/banners/HealthDisplayBanner.png');
-        game.load.image('charDisplayBanner', 'Images/banners/charDisplayBanner.png');
         game.load.image('bannerHidden', 'Images/banners/HiddenBanner.png');
         game.load.image('tutorialBanner', 'Images/banners/tutorialbanner.png');
-        game.load.image('scoreDisplayBanner', 'Images/banners/scoredisplaybanner.png');
         
         // Btns
         game.load.image('backBtn', 'Images/btns/Btn-Back.png');
@@ -85,6 +83,7 @@ var load = {
         game.load.image('no', 'Images/showerMinigame/no.png');
         game.load.image('marker', 'Images/showerMinigame/marker.png');
         game.load.image('dontshowertoolong', 'Images/showerMinigame/dontshowertoolong.png');
+        game.load.image('showertime', 'Images/showerMinigame/showertime.png');
         
         // Sounds
         game.load.audio('pop', 'sounds/pop.wav');
