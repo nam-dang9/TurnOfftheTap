@@ -32,30 +32,30 @@ function minigameSprinkler() {
         var house1 = {
             health: startingHealth,
             sprinklerStatus: false,
-            sprinkler: game.add.sprite(377, 796, 'sprinklerBoss'),
+            sprinkler: game.add.sprite(377, 796, 'sprites', 'sprinklerMinigame/sprinklerBoss/6.png'),
             sprinklerOn: function() {
                 if (this.sprinklerStatus) {
-                    this.sprinkler.animations.add('on', [0, 1, 2, 3, 4]);
+                    this.sprinkler.animations.add('on', Phaser.Animation.generateFrameNames('sprinklerMinigame/sprinklerBoss/', 1, 5, '.png', 1));
                     this.sprinkler.animations.play('on', 30, true);
-                    this.health += 8;
+                    this.health += 10;
                 } else {
-                    this.sprinkler.animations.add('on', [5, 6]);
+                    this.sprinkler.animations.add('on', ['sprinklerMinigame/sprinklerBoss/6.png']);
                     this.sprinkler.animations.play('on', 30, true);
                 } 
             },
-            status: game.add.sprite(188, 490, 'nothing'),
+            status: game.add.sprite(188, 490, 'sprites', 'nothing.png'),
             waterStatus: function() {
                 this.status.anchor.setTo(0.5, 0.5);
                 if (this.health > 20) {
-                    this.status.loadTexture('toomuchwater');
+                    this.status.loadTexture('sprites', 'sprinklerMinigame/toomuchwater.png');
                     sprinklerHealthBar.health -= 2.5;
                     sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
                 } else if (this.health >= 15 && this.health <= 20) {
-                    this.status.loadTexture('haswater');
+                    this.status.loadTexture('sprites', 'sprinklerMinigame/haswater.png');
                 } else if (this.health <= 5 && this.health >= 0) {
-                    this.status.loadTexture('needswater');
+                    this.status.loadTexture('sprites', 'sprinklerMinigame/needswater.png');
                 } else if (this.health < 0) {
-                    this.status.loadTexture('reallyneedswater');
+                    this.status.loadTexture('sprites', 'sprinklerMinigame/reallyneedswater.png');
                     sprinklerHealthBar.health -= 2.5;
                     sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
                 }
@@ -85,34 +85,34 @@ function minigameSprinkler() {
  var house2 = {
         health: startingHealth,
         sprinklerStatus: false,
-        sprinkler: game.add.sprite(725, 598, 'sprinklerBoss'),
+        sprinkler: game.add.sprite(725, 598, 'sprites', 'sprinklerMinigame/sprinklerBoss/6.png'),
         sprinklerOn: function() {
             if (this.sprinklerStatus) {
-                this.sprinkler.animations.add('on', [0, 1, 2, 3, 4]);
+                this.sprinkler.animations.add('on', Phaser.Animation.generateFrameNames('sprinklerMinigame/sprinklerBoss/', 1, 5, '.png', 1));
                 this.sprinkler.animations.play('on', 30, true);
-                this.health += 8;
+                this.health += 10;
             } else {
-                this.sprinkler.animations.add('on', [6]);
+                this.sprinkler.animations.add('on', ['sprinklerMinigame/sprinklerBoss/6.png']);
                 this.sprinkler.animations.play('on', 30, true);
             } 
         },
-        status: game.add.sprite(910, 490, 'nothing'),
+        status: game.add.sprite(910, 490, 'sprites', 'nothing.png'),
         waterStatus: function() {
             this.status.anchor.setTo(0.5, 0.5);
             if (this.health > 20) {
-                this.status.loadTexture('toomuchwater');
-                sprinklerHealthBar.health -= 4.5;
+                this.status.loadTexture('sprites', 'sprinklerMinigame/toomuchwater.png');
+                sprinklerHealthBar.health -= 2.5;
                 sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             } else if (this.health >= 15 && this.health <= 20) {
-                this.status.loadTexture('haswater');
+                this.status.loadTexture('sprites', 'sprinklerMinigame/haswater.png');
             } else if (this.health <= 5 && this.health >= 0) {
-                this.status.loadTexture('needswater');
+                this.status.loadTexture('sprites', 'sprinklerMinigame/needswater.png');
             } else if (this.health < 0) {
-                this.status.loadTexture('reallyneedswater');
-                sprinklerHealthBar.health -= 4.5;
+                this.status.loadTexture('sprites', 'sprinklerMinigame/reallyneedswater.png');
+                sprinklerHealthBar.health -= 2.5;
                 sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             }
-        }
+        } 
     }
 
     house2.sprinkler.anchor.setTo(0.5, 0.5);
@@ -137,34 +137,34 @@ function minigameSprinkler() {
     var house3 = {
         health: startingHealth,
         sprinklerStatus: false,
-        sprinkler: game.add.sprite(370, 1110, 'sprinklerBoss'),
+        sprinkler: game.add.sprite(370, 1110, 'sprites', 'sprinklerMinigame/sprinklerBoss/6.png'),
         sprinklerOn: function() {
             if (this.sprinklerStatus) {
-                this.sprinkler.animations.add('on', [0, 1, 2, 3, 4]);
+                this.sprinkler.animations.add('on', Phaser.Animation.generateFrameNames('sprinklerMinigame/sprinklerBoss/', 1, 5, '.png', 1));
                 this.sprinkler.animations.play('on', 30, true);
                 this.health += 10;
             } else {
-                this.sprinkler.animations.add('on', [6]);
+                this.sprinkler.animations.add('on', ['sprinklerMinigame/sprinklerBoss/6.png']);
                 this.sprinkler.animations.play('on', 30, true);
             } 
         },
-        status: game.add.sprite(188, 990, 'nothing'),
+        status: game.add.sprite(188, 990, 'sprites', 'nothing.png'),
         waterStatus: function() {
             this.status.anchor.setTo(0.5, 0.5);
             if (this.health > 20) {
-                this.status.loadTexture('toomuchwater');
-                sprinklerHealthBar.health -= 5.5;
+                this.status.loadTexture('sprites', 'sprinklerMinigame/toomuchwater.png');
+                sprinklerHealthBar.health -= 2.5;
                 sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             } else if (this.health >= 15 && this.health <= 20) {
-                this.status.loadTexture('haswater');
+                this.status.loadTexture('sprites', 'sprinklerMinigame/haswater.png');
             } else if (this.health <= 5 && this.health >= 0) {
-                this.status.loadTexture('needswater');
+                this.status.loadTexture('sprites', 'sprinklerMinigame/needswater.png');
             } else if (this.health < 0) {
-                this.status.loadTexture('reallyneedswater');
-                sprinklerHealthBar.health -= 0.5;
+                this.status.loadTexture('sprites', 'sprinklerMinigame/reallyneedswater.png');
+                sprinklerHealthBar.health -= 2.5;
                 sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             }
-        }
+        } 
     }
 
     house3.sprinkler.anchor.setTo(0.5, 0.5);
@@ -189,34 +189,34 @@ function minigameSprinkler() {
     var house4 = {
         health: startingHealth,
         sprinklerStatus: false,
-        sprinkler: game.add.sprite(720, 1310, 'sprinklerBoss'),
+        sprinkler: game.add.sprite(720, 1310, 'sprites', 'sprinklerMinigame/sprinklerBoss/6.png'),
         sprinklerOn: function() {
             if (this.sprinklerStatus) {
-                this.sprinkler.animations.add('on', [0, 1, 2, 3, 4]);
+                this.sprinkler.animations.add('on', Phaser.Animation.generateFrameNames('sprinklerMinigame/sprinklerBoss/', 1, 5, '.png', 1));
                 this.sprinkler.animations.play('on', 30, true);
-                this.health += 12;
+                this.health += 10;
             } else {
-                this.sprinkler.animations.add('on', [6]);
+                this.sprinkler.animations.add('on', ['sprinklerMinigame/sprinklerBoss/6.png']);
                 this.sprinkler.animations.play('on', 30, true);
             } 
         },
-        status: game.add.sprite(910, 990, 'nothing'),
+        status: game.add.sprite(910, 990, 'sprites', 'nothing.png'),
         waterStatus: function() {
             this.status.anchor.setTo(0.5, 0.5);
             if (this.health > 20) {
-                this.status.loadTexture('toomuchwater');
-                sprinklerHealthBar.health -= 4.5;
+                this.status.loadTexture('sprites', 'sprinklerMinigame/toomuchwater.png');
+                sprinklerHealthBar.health -= 2.5;
                 sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             } else if (this.health >= 15 && this.health <= 20) {
-                this.status.loadTexture('haswater');
+                this.status.loadTexture('sprites', 'sprinklerMinigame/haswater.png');
             } else if (this.health <= 5 && this.health >= 0) {
-                this.status.loadTexture('needswater');
+                this.status.loadTexture('sprites', 'sprinklerMinigame/needswater.png');
             } else if (this.health < 0) {
-                this.status.loadTexture('reallyneedswater');
-                sprinklerHealthBar.health -= 0.5;
+                this.status.loadTexture('sprites', 'sprinklerMinigame/reallyneedswater.png');
+                sprinklerHealthBar.health -= 2.5;
                 sprinklerHealthBar.setPercent((sprinklerHealthBar.health / 30) * 100);
             }
-        }
+        } 
     }
 
     house4.sprinkler.anchor.setTo(0.5, 0.5);
@@ -345,7 +345,6 @@ function minigameSprinkler() {
                 healthDisplay.text = Math.round(health) + ' / 100';
                 minigame = false;
                 unpauseTime();
-                //spawnBubbles();
             }, this);
         } else {
             if (!alreadyDone) {
@@ -369,7 +368,6 @@ function minigameSprinkler() {
                     healthDisplay.text = Math.round(health) + ' / 100';
                     minigame = false;
                     unpauseTime();
-                    //spawnBubbles();
                 }, this);
             }
         }

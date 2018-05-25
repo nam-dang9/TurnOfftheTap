@@ -36,6 +36,7 @@ var bubbles;
 var bubble;
 
 var character;
+var face;
 var charX = -5;
 var charY = +5;
 
@@ -80,21 +81,28 @@ var main = {
         // Setting up UI
         var ui = game.add.image(0, 0, 'ui');
 
-        logo = game.add.image(30, 1775, "logo");
+        logo = game.add.image(30, 1775, "sprites", "TurnOfftheTap Logo1.png");
         logo.inputEnabled = true;
         logo.events.onInputDown.add(tapOnLogo, this);
         logo.taps = 9;
 
         // UI buttons
-        mainPause = game.add.image(880, 1740, "pause");
+        mainPause = game.add.image(880, 1740, "sprites", "btn-pause.png");
         mainPause.inputEnabled = true;
         mainPause.events.onInputDown.add(pauseBtn, this);
 
-        mainHome = game.add.image(680, 1740, "homeBtn");
+        mainHome = game.add.image(680, 1740, "sprites", "Btn-HomeIcon.png");
         mainHome.inputEnabled = true;
         mainHome.events.onInputDown.add(homeBtn, this);
 
         // Health display
+        var healthDisplayBanner = game.add.image(960, 110, "healthDisplayBanner");
+        healthDisplayBanner.anchor.setTo(0.5, 0.5);
+        healthDisplayBanner.scale.setTo(1, 1);
+        var waterdrop = game.add.image(837, 110, "sprites", "Waterdrop.png");
+        waterdrop.anchor.setTo(0.5, 0.5);
+        waterdrop.scale.setTo(0.7, 0.7);
+        game.add.image(0, -40, "charDisplayBanner");
         healthDisplay = game.add.text(970, 110, health + '/100', {
             font: "35px Pixelate",
             fill: "#ffffff",
@@ -109,6 +117,8 @@ var main = {
             align: "right"
         });
         scoreDisplay.anchor.setTo(0.5, 0.5);
+        var trophy = game.add.image(500, 110, "sprites", "trophy.png");
+        trophy.anchor.setTo(0.5, 0.5);
         seasonDisplay = game.add.sprite(200, 470, "summerBanner");
         seasonDisplay.anchor.setTo(0.5, 0.5);
         seasonDisplay.scale.setTo(1.1, 1.1);
@@ -138,16 +148,24 @@ var main = {
         character = game.add.group();
 
 
-        var body = character.create(charX, charY, 'body');
+        var body = character.create(charX, charY, 'sprites', 'character/body.png');
+
+        console.log(hair);
+        console.log(userBody);
+        var charHair = character.create(charX, charY, 'sprites', 'character/' + hair + '.png');
+
+        var shirt = character.create(charX, charY, 'sprites', 'character/' + userBody + '.png');
+        face = character.create(charX, charY, 'sprites', 'character/face2.png');
+
+        
         body.smoothed = false;
         body.tint = userSkin;
+        
+        charHair.smoothed = false;
+        charHair.tint = userHairColor;
 
-        var hair = character.create(charX, charY, 'hair');
-        hair.smoothed = false;
-        hair.tint = userHairColor;
-
-        character.create(charX, charY, 'shirt').smoothed = false;
-        character.create(charX, charY, 'face').smoothed = false;
+        shirt.smoothed = false;
+        face.smoothed = false;
 
         character.scale.setTo(8);
 
@@ -158,7 +176,7 @@ var main = {
         game.time.events.add(seasonDuration, changeSeason);
 
         emitter = game.add.emitter(0, 0, 50);
-        emitter.makeParticles('particle');
+        emitter.makeParticles('sprites', 'waterParticle.png');
         emitter.setScale(1, 2, 1, 2);
         emitter.setAlpha(1, 0.2, 400);
         emitter.setXSpeed(-400, 400);
@@ -176,6 +194,7 @@ var main = {
             if (health <= 0) {
                 game.state.start('gameover');
             }
+
             // Reduce health based on currently living bubbles
             bubbles.forEachAlive(damageHealth, this);
             healthDisplay.text = Math.round(health) + ' / 100';
@@ -183,6 +202,18 @@ var main = {
             // Update difficulty based on elapsed time
             timer = game.time.elapsedSince(startTime) - pausedTime;
             difficulty = Math.round(timer / difficultyRate);
+
+            if(health > 80) {
+                face.frameName = 'character/face2.png';
+            } else if(health > 60) {
+                face.frameName = 'character/face1.png';
+            } else if(health > 40) {
+                face.frameName = 'character/face3.png';
+            } else if(health > 20) {
+                face.frameName = 'character/face4.png';
+            } else {
+                face.frameName = 'character/face5.png';
+            }
 
 
             healthBar.setPercent((health / 100) * 100);
@@ -269,10 +300,10 @@ function onRelease(bubble) {
 }
 
 function createBubble() {
-    var currentEvent, currentBubble = Math.floor(Math.random() * 20);
+    var currentEvent, currentBubble = Math.floor(Math.random() * 6);
     if (currentBubble == 0) {
         currentBubble = Math.floor(Math.random() * minigameNames.length);
-        currentEvent = minigameNames[currentBubble];
+        currentEvent = minigameNames[0];
     } else {
         currentBubble = Math.floor(Math.random() * bubbleNames.length);
         currentEvent = bubbleNames[currentBubble];
@@ -294,7 +325,7 @@ function createBubble() {
         currentY = Math.random() * 1200 + 20;
     }
 
-    bubble = bubbles.create(currentX, currentY, currentEvent);
+    bubble = bubbles.create(currentX, currentY, 'sprites', "bubbles/" + currentEvent + '.png');
     bubble.type = currentEvent;
     bubble.anchor.setTo(0.5, 0.5);
     bubble.inputEnabled = true;
@@ -430,7 +461,7 @@ function pauseBtn() {
         overlay = game.add.image(0, 0, 'overlay');
         mainHome.inputEnabled = false;
         mainPause.inputEnabled = false;
-        unpause = game.add.image(540, 800, 'unpause');
+        unpause = game.add.image(540, 800, 'sprites', 'btn-unpause.png');
         unpause.anchor.setTo(0.5, 0.5);
         unpause.scale.setTo(1.7, 1.7);
         unpause.inputEnabled = true;
@@ -444,7 +475,7 @@ function pauseBtn() {
             mainPause.inputEnabled = true;
             spawnBubbles();
         }, this);
-        replay = game.add.image(540, 1100, 'replay');
+        replay = game.add.image(540, 1100, 'sprites', 'btn-replay.png');
         replay.anchor.setTo(0.5, 0.5);
         replay.inputEnabled = true;
         replay.events.onInputDown.add(replayBtn, this);
